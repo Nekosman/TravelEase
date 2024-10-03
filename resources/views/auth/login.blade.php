@@ -24,8 +24,8 @@
            <div class="featured-image mb-3">
             <img src="images/1.png" class="img-fluid" style="width: 250px;">
            </div>
-           <p class="text-white fs-2" style="font-family: 'Courier New', Courier, monospace; font-weight: 600;">Be Verified</p>
-           <small class="text-white text-wrap text-center" style="width: 17rem;font-family: 'Courier New', Courier, monospace;">Join experienced Designers on this platform.</small>
+           <p class="text-white fs-2" style="font-family: 'Courier New', Courier, monospace; font-weight: 600;">Di Verifikasi</p>
+           <small class="text-white text-wrap text-center" style="width: 17rem;font-family: 'Courier New', Courier, monospace;">Join TravelEase sekarang.</small>
        </div> 
 
     <!-------------------- ------ Right Box ---------------------------->
@@ -33,8 +33,8 @@
        <div class="col-md-6 right-box">
           <div class="row align-items-center">
                 <div class="header-text mb-4">
-                     <h2>Hello,Again</h2>
-                     <p>We are happy to have you back.</p>
+                     <h2>Haii Selamat Datang</h2>
+                     <p>Kami senang anda kembali.</p>
                 </div>
                 <form action="{{ route('login.action') }}" method="POST">
                     @csrf
