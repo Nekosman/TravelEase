@@ -164,7 +164,7 @@
                                 <div class="icon-box">
                                     <i class="bi bi-clipboard-pulse"></i>
                                     <h3>Misi</h3>
-                                    <p>Kami memahami bahwa setiap pelancong memiliki preferensi dan kebutuhan yang unik. Tim kami siap membantu Anda menemukan paket perjalanan yang sesuai dengan keinginan Anda.</p>
+                                    <p>Kami memahami bahwa setiap wisatawan memiliki preferensi dan kebutuhan yang unik. Tim kami siap membantu Anda menemukan paket perjalanan yang sesuai dengan keinginan Anda.</p>
                                 </div>
                             </div> <!-- End Icon Box -->
 
