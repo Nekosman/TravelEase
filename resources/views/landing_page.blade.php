@@ -77,7 +77,7 @@
                     </div>
 
                     <div class="col-lg-6  d-flex flex-column justify-content-center" data-aos="fade-in">
-                        <h1>Make your travel more easy with <span>TravelEase</span></h1>
+                        <h1>Jadikan perjalanan Anda lebih mudah dengan <span>TravelEase</span></h1>
                         <p></p>
                         <div class="d-flex">
 
@@ -144,10 +144,8 @@
 
                     <div class="col-xl-5 content">
                         <h3>About Us</h3>
-                        <h2>Ducimus rerum libero reprehenderit cumque</h2>
-                        <p>Ipsa sint sit. Quis ducimus tempore dolores impedit et dolor cumque alias maxime. Enim
-                            reiciendis minus et rerum hic non. Dicta quas cum quia maiores iure. Quidem nulla qui
-                            assumenda incidunt voluptatem tempora deleniti soluta.</p>
+                        <h2>Ingin Liburan Ke Luar Negri? Mending pakai TravelEase</h2>
+                        <p>Selamat datang di Travelease, platform perjalanan yang dirancang untuk memberikan pengalaman berwisata yang tak terlupakan. Kami percaya bahwa setiap perjalanan adalah kesempatan untuk menjelajahi, belajar, dan menciptakan kenangan berharga. Dengan Travelease, kami berkomitmen untuk membantu Anda menemukan destinasi impian, merencanakan petualangan yang sempurna, dan menjelajahi dunia dengan mudah.</p>
                         <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
                     </div>
 
@@ -157,36 +155,32 @@
                             <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
                                 <div class="icon-box">
                                     <i class="bi bi-buildings"></i>
-                                    <h3>Eius provident</h3>
-                                    <p>Magni repellendus vel ullam hic officia accusantium ipsa dolor omnis dolor
-                                        voluptatem</p>
+                                    <h3>Visi</h3>
+                                    <p>Visi kami adalah menjadi pilihan utama bagi para pelancong yang mencari kemudahan dan kenyamanan dalam merencanakan perjalanan. Kami ingin menghadirkan solusi perjalanan yang inovatif, terjangkau, dan personal, memungkinkan setiap orang untuk menikmati keindahan dunia tanpa batas.</p>
                                 </div>
                             </div> <!-- End Icon Box -->
 
                             <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
                                 <div class="icon-box">
                                     <i class="bi bi-clipboard-pulse"></i>
-                                    <h3>Rerum aperiam</h3>
-                                    <p>Autem saepe animi et aut aspernatur culpa facere. Rerum saepe rerum voluptates
-                                        quia</p>
+                                    <h3>Misi</h3>
+                                    <p>Kami memahami bahwa setiap pelancong memiliki preferensi dan kebutuhan yang unik. Tim kami siap membantu Anda menemukan paket perjalanan yang sesuai dengan keinginan Anda.</p>
                                 </div>
                             </div> <!-- End Icon Box -->
 
                             <div class="col-md-6" data-aos="fade-up" data-aos-delay="400">
                                 <div class="icon-box">
                                     <i class="bi bi-command"></i>
-                                    <h3>Veniam omnis</h3>
-                                    <p>Omnis perferendis molestias culpa sed. Recusandae quas possimus. Quod consequatur
-                                        corrupti</p>
+                                    <h3>Dukungan Pelanggan yang Unggul</h3>
+                                    <p>Tim dukungan pelanggan kami selalu siap sedia untuk membantu Anda selama perjalanan, memastikan bahwa setiap pengalaman bersama kami berjalan lancar.</p>
                                 </div>
                             </div> <!-- End Icon Box -->
 
                             <div class="col-md-6" data-aos="fade-up" data-aos-delay="500">
                                 <div class="icon-box">
                                     <i class="bi bi-graph-up-arrow"></i>
-                                    <h3>Delares sapiente</h3>
-                                    <p>Sint et dolor voluptas minus possimus nostrum. Reiciendis commodi eligendi omnis
-                                        quideme lorenda</p>
+                                    <h3>Kemudahan Akses</h3>
+                                    <p>Dengan platform kami yang user-friendly, Anda dapat dengan mudah menjelajahi berbagai destinasi, akomodasi, dan aktivitas, semuanya hanya dengan beberapa klik.</p>
                                 </div>
                             </div> <!-- End Icon Box -->
 
@@ -207,85 +201,85 @@
 
                     <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="100">
                         <div class="features-item">
-                            <i class="bi bi-eye" style="color: #ffbb2c;"></i>
-                            <h3><a href="" class="stretched-link">Lorem Ipsum</a></h3>
+                            <i class="bi bi-search" style="color: #ffbb2c;"></i>
+                            <h3><a href="" class="stretched-link">Pencarian Destinasi</a></h3>
                         </div>
                     </div><!-- End Feature Item -->
 
                     <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="200">
                         <div class="features-item">
-                            <i class="bi bi-infinity" style="color: #5578ff;"></i>
-                            <h3><a href="" class="stretched-link">Dolor Sitema</a></h3>
+                            <i class="bi bi-box" style="color: #5578ff;"></i>
+                            <h3><a href="" class="stretched-link">Paket Perjalanan</a></h3>
                         </div>
                     </div><!-- End Feature Item -->
 
                     <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="300">
                         <div class="features-item">
-                            <i class="bi bi-mortarboard" style="color: #e80368;"></i>
-                            <h3><a href="" class="stretched-link">Sed perspiciatis</a></h3>
+                            <i class="bi bi-house" style="color: #e80368;"></i>
+                            <h3><a href="" class="stretched-link">Booking Akomodasi</a></h3>
                         </div>
                     </div><!-- End Feature Item -->
 
                     <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="400">
                         <div class="features-item">
-                            <i class="bi bi-nut" style="color: #e361ff;"></i>
-                            <h3><a href="" class="stretched-link">Magni Dolores</a></h3>
+                            <i class="bi bi-credit-card" style="color: #e361ff;"></i>
+                            <h3><a href="" class="stretched-link">Sistem Pembayaran Aman</a></h3>
                         </div>
                     </div><!-- End Feature Item -->
 
                     <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="500">
                         <div class="features-item">
-                            <i class="bi bi-shuffle" style="color: #47aeff;"></i>
-                            <h3><a href="" class="stretched-link">Nemo Enim</a></h3>
+                            <i class="bi bi-map" style="color: #47aeff;"></i>
+                            <h3><a href="" class="stretched-link">Panduan Wisata</a></h3>
                         </div>
                     </div><!-- End Feature Item -->
 
                     <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="600">
                         <div class="features-item">
                             <i class="bi bi-star" style="color: #ffa76e;"></i>
-                            <h3><a href="" class="stretched-link">Eiusmod Tempor</a></h3>
+                            <h3><a href="" class="stretched-link">Ulasan dan Penilaian</a></h3>
                         </div>
                     </div><!-- End Feature Item -->
 
                     <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="700">
                         <div class="features-item">
-                            <i class="bi bi-x-diamond" style="color: #11dbcf;"></i>
-                            <h3><a href="" class="stretched-link">Midela Teren</a></h3>
+                            <i class="bi bi-headset" style="color: #11dbcf;"></i>
+                            <h3><a href="" class="stretched-link">Dukungan Pelanggan 24/7</a></h3>
                         </div>
                     </div><!-- End Feature Item -->
 
                     <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="800">
                         <div class="features-item">
-                            <i class="bi bi-camera-video" style="color: #4233ff;"></i>
-                            <h3><a href="" class="stretched-link">Pira Neve</a></h3>
+                            <i class="bi bi-geo-alt" style="color: #4233ff;"></i>
+                            <h3><a href="" class="stretched-link">Rekomendasi Destinasi</a></h3>
                         </div>
                     </div><!-- End Feature Item -->
 
                     <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="900">
                         <div class="features-item">
-                            <i class="bi bi-command" style="color: #b2904f;"></i>
-                            <h3><a href="" class="stretched-link">Dirada Pack</a></h3>
+                            <i class="bi bi-person-check" style="color: #b2904f;"></i>
+                            <h3><a href="" class="stretched-link">Kolaborasi</a></h3>
                         </div>
                     </div><!-- End Feature Item -->
 
                     <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="1000">
                         <div class="features-item">
-                            <i class="bi bi-dribbble" style="color: #b20969;"></i>
-                            <h3><a href="" class="stretched-link">Moton Ideal</a></h3>
+                                <i class="bi bi-tag" style="color: #b20969;"></i>
+                                <h3><a href="" class="stretched-link">Promo</a></h3>
                         </div>
                     </div><!-- End Feature Item -->
 
                     <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="1100">
                         <div class="features-item">
-                            <i class="bi bi-activity" style="color: #ff5828;"></i>
-                            <h3><a href="" class="stretched-link">Verdo Park</a></h3>
+                            <i class="bi bi-phone" style="color: #ff5828;"></i>
+                            <h3><a href="" class="stretched-link">Aplikasi Mobile</a></h3>
                         </div>
                     </div><!-- End Feature Item -->
 
                     <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="1200">
                         <div class="features-item">
-                            <i class="bi bi-brightness-high" style="color: #29cc61;"></i>
-                            <h3><a href="" class="stretched-link">Flavor Nivelanda</a></h3>
+                            <i class="bi bi-bell" style="color: #29cc61;"></i>
+                            <h3><a href="" class="stretched-link">Notifikasi dan Pengingat</a></h3>
                         </div>
                     </div><!-- End Feature Item -->
 
