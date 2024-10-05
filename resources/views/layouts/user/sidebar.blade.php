@@ -28,7 +28,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="ticketing">
+                    <a class="nav-link" href="{{ route('ticket.index') }}">
                         <i class="fa-solid fa-ticket icon"></i>
                         <span>Ticketing</span>
                     </a>

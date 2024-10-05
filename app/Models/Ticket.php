@@ -10,7 +10,7 @@ class Ticket extends Model
     use HasFactory;
 
     protected $fillable = [
-       'ticket_no', 'title', 'description', 'priority', 'user_id', 'officer_id', 'status'
+       'ticket_no' ,'title', 'description', 'priority', 'user_id', 'officer_id', 'scheduled_at', 'status'
     ];
 
     public function user()
@@ -19,9 +19,24 @@ class Ticket extends Model
     }
 
 
-
     public function officer()
     {
         return $this->belongsTo(User::class, 'officer_id');
-    }    
+    }
+
+    public static function boot()
+{
+    parent::boot();
+
+    static::creating(function ($ticket) {
+        // Cari nomor tiket terakhir untuk user yang sama
+        $lastTicket = Ticket::where('user_id', $ticket->user_id)->max('ticket_no');
+
+        // Jika belum ada tiket untuk user tersebut, mulai dari 1
+        $ticket->ticket_no = $lastTicket ? $lastTicket + 1 : 1;
+    });
+}
+
+    
+    
 }

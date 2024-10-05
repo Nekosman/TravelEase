@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('style.css') }}">
-    <title>Boostrap Login | Ludiflex</title>
+    <title>TravelEase | Login</title>
 </head>
 <body>
 
@@ -24,8 +24,8 @@
            <div class="featured-image mb-3">
             <img src="images/1.png" class="img-fluid" style="width: 250px;">
            </div>
-           <p class="text-white fs-2" style="font-family: 'Courier New', Courier, monospace; font-weight: 600;">Be Verified</p>
-           <small class="text-white text-wrap text-center" style="width: 17rem;font-family: 'Courier New', Courier, monospace;">Join experienced Designers on this platform.</small>
+           <p class="text-white fs-2" style="font-family: 'Courier New', Courier, monospace; font-weight: 600;">Di Verifikasi</p>
+           <small class="text-white text-wrap text-center" style="width: 17rem;font-family: 'Courier New', Courier, monospace;">Join TravelEase sekarang.</small>
        </div> 
 
     <!-------------------- ------ Right Box ---------------------------->
@@ -33,8 +33,8 @@
        <div class="col-md-6 right-box">
           <div class="row align-items-center">
                 <div class="header-text mb-4">
-                     <h2>Hello,Again</h2>
-                     <p>We are happy to have you back.</p>
+                     <h2>Haii Selamat Datang</h2>
+                     <p>Kami senang anda kembali.</p>
                 </div>
                 <form action="{{ route('login.action') }}" method="POST">
                     @csrf
@@ -61,7 +61,7 @@
                     <button class="btn btn-lg btn-light w-100 fs-6"><img src="images/google.png" style="width:20px" class="me-2"><small>Sign In with Google</small></button>
                 </div>
                 <div class="row">
-                    <small>Don't have account? <a href="#">Sign Up</a></small>
+                    <small>Don't have account? <a href="{{ route('register') }}">Sign Up</a></small>
                 </div>
           </div>
        </div> 

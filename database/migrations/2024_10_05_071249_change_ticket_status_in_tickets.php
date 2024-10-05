@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropPrimary('PRIMARY');
-
-            $table->string('id', 10)->primary()->change();
+        Schema::table('tickets', function (Blueprint $table) {
+            $table->enum('status', ['pending','accepted' , 'closed', 'canceled'])->default('pending')->change();    
         });
     }
 
@@ -23,10 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropPrimary();
-
-            $table->dropColumn('id');
+        Schema::table('tickets', function (Blueprint $table) {
+            //
         });
     }
 };
