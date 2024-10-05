@@ -163,8 +163,9 @@
                             <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
                                 <div class="icon-box">
                                     <i class="bi bi-clipboard-pulse"></i>
-                                    <h3>Misi</h3>
-                                    <p>Kami memahami bahwa setiap pelancong memiliki preferensi dan kebutuhan yang unik. Tim kami siap membantu Anda menemukan paket perjalanan yang sesuai dengan keinginan Anda.</p>
+                                    <h3>Rerum aperiam</h3>
+                                    <p>Autem saepe animi et aut aspernatur culpa facere. Rerum saepe rerum voluptates
+                                        quia</p>
                                 </div>
                             </div> <!-- End Icon Box -->
 
@@ -354,19 +355,15 @@
                         <img src="assets/img/details-1.png" class="img-fluid" alt="">
                     </div>
                     <div class="col-md-7" data-aos="fade-up" data-aos-delay="100">
-                        <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
+                        <h3>TravelEase adalah platform inovatif yang menyediakan solusi lengkap untuk para Wisatawan.</h3>
                         <p class="fst-italic">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore
-                            magna aliqua.
+                        Dengan TravelEase, pengguna dapat merencanakan perjalanan mereka dengan mudah dan efisien. Dari pemesanan akomodasi hingga rekomendasi destinasi, TravelEase menawarkan berbagai fitur untuk memastikan pengalaman perjalanan yang menyenangkan dan tanpa stres.
                         </p>
                         <ul>
-                            <li><i class="bi bi-check"></i><span> Ullamco laboris nisi ut aliquip ex ea commodo
-                                    consequat.</span></li>
-                            <li><i class="bi bi-check"></i> <span>Duis aute irure dolor in reprehenderit in voluptate
-                                    velit.</span></li>
-                            <li><i class="bi bi-check"></i> <span>Ullam est qui quos consequatur eos accusamus.</span>
-                            </li>
+                        <li><i class="bi bi-check"></i><span> Kemudahan dalam Perencanaan Perjalanan.</span></li>
+                        <li><i class="bi bi-check"></i> <span>Personalisasi.</span></li>
+                        <li><i class="bi bi-check"></i> <span>Akses Informasi.</span></li>
+                        <li><i class="bi bi-check"></i> <span>Keamanan.</span></li>
                         </ul>
                     </div>
                 </div><!-- Features Item -->
@@ -377,59 +374,16 @@
                         <img src="{{ asset('assets/img/details-2.png') }}" class="img-fluid" alt="">
                     </div>
                     <div class="col-md-7 order-2 order-md-1" data-aos="fade-up" data-aos-delay="200">
-                        <h3>Corporis temporibus maiores provident</h3>
+                        <h3>TravelEase menyediakan berbagai layanan dan fitur</h3>
                         <p class="fst-italic">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore
-                            magna aliqua.
+                        dirancang untuk memenuhi kebutuhan para pelancong dalam merencanakan dan menikmati perjalanan mereka. Berikut adalah beberapa layanan utama yang ditawarkan oleh Travelease.
                         </p>
-                        <p>
-                            Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                            reprehenderit in voluptate
-                            velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                            proident, sunt in
-                            culpa qui officia deserunt mollit anim id est laborum
-                        </p>
-                    </div>
-                </div><!-- Features Item -->
-
-                <div class="row gy-4 align-items-center features-item">
-                    <div class="col-md-5 d-flex align-items-center" data-aos="zoom-out">
-                        <img src="{{ asset('assets/img/details-3.png') }}" class="img-fluid" alt="">
-                    </div>
-                    <div class="col-md-7" data-aos="fade-up">
-                        <h3>Sunt consequatur ad ut est nulla consectetur reiciendis animi voluptas</h3>
-                        <p>Cupiditate placeat cupiditate placeat est ipsam culpa. Delectus quia minima quod. Sunt saepe
-                            odit aut quia voluptatem hic voluptas dolor doloremque.</p>
                         <ul>
-                            <li><i class="bi bi-check"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo
-                                    consequat.</span></li>
-                            <li><i class="bi bi-check"></i><span> Duis aute irure dolor in reprehenderit in voluptate
-                                    velit.</span></li>
-                            <li><i class="bi bi-check"></i> <span>Facilis ut et voluptatem aperiam. Autem soluta ad
-                                    fugiat</span>.</li>
+                        <li><i class="bi bi-check"></i><span> Pencarian Destinasi.</span></li>
+                        <li><i class="bi bi-check"></i> <span>Paket Perjalanan yang Dipersonalisasi.</span></li>
+                        <li><i class="bi bi-check"></i> <span>Kolaborasi.</span></li>
+                        <li><i class="bi bi-check"></i> <span>Promo dan Diskon.</span></li>
                         </ul>
-                    </div>
-                </div><!-- Features Item -->
-
-                <div class="row gy-4 align-items-center features-item">
-                    <div class="col-md-5 order-1 order-md-2 d-flex align-items-center" data-aos="zoom-out">
-                        <img src="{{ asset('assets/img/details-4.png') }}" class="img-fluid" alt="">
-                    </div>
-                    <div class="col-md-7 order-2 order-md-1" data-aos="fade-up">
-                        <h3>Quas et necessitatibus eaque impedit ipsum animi consequatur incidunt in</h3>
-                        <p class="fst-italic">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore
-                            magna aliqua.
-                        </p>
-                        <p>
-                            Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                            reprehenderit in voluptate
-                            velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                            proident, sunt in
-                            culpa qui officia deserunt mollit anim id est laborum
-                        </p>
                     </div>
                 </div><!-- Features Item -->
 
@@ -467,8 +421,8 @@
                             <div class="testimonial-item">
                                 <img src="{{ asset('assets/img/testimonials/testimonials-1.jpg') }}"
                                     class="testimonial-img" alt="">
-                                <h3>Saul Goodman</h3>
-                                <h4>Ceo &amp; Founder</h4>
+                                <h3>Arya Putra</h3>
+                                <h4>Frontend Development</h4>
                                 <div class="stars">
                                     <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
                                         class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
@@ -476,9 +430,7 @@
                                 </div>
                                 <p>
                                     <i class="bi bi-quote quote-icon-left"></i>
-                                    <span>Proin iaculis purus consequat sem cure digni ssim donec porttitora entum
-                                        suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et.
-                                        Maecen aliquam, risus at semper.</span>
+                                    <span>TravelEase benar-benar mengubah cara saya merencanakan perjalanan! Aplikasi ini sangat intuitif dan mudah digunakan. Saya bisa dengan cepat menemukan destinasi menarik yang belum pernah saya ketahui sebelumnya, dan fitur personalisasi paket perjalanan sangat membantu dalam menyesuaikan rencana saya dengan anggaran yang ada. Booking akomodasi juga sangat mudah dengan banyak pilihan dan sistem pembayaran yang aman. </span>
                                     <i class="bi bi-quote quote-icon-right"></i>
                                 </p>
                             </div>
@@ -488,8 +440,8 @@
                             <div class="testimonial-item">
                                 <img src="{{ asset('assets/img/testimonials/testimonials-2.jpg') }}"
                                     class="testimonial-img" alt="">
-                                <h3>Sara Wilsson</h3>
-                                <h4>Designer</h4>
+                                <h3>Raditya</h3>
+                                <h4>Backend Development</h4>
                                 <div class="stars">
                                     <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
                                         class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
@@ -497,9 +449,7 @@
                                 </div>
                                 <p>
                                     <i class="bi bi-quote quote-icon-left"></i>
-                                    <span>Export tempor illum tamen malis malis eram quae irure esse labore quem cillum
-                                        quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat
-                                        irure amet legam anim culpa.</span>
+                                    <span>Pengalaman pengguna yang luar biasa! Antarmuka Travelease sangat user-friendly, dan saya bisa menemukan semua yang saya butuhkan untuk perjalanan hanya dalam beberapa klik. Sistem pembayaran yang aman membuat saya merasa nyaman melakukan transaksi.</span>
                                     <i class="bi bi-quote quote-icon-right"></i>
                                 </p>
                             </div>
@@ -509,8 +459,8 @@
                             <div class="testimonial-item">
                                 <img src="{{ asset('assets/img/testimonials/testimonials-3.jpg') }}"
                                     class="testimonial-img" alt="">
-                                <h3>Jena Karlis</h3>
-                                <h4>Store Owner</h4>
+                                <h3>Syifa</h3>
+                                <h4>Design & Frontend Development</h4>
                                 <div class="stars">
                                     <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
                                         class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
@@ -518,9 +468,7 @@
                                 </div>
                                 <p>
                                     <i class="bi bi-quote quote-icon-left"></i>
-                                    <span>Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla
-                                        quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore
-                                        quis sint minim.</span>
+                                    <span>Fitur promo sangat menguntungkan! Travelease sering memberikan promo yang sangat menarik! Saya bisa mendapatkan diskon besar untuk akomodasi dan layanan lainnya. Ini benar-benar membantu mengurangi biaya perjalanan saya.</span>
                                     <i class="bi bi-quote quote-icon-right"></i>
                                 </p>
                             </div>
@@ -530,8 +478,8 @@
                             <div class="testimonial-item">
                                 <img src="{{ asset('assets/img/testimonials/testimonials-4.jpg') }}"
                                     class="testimonial-img" alt="">
-                                <h3>Matt Brandon</h3>
-                                <h4>Freelancer</h4>
+                                <h3>Mordecai</h3>
+                                <h4>Frontend Development</h4>
                                 <div class="stars">
                                     <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
                                         class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
@@ -551,8 +499,8 @@
                             <div class="testimonial-item">
                                 <img src="{{ 'assets/img/testimonials/testimonials-5.jpg' }}" class="testimonial-img"
                                     alt="">
-                                <h3>John Larson</h3>
-                                <h4>Entrepreneur</h4>
+                                <h3>Rayor</h3>
+                                <h4>Frontend Development</h4>
                                 <div class="stars">
                                     <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
                                         class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
@@ -560,9 +508,7 @@
                                 </div>
                                 <p>
                                     <i class="bi bi-quote quote-icon-left"></i>
-                                    <span>Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor
-                                        noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam
-                                        esse veniam culpa fore nisi cillum quid.</span>
+                                    <span>Panduan wisata yang sangat berguna!" "Saya menggunakan fitur panduan wisata Travelease selama perjalanan saya ke luar negeri, dan itu sangat membantu! Semua informasi penting, dari tempat wisata hingga restoran lokal, bisa diakses dengan mudah.</span>
                                     <i class="bi bi-quote quote-icon-right"></i>
                                 </p>
                             </div>
@@ -594,8 +540,8 @@
                             <div class="pic"><img src="{{ asset('assets/img/team/team-1.jpg') }}"
                                     class="img-fluid" alt=""></div>
                             <div class="member-info">
-                                <h4>Walter White</h4>
-                                <span>Chief Executive Officer</span>
+                                <h4>Raditya</h4>
+                                <span>Backend Development</span>
                                 <div class="social">
                                     <a href=""><i class="bi bi-twitter-x"></i></a>
                                     <a href=""><i class="bi bi-facebook"></i></a>
@@ -611,8 +557,8 @@
                             <div class="pic"><img src="{{ asset('assets/img/team/team-2.jpg') }}"
                                     class="img-fluid" alt=""></div>
                             <div class="member-info">
-                                <h4>Sarah Jhonson</h4>
-                                <span>Product Manager</span>
+                                <h4>Syifa</h4>
+                                <span>Frontend Development</span>
                                 <div class="social">
                                     <a href=""><i class="bi bi-twitter-x"></i></a>
                                     <a href=""><i class="bi bi-facebook"></i></a>
@@ -628,12 +574,12 @@
                             <div class="pic"><img src="{{ asset('assets/img/team/team-3.jpg') }}"
                                     class="img-fluid" alt=""></div>
                             <div class="member-info">
-                                <h4>William Anderson</h4>
-                                <span>CTO</span>
+                                <h4>Arya Putra</h4>
+                                <span>Frontend Development</span>
                                 <div class="social">
                                     <a href=""><i class="bi bi-twitter-x"></i></a>
                                     <a href=""><i class="bi bi-facebook"></i></a>
-                                    <a href=""><i class="bi bi-instagram"></i></a>
+                                    <a href="https://www.instagram.com/mhmdarya_11?igsh=MWUzNjRremNtd3BqZw=="><i class="bi bi-instagram"></i></a>
                                     <a href=""><i class="bi bi-linkedin"></i></a>
                                 </div>
                             </div>
@@ -739,7 +685,7 @@
                             <i class="bi bi-geo-alt flex-shrink-0"></i>
                             <div>
                                 <h3>Address</h3>
-                                <p>A108 Adam Street, New York, NY 535022</p>
+                                <p>Jakarta Timur, Jl Raden Inten, No 535022</p>
                             </div>
                         </div><!-- End Info Item -->
 
@@ -747,7 +693,7 @@
                             <i class="bi bi-telephone flex-shrink-0"></i>
                             <div>
                                 <h3>Call Us</h3>
-                                <p>+1 5589 55488 55</p>
+                                <p>+62 895 2561 9810</p>
                             </div>
                         </div><!-- End Info Item -->
 
@@ -755,7 +701,7 @@
                             <i class="bi bi-envelope flex-shrink-0"></i>
                             <div>
                                 <h3>Email Us</h3>
-                                <p>info@example.com</p>
+                                <p>travelease@gmail.com</p>
                             </div>
                         </div><!-- End Info Item -->
 
@@ -811,13 +757,13 @@
             <div class="row gy-4">
                 <div class="col-lg-4 col-md-6 footer-about">
                     <a href="index.html" class="logo d-flex align-items-center">
-                        <span class="sitename">Bootslander</span>
+                        <span class="sitename">TravelEase</span>
                     </a>
                     <div class="footer-contact pt-3">
-                        <p>A108 Adam Street</p>
-                        <p>New York, NY 535022</p>
-                        <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
-                        <p><strong>Email:</strong> <span>info@example.com</span></p>
+                        <p>Jakarta Timur</p>
+                        <p>Jl Raden Inten, No 535022</p>
+                        <p class="mt-3"><strong>Phone:</strong> <span>+62 895 2561 9810</span></p>
+                        <p><strong>Email:</strong> <span>travelease@gmail.com</span></p>
                     </div>
                     <div class="social-links d-flex mt-4">
                         <a href=""><i class="bi bi-twitter-x"></i></a>
@@ -865,7 +811,7 @@
         </div>
 
         <div class="container copyright text-center mt-4">
-            <p>© <span>Copyright</span> <strong class="px-1 sitename">Bootslander</strong> <span>All Rights
+            <p>© <span>Copyright</span> <strong class="px-1 sitename">TravelEase</strong> <span>All Rights
                     Reserved</span></p>
             <div class="credits">
                 <!-- All the links in the footer should remain intact. -->
