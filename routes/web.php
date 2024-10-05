@@ -4,6 +4,10 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TicketController;
 use Illuminate\Support\Facades\Route;
+use BotMan\BotMan\BotMan;
+use App\Http\conversations\TreeConversation;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -57,4 +61,26 @@ Route::middleware(['auth', 'user-access:user'])->group(function(){
     Route::get('/tickets/edit/{ticket}', [TicketController::class, 'editTicket'])->name('ticket.edit');
     Route::put('/tickets/update/{ticket}', [TicketController::class, 'updateTicket'])->name('ticket.update');
     Route::delete('tickets/delete/{id}', [TicketController::class, 'destroyTicket'])->name('ticket.destroy');
+});
+
+Route::middleware(['auth'])->group(function() {
+    // Rute untuk menampilkan halaman chatbot
+    Route::get('/chatbot', function () {
+        return view('chatbot.chatbot');
+    });
+
+    Route::match(['get', 'post'], '/botman', function () {
+        $botman = app('botman');
+    
+        $botman->hears('{message}', function (BotMan $botman, $message) {
+            $botman->startConversation( new TreeConversation);
+        });
+    
+        $botman->listen();
+    });
+
+    // // Rute ini HANYA untuk menangani percakapan, bukan untuk merender halaman chatbot
+    // Route::get('/botman/chat', function () {
+    //     return '';
+    // });
 });
