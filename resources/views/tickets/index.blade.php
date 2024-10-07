@@ -8,8 +8,8 @@
                     <div class="card-header">
                         Tickets
                         <a href="{{ route('ticket.create') }}" class="btn btn-primary float-end">Create Ticket</a>
-                        <a href="{{ route('ticket.index', ['filter' => 'all']) }}" class="btn btn-success">All Tickets</a>
-                        <a href="{{ route('ticket.index', ['filter' => 'officer_empty']) }}" class="btn btn-danger">Empty Officer</a>
+                        <a href="{{ route('user.ticket', ['filter' => 'all']) }}" class="btn btn-success">All Tickets</a>
+                        <a href="{{ route('user.ticket', ['filter' => 'officer_empty']) }}" class="btn btn-danger">Empty Officer</a>
                     </div>
 
                     <div class="card-body">
@@ -34,6 +34,7 @@
                                     <th>Description</th>
                                     <th>Priority</th>
                                     <th>Status</th>
+                                    <th>Category</th>
                                     <th>chat</th>
                                     <th>Actions</th>
                                 </tr>
@@ -47,24 +48,23 @@
                                         <td>{{ $ticket->description }}</td>
                                         <td>{{ $ticket->priority }}</td>
                                         <td>{{ $ticket->status }}</td>
+                                        <td>{{ $ticket->category->name_category }}</td>
                                         <td>
                                             @if ($ticket->status === 'scheduled')
-                                                <a href="{{ route('chat.show', $ticket->id) }}" class="btn btn-primary">Go
-                                                    to Chat</a>
+                                                <a href="{{ route('chat.show', $ticket->id) }}" class="btn btn-primary">Go to Chat</a>
                                             @else
                                                 <span class="btn btn-secondary disabled">Chat Not Available</span>
                                             @endif
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
-                                                data-target="#ticketDetailModal{{ $ticket->id }}">View</button>
-                                            <a href="{{ route('ticket.edit', $ticket->id) }}"
-                                                class="btn btn-warning btn-sm">Edit</a>
-                                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
-                                                data-target="#deleteModal{{ $ticket->id }}">Delete</button>
+                                            <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal"
+                                                data-bs-target="#ticketDetailModal{{ $ticket->id }}">View</button>
+                                            <a href="{{ route('ticket.edit', $ticket->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                                data-bs-target="#deleteModal{{ $ticket->id }}">Delete</button>
                                         </td>
                                     </tr>
-
+                                    
                                     <!-- Modal for Ticket Details -->
                                     <div class="modal fade" id="ticketDetailModal{{ $ticket->id }}" tabindex="-1"
                                         role="dialog" aria-labelledby="ticketDetailModalLabel{{ $ticket->id }}"
@@ -74,22 +74,16 @@
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="ticketDetailModalLabel{{ $ticket->id }}">
                                                         Ticket Details</h5>
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
                                                     <p><strong>Title:</strong> {{ $ticket->title }}</p>
                                                     <p><strong>Description:</strong> {{ $ticket->description }}</p>
                                                     <p><strong>Priority:</strong> {{ $ticket->priority }}</p>
                                                     <p><strong>Status:</strong> {{ $ticket->status }}</p>
-                                                    <p><strong>Guru yang Mengambil:</strong>
-                                                        @if ($ticket->guru)
-                                                            {{ $ticket->guru->name }}
-                                                        @else
-                                                            Tidak ada
-                                                        @endif
+                                                    <p><strong>Category:</strong>
+                                                        {{ $ticket->category->name_category }}
                                                     </p>
                                                 </div>
                                             </div>
@@ -105,17 +99,14 @@
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="deleteModalLabel{{ $ticket->id }}">
                                                         Confirm Delete</h5>
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
                                                     Are you sure you want to delete this ticket?
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <form action="{{ route('ticket.destroy', $ticket->id) }}"
-                                                        method="POST" style="display: inline;">
+                                                    <form action="{{ route('ticket.destroy', $ticket->id) }}" method="POST" style="display: inline;">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger">Delete</button>
@@ -124,18 +115,17 @@
                                             </div>
                                         </div>
                                     </div>
+
                                 @endforeach
                             </tbody>
                         </table>
-
-
-
-                        {{-- <div class="d-flex justify-content-center">
-                        {{ $tickets->links() }}
-                    </div> --}}
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Load Bootstrap and jQuery for Modal functionality -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 @endsection

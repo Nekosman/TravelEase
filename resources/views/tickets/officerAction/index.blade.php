@@ -1,4 +1,4 @@
-@extends(Auth::user()->role === 'guru' ? 'layouts.guru.sidebar' : 'layouts.admin.sidebar')
+@extends(Auth::user()->role === 'officer' ? 'layouts.officer.sidebar' : 'layouts.admin.sidebar')
 
 @section('contents')
 <div class="container">
@@ -7,8 +7,8 @@
             <div class="card">
 
                 <div class="card-header">
-                    <a href="{{ route('officer.ticket', ['filter' => 'all']) }}" class="btn btn-success">All tickets</a>
-                    <a href="{{ route('officer.ticket', ['filter' => 'officer_empty']) }}" class="btn btn-danger">Empty Officer</a>
+                    <a href="{{ route('ticket', ['filter' => 'all']) }}" class="btn btn-success">All tickets</a>
+                    <a href="{{ route('ticket', ['filter' => 'officer_empty']) }}" class="btn btn-danger">Empty Officer</a>
                 </div>
 
                 <div class="card-body">
@@ -21,12 +21,13 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>No</th>
+                                <th>id</th>
+                                <th>Ticket_no</th>
                                 <th>Title</th>
                                 <th>Description</th>
                                 <th>Priority</th>
                                 <th>Status</th>
-                                <th>Guru yang Mengambil</th>
+                                <th>officer name</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -49,9 +50,8 @@
                                     <td>
                                         @if ($ticket->status == 'pending')
                                             @csrf
-                                            <form action="{{ route('officer.showAcceptForm', $ticket->id) }}" method="POST" style="display: inline">
+                                            <form action="{{ route('accept', $ticket->id) }}" method="POST" style="display: inline">
                                                 @csrf
-                                                @method('GET')
                                                 <button type="submit" class="btn btn-info btn-sm">Accept</button>
                                             </form>
                                         @else

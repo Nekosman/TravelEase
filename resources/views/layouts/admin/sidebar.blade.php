@@ -7,32 +7,36 @@
     <title>@yield('title')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-    <link href="{{ asset('assets/css/sidebar.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
 
 </head>
 
 <body>
     <div class="d-flex">
         <div class="sidebar p-3" id="sidebar">
-            <a href="{{ route('user.home') }}"><img id="sidebarLogo" src="{{ url('assets/img/logoTravel.png') }}"
-                    alt="Sidebar Image" class="img-fluid mx-auto d-block"></a>
+            <img id="sidebarLogo" src="{{ url('assets/img/logoTravel.png') }}" alt="Sidebar Image"
+                class="img-fluid mx-auto d-block">
             <br>
-            <div class="toggleButton"> 
-                <button class="btn btn-muted" id="toggleButton">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
-            </div>
+            <button class="btn btn-muted" id="toggleButton">
+                <i class="fa-solid fa-bars"></i>
+            </button>
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link" href="home">
-                        <i class="fas fa-comments"></i>
-                        <span>Chat</span>
+                    <a class="nav-link" href="{{ route('admin.home') }}">
+                        <i class="fa-solid fa-house"></i>
+                        <span>Dashboard</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('user.ticket') }}">
+                    <a class="nav-link" href="{{ route('ticket') }}">
                         <i class="fa-solid fa-ticket icon"></i>
                         <span>Ticketing</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('categories') }}">
+                        <i class="fas fa-tags"></i>
+                        <span>Category</span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -102,9 +106,6 @@
         }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-
 
 </body>
 
