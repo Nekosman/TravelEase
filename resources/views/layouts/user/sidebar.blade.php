@@ -23,8 +23,8 @@
             <ul class="nav flex-column">
                 <li class="nav-item">
                     <a class="nav-link" href="home">
-                        <i class="fa-solid fa-house icon"></i>
-                        <span>Dashboard</span>
+                        <i class="fas fa-comments"></i>
+                        <span>Chat</span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -33,13 +33,6 @@
                         <span>Ticketing</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="chatbot">
-                        <i class="fa-solid fa-message icon"></i>
-                        <span>ChatBot</span>
-                    </a>
-                </li>
-
                 <li class="nav-item">
                     <a class="nav-link" href="faq">
                         <i class="fa-solid fa-question icon"></i>

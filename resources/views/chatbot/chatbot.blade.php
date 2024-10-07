@@ -1,6 +1,3 @@
-@extends('layouts.user.sidebar')
-
-@section('contents')
 <div id="chatbot"></div>
 <script>
     var botmanWidget = {
@@ -12,4 +9,3 @@
     };
 </script>
 <script src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/widget.js'></script>
-@endsection
