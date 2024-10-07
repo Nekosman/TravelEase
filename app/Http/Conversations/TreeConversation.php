@@ -11,14 +11,14 @@ class TreeConversation extends Conversation
     protected $step = 1; // Step untuk melacak posisi percakapan user
 
     protected $ticketIssues = [
-        '1' => 'Tiket sudah dibeli tapi belum dapat kodenya',
-        '2' => 'Tiket tidak bisa dipakai',
+        '1' => 'Tiket sudah dibeli tapi belum mendapatkan kode konfirmasi.',
+        '2' => 'Tiket yang dibeli tidak bisa digunakan untuk perjalanan.',
     ];
 
     protected $planeIssues = [
-        '1' => 'Kode tidak bisa dipakai',
-        '2' => 'Kode salah padahal sudah benar isinya',
-        '3' => 'Kode keterangan sudah dipakai padahal belum dipakai',
+        '1' => 'Kode yang diberikan tidak dapat digunakan.',
+        '2' => 'Kode yang dimasukkan salah meskipun sudah yakin.',
+        '3' => 'Kode telah digunakan padahal saya belum melakukan perjalanan.',
     ];
 
     public function run()
@@ -34,13 +34,13 @@ class TreeConversation extends Conversation
         // Animasi mengetik sebelum pertanyaan
         $this->bot->typesAndWaits(2); 
 
-        $question = Question::create('Pertanyaan pertama: Apa yang ingin Anda lakukan?')
-            ->fallback('Tidak bisa memahami pilihan Anda')
+        $question = Question::create('Selamat datang! Apa yang bisa saya bantu hari ini?')
+            ->fallback('Tidak bisa memahami pilihan Anda. Mohon coba lagi.')
             ->callbackId('ask_first_question')
             ->addButtons([
-                Button::create('Masalah pembelian tiket')->value('1'),
-                Button::create('Masalah pesawat')->value('2'),
-                Button::create('Kembali')->value('kembali'),
+                Button::create('Masalah Pembelian Tiket')->value('1'),
+                Button::create('Masalah Pesawat')->value('2'),
+                Button::create('Kembali ke Menu Utama')->value('kembali'),
             ]);
 
         $this->ask($question, function ($answer) {
@@ -53,7 +53,8 @@ class TreeConversation extends Conversation
                 $this->step = 3;
                 $this->askMyPlane();
             } elseif ($response === 'kembali') {
-                $this->goBack();
+                $this->say('Anda telah kembali ke menu utama. Mari kita mulai lagi!');
+                $this->askFirstQuestion();
             } else {
                 $this->say('Pilihan tidak valid. Coba lagi.');
                 $this->repeat();
@@ -69,13 +70,13 @@ class TreeConversation extends Conversation
         // Animasi mengetik sebelum pertanyaan
         $this->bot->typesAndWaits(2);
 
-        $question = Question::create('Masalah pembelian tiket apa yang ingin Anda tanyakan?')
-            ->fallback('Tidak bisa memahami pilihan Anda')
+        $question = Question::create('Kami memahami bahwa Anda mungkin mengalami kesulitan dengan tiket. Masalah pembelian tiket apa yang ingin Anda tanyakan?')
+            ->fallback('Tidak bisa memahami pilihan Anda. Mohon coba lagi.')
             ->callbackId('ask_my_ticket')
             ->addButtons([
-                Button::create('Tiket sudah dibeli tapi belum dapat kodenya')->value('1'),
-                Button::create('Tiket tidak bisa dipakai')->value('2'),
-                Button::create('Kembali')->value('kembali'),
+                Button::create('Tiket sudah dibeli tapi belum mendapatkan kode konfirmasi.')->value('1'),
+                Button::create('Tiket yang saya beli tidak bisa digunakan untuk perjalanan.')->value('2'),
+                Button::create('Kembali ke Menu Utama')->value('kembali'),
             ]);
 
         $this->ask($question, function ($answer) {
@@ -84,12 +85,12 @@ class TreeConversation extends Conversation
             if ($response === '1') {
                 // Animasi mengetik sebelum jawaban
                 $this->bot->typesAndWaits(1);
-                $this->say('Anda bisa menghubungi layanan pelanggan untuk mendapatkan kode tiket Anda.');
+                $this->say('Silakan hubungi layanan pelanggan kami untuk mendapatkan kode tiket Anda.');
             } elseif ($response === '2') {
                 $this->step = 4;
                 $this->askPlaneIssueDetails();
             } elseif ($response === 'kembali') {
-                $this->goBack();
+                $this->askFirstQuestion();
             } else {
                 $this->say('Pilihan tidak valid. Coba lagi.');
                 $this->repeat();
@@ -105,14 +106,14 @@ class TreeConversation extends Conversation
         // Animasi mengetik sebelum pertanyaan
         $this->bot->typesAndWaits(2);
 
-        $question = Question::create('Masalah spesifik apa yang Anda alami?')
-            ->fallback('Tidak bisa memahami pilihan Anda')
+        $question = Question::create('Untuk membantu kami menyelesaikan masalah Anda, dapatkah Anda menjelaskan masalah spesifik yang Anda alami?')
+            ->fallback('Tidak bisa memahami pilihan Anda. Mohon coba lagi.')
             ->callbackId('ask_plane_issue_details')
             ->addButtons([
-                Button::create('Kode tidak bisa dipakai')->value('1'),
-                Button::create('Kode salah padahal sudah benar')->value('2'),
-                Button::create('Kode keterangan sudah dipakai padahal belum')->value('3'),
-                Button::create('Kembali')->value('kembali'),
+                Button::create('Kode tidak bisa digunakan.')->value('1'),
+                Button::create('Kode yang dimasukkan salah padahal saya yakin benar.')->value('2'),
+                Button::create('Kode saya sudah digunakan padahal saya belum melakukan perjalanan.')->value('3'),
+                Button::create('Kembali ke Menu Utama')->value('kembali'),
             ]);
 
         $this->ask($question, function ($answer) {
@@ -122,13 +123,13 @@ class TreeConversation extends Conversation
             $this->bot->typesAndWaits(1);
 
             if ($response === '1') {
-                $this->say('Anda bisa menghubungi layanan pelanggan untuk masalah kode yang tidak bisa dipakai.');
+                $this->say('Silakan hubungi layanan pelanggan kami untuk masalah kode yang tidak dapat digunakan.');
             } elseif ($response === '2') {
-                $this->say('Silakan hubungi tim teknis untuk memeriksa kesalahan kode.');
+                $this->say('Kami sarankan Anda menghubungi tim teknis untuk memeriksa kesalahan pada kode Anda.');
             } elseif ($response === '3') {
-                $this->say('Hubungi dukungan pelanggan untuk melaporkan masalah ini.');
+                $this->say('Silakan hubungi dukungan pelanggan kami untuk melaporkan masalah ini dan mendapatkan bantuan.');
             } elseif ($response === 'kembali') {
-                $this->goBack();
+                $this->askMyTicket();
             } else {
                 $this->say('Pilihan tidak valid. Coba lagi.');
                 $this->repeat();
@@ -144,13 +145,13 @@ class TreeConversation extends Conversation
         // Animasi mengetik sebelum pertanyaan
         $this->bot->typesAndWaits(2);
 
-        $question = Question::create('Pilihan masalah pesawat:')
-            ->fallback('Tidak bisa memahami pilihan Anda')
+        $question = Question::create('Kami siap membantu Anda dengan masalah pesawat. Silakan pilih dari masalah berikut:')
+            ->fallback('Tidak bisa memahami pilihan Anda. Mohon coba lagi.')
             ->callbackId('ask_my_plane')
             ->addButtons([
-                Button::create('Subpilihan B1')->value('1'),
-                Button::create('Subpilihan B2')->value('2'),
-                Button::create('Kembali')->value('kembali'),
+                Button::create('Terlambat dalam penerbangan.')->value('1'),
+                Button::create('Perubahan jadwal penerbangan.')->value('2'),
+                Button::create('Kembali ke Menu Utama')->value('kembali'),
             ]);
 
         $this->ask($question, function ($answer) {
@@ -160,11 +161,11 @@ class TreeConversation extends Conversation
             $this->bot->typesAndWaits(1);
 
             if ($response === '1') {
-                $this->say('Anda memilih subpilihan B1.');
+                $this->say('Kami mohon maaf atas keterlambatan ini. Silakan cek dengan layanan pelanggan untuk informasi lebih lanjut.');
             } elseif ($response === '2') {
-                $this->say('Anda memilih subpilihan B2.');
+                $this->say('Silakan hubungi layanan pelanggan untuk informasi tentang perubahan jadwal penerbangan.');
             } elseif ($response === 'kembali') {
-                $this->goBack();
+                $this->askFirstQuestion();
             } else {
                 $this->say('Pilihan tidak valid. Coba lagi.');
                 $this->repeat();
@@ -184,7 +185,7 @@ class TreeConversation extends Conversation
                 $this->askMyTicket(); // Kembali ke pertanyaan terkait tiket
                 break;
             default:
-                $this->say('Anda sudah berada di langkah pertama.');
+                $this->say('Anda sudah berada di langkah pertama. Mari kita mulai lagi!');
                 $this->askFirstQuestion();
         }
     }
