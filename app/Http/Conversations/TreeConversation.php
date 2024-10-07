@@ -34,8 +34,13 @@ class TreeConversation extends Conversation
         // Animasi mengetik sebelum pertanyaan
         $this->bot->typesAndWaits(2); 
 
+<<<<<<< HEAD
         $question = Question::create('Selamat datang! Apa yang bisa saya bantu hari ini?')
             ->fallback('Tidak bisa memahami pilihan Anda. Mohon coba lagi.')
+=======
+        $question = Question::create('Pertanyaan pertama: Apa yang ingin Anda lakukan?')
+            ->fallback('Tidak bisa memahami pilihan Anda')
+>>>>>>> 7775111153b93c9a04e9eceb423c05d07c80ed91
             ->callbackId('ask_first_question')
             ->addButtons([
                 Button::create('Masalah Pembelian Tiket')->value('1'),
@@ -70,8 +75,13 @@ class TreeConversation extends Conversation
         // Animasi mengetik sebelum pertanyaan
         $this->bot->typesAndWaits(2);
 
+<<<<<<< HEAD
         $question = Question::create('Kami memahami bahwa Anda mungkin mengalami kesulitan dengan tiket. Masalah pembelian tiket apa yang ingin Anda tanyakan?')
             ->fallback('Tidak bisa memahami pilihan Anda. Mohon coba lagi.')
+=======
+        $question = Question::create('Masalah pembelian tiket apa yang ingin Anda tanyakan?')
+            ->fallback('Tidak bisa memahami pilihan Anda')
+>>>>>>> 7775111153b93c9a04e9eceb423c05d07c80ed91
             ->callbackId('ask_my_ticket')
             ->addButtons([
                 Button::create('Tiket sudah dibeli tapi belum mendapatkan kode konfirmasi.')->value('1'),
@@ -85,7 +95,11 @@ class TreeConversation extends Conversation
             if ($response === '1') {
                 // Animasi mengetik sebelum jawaban
                 $this->bot->typesAndWaits(1);
+<<<<<<< HEAD
                 $this->say('Silakan hubungi layanan pelanggan kami untuk mendapatkan kode tiket Anda.');
+=======
+                $this->say('Anda bisa menghubungi layanan pelanggan untuk mendapatkan kode tiket Anda.');
+>>>>>>> 7775111153b93c9a04e9eceb423c05d07c80ed91
             } elseif ($response === '2') {
                 $this->step = 4;
                 $this->askPlaneIssueDetails();
@@ -106,8 +120,13 @@ class TreeConversation extends Conversation
         // Animasi mengetik sebelum pertanyaan
         $this->bot->typesAndWaits(2);
 
+<<<<<<< HEAD
         $question = Question::create('Untuk membantu kami menyelesaikan masalah Anda, dapatkah Anda menjelaskan masalah spesifik yang Anda alami?')
             ->fallback('Tidak bisa memahami pilihan Anda. Mohon coba lagi.')
+=======
+        $question = Question::create('Masalah spesifik apa yang Anda alami?')
+            ->fallback('Tidak bisa memahami pilihan Anda')
+>>>>>>> 7775111153b93c9a04e9eceb423c05d07c80ed91
             ->callbackId('ask_plane_issue_details')
             ->addButtons([
                 Button::create('Kode tidak bisa digunakan.')->value('1'),
@@ -145,8 +164,13 @@ class TreeConversation extends Conversation
         // Animasi mengetik sebelum pertanyaan
         $this->bot->typesAndWaits(2);
 
+<<<<<<< HEAD
         $question = Question::create('Kami siap membantu Anda dengan masalah pesawat. Silakan pilih dari masalah berikut:')
             ->fallback('Tidak bisa memahami pilihan Anda. Mohon coba lagi.')
+=======
+        $question = Question::create('Pilihan masalah pesawat:')
+            ->fallback('Tidak bisa memahami pilihan Anda')
+>>>>>>> 7775111153b93c9a04e9eceb423c05d07c80ed91
             ->callbackId('ask_my_plane')
             ->addButtons([
                 Button::create('Terlambat dalam penerbangan.')->value('1'),

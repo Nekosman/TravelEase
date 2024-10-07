@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\TicketController;
@@ -44,17 +45,13 @@ Route::middleware(['auth', 'user-access:admin'])->group(function(){
 
 Route::middleware(['auth', 'user-access:officer'])->group(function(){
     Route::get('/agent',[HomeController::class, 'adminOfficer'])->name('officer.home');
-
-    Route::get('/officer/tickets', [TicketController::class, 'myTicketsForOfficer'])->name('officer.ticket');
-    Route::get('officer/tickets/{id}/accept', [TicketController::class, 'showAcceptForm'])->name('officer.showAcceptForm');
-    Route::post('officer/acceptTicket/{id}', [TicketController::class, 'acceptTicket'])->name('officer.accept');
 });
 
 Route::middleware(['auth', 'user-access:user'])->group(function(){
     Route::get('/home',[HomeController::class, 'userHome'])->name('user.home');
 
     
-    Route::get('/tickets', [TicketController::class, 'indexTicket'])->name('ticket.index');
+    Route::get('/tickets', [TicketController::class, 'indexTicket'])->name('user.ticket');
     Route::get('/tickets/create', [TicketController::class, 'createTicket'])->name('ticket.create');
     Route::post('/tickets', [TicketController::class, 'storeTicket'])->name('ticket.store');
     Route::get('/tickets/edit/{ticket}', [TicketController::class, 'editTicket'])->name('ticket.edit');
@@ -77,9 +74,16 @@ Route::middleware(['auth'])->group(function() {
     
         $botman->listen();
     });
+});
 
-    // // Rute ini HANYA untuk menangani percakapan, bukan untuk merender halaman chatbot
-    // Route::get('/botman/chat', function () {
-    //     return '';
-    // });
+Route::middleware(['auth', 'user-access:admin, officer'])->group(function() {
+    Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
+    Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
+    Route::post('/categories/store', [CategoryController::class, 'store'])->name('categories.store');
+    Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
+    Route::put('/categories/update/{category}', [CategoryController::class, 'update'])->name('categories.update');
+    Route::delete('/categories/delete/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+
+    Route::get('/tickets/list', [TicketController::class, 'myTicketsForOfficer'])->name('ticket');
+    Route::post('/acceptTicket/{id}', [TicketController::class, 'acceptTicket'])->name('accept');
 });

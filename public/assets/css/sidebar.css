@@ -1,0 +1,63 @@
+.d-flex {
+    display: flex;
+    min-height: 100vh; /* Sidebar & content fill the screen vertically */
+  }
+  
+  .sidebar {
+    background-color: white;
+    width: 250px; /* Initial width of the sidebar */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    min-height: 100vh;
+    transition: width 0.3s;
+  }
+  
+  .sidebar.collapsed {
+    width: 80px; /* Sidebar width when collapsed */
+  }
+  
+  .content {
+    flex-grow: 1; /* Ensures content takes up remaining space */
+    padding: 20px; /* Optional padding for content */
+  }
+  
+  .nav-link {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: #6c757d;
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+  }
+  
+  .nav-link.active {
+    color: #366389;
+    border-color: #366389;
+  }
+  
+  .nav-link span {
+    margin-left: 10px;
+  }
+  
+  .sidebar.collapsed .nav-link span {
+    display: none; /* Hide text when sidebar is collapsed */
+  }
+  
+  .sidebar img {
+    width: 130px; /* Logo size when sidebar is expanded */
+    height: auto;
+    margin-bottom: 20px;
+    transition: width 0.3s;
+  }
+  
+  .sidebar.collapsed img {
+    width: 50px; /* Logo size when sidebar is collapsed */
+  }
+  
+  .toggleButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}

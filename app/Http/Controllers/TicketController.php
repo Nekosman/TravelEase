@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categories;
 use App\Models\Ticket;
 use App\Notifications\TicketAccepted;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class TicketController extends Controller
         $filter = $request->query('filter', 'all'); // Default filter is 'all'
 
         // Query builder awal
-        $query = Ticket::with('user')->where('user_id', $userId);
+        $query = Ticket::with('user', 'category')->where('user_id', $userId);
 
         // Terapkan filter
         if ($filter === 'officer_empty') {
@@ -30,7 +31,8 @@ class TicketController extends Controller
 
     public function createTicket()
     {
-        return view('tickets.create');
+        $categories = Categories::all(); // Ambil semua kategori
+        return view('tickets.create', compact('categories')); // Kirim kategori ke view
     }
 
     public function storeTicket(Request $request)
@@ -39,47 +41,62 @@ class TicketController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'priority' => 'required|in:low,medium,high',
+            'category_id' => 'required|exists:categories,id', // Validasi untuk category
         ]);
 
         Ticket::create([
             'title' => $request->title,
             'description' => $request->description,
             'priority' => $request->priority,
+            'category_id' => $request->category_id, // Simpan category_id
             'user_id' => Auth::id(),
         ]);
 
         // $tickets->user()->sync($request->siswa_id);
 
-        return redirect()->route('ticket.index')->with('success', 'Product created successfully.');
+        return redirect()->route('user.ticket')->with('success', 'Product created successfully.');
     }
 
     public function editTicket(Ticket $ticket)
     {
-        if ($ticket->status === 'canceled' && 'closed') {
+        // Cek jika status adalah accepted, closed, atau canceled
+        if (in_array($ticket->status, ['accepted', 'closed', 'canceled'])) {
             return redirect()
-                ->route('ticket.index')
-                ->with(['error' => 'You cannot edit a scheduled ticket.']);
-        } else {
-            return view('tickets.edit', compact('ticket'));
+                ->route('user.ticket')
+                ->with(['error' => 'You cannot edit a ticket that is already accepted, closed, or canceled.']);
         }
+
+        $categories = Categories::all(); // Ambil semua kategori untuk ditampilkan di form edit
+        return view('tickets.edit', compact('ticket', 'categories')); // Kirim kategori ke view
     }
 
     public function updateTicket(Request $request, Ticket $ticket)
     {
+        // Cek jika status adalah accepted, closed, atau canceled
+        if (in_array($ticket->status, ['accepted', 'closed', 'canceled'])) {
+            return redirect()
+                ->route('user.ticket')
+                ->with(['error' => 'You cannot update a ticket that is already accepted, closed, or canceled.']);
+        }
+
+        // Validasi input dari request
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'priority' => 'required|in:low,medium,high',
+            'category_id' => 'required|exists:categories,id', // Validasi untuk category
         ]);
 
+        // Update tiket
         $ticket->update([
             'title' => $request->title,
             'description' => $request->description,
             'priority' => $request->priority,
+            'category_id' => $request->category_id,
             'user_id' => Auth::id(),
         ]);
 
-        return redirect()->route('ticket.index')->with('success', 'Ticket updated successfully.');
+        return redirect()->route('user.ticket')->with('success', 'Ticket updated successfully.');
     }
 
     public function destroyTicket($id)
@@ -87,7 +104,7 @@ class TicketController extends Controller
         $ticket = Ticket::findOrFail($id);
         $ticket->delete();
 
-        return redirect()->route('ticket.index')->with('success', 'Product deleted successfully.');
+        return redirect()->route('user.ticket')->with('success', 'Product deleted successfully.');
     }
 
     //Fungsi action guru
@@ -120,11 +137,11 @@ class TicketController extends Controller
             'status' => 'accepted', // Status diubah menjadi 'accepted' atau sesuai dengan logika Anda
         ]);
 
-        // Kirim notifikasi ke user
-        $user = $ticket->user; // Asumsi bahwa tiket memiliki relasi user
-        $user->notify(new TicketAccepted($ticket));
+        // // Kirim notifikasi ke user
+        // $user = $ticket->user; // Asumsi bahwa tiket memiliki relasi user
+        // $user->notify(new TicketAccepted($ticket));
 
-        return redirect()->route('officer.ticket')->with('success', 'Ticket accepted successfully.');
+        return redirect()->route('ticket')->with('success', 'Ticket accepted successfully.');
     }
 
     public function showAcceptForm($id)
@@ -132,7 +149,7 @@ class TicketController extends Controller
         $ticket = Ticket::where('id', $id)->where('officer_id', null)->first();
 
         if (!$ticket) {
-            return redirect()->route('officer.ticket')->with('error', 'Ticket not found or already accepted.');
+            return redirect()->route('ticket')->with('error', 'Ticket not found or already accepted.');
         }
 
         return view('tickets.officerAction.accept', compact('ticket'));
