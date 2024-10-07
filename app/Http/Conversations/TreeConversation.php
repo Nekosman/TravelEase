@@ -26,10 +26,14 @@ class TreeConversation extends Conversation
         $this->askFirstQuestion();
     }
 
-    // Pertanyaan pertama dengan quick replies
+    // Pertanyaan pertama dengan animasi mengetik
     public function askFirstQuestion()
     {
         $this->step = 1; // Set step ke 1
+
+        // Animasi mengetik sebelum pertanyaan
+        $this->bot->typesAndWaits(2); 
+
         $question = Question::create('Pertanyaan pertama: Apa yang ingin Anda lakukan?')
             ->fallback('Tidak bisa memahami pilihan Anda')
             ->callbackId('ask_first_question')
@@ -57,10 +61,14 @@ class TreeConversation extends Conversation
         });
     }
 
-    // Pertanyaan terkait pembelian tiket dengan quick replies
+    // Pertanyaan terkait pembelian tiket dengan animasi mengetik
     public function askMyTicket()
     {
         $this->step = 2; // Set step ke 2
+
+        // Animasi mengetik sebelum pertanyaan
+        $this->bot->typesAndWaits(2);
+
         $question = Question::create('Masalah pembelian tiket apa yang ingin Anda tanyakan?')
             ->fallback('Tidak bisa memahami pilihan Anda')
             ->callbackId('ask_my_ticket')
@@ -74,6 +82,8 @@ class TreeConversation extends Conversation
             $response = $answer->getValue();
 
             if ($response === '1') {
+                // Animasi mengetik sebelum jawaban
+                $this->bot->typesAndWaits(1);
                 $this->say('Anda bisa menghubungi layanan pelanggan untuk mendapatkan kode tiket Anda.');
             } elseif ($response === '2') {
                 $this->step = 4;
@@ -87,10 +97,14 @@ class TreeConversation extends Conversation
         });
     }
 
-    // Pertanyaan lanjutan terkait masalah tiket tidak bisa dipakai
+    // Pertanyaan lanjutan terkait masalah tiket tidak bisa dipakai dengan animasi mengetik
     public function askPlaneIssueDetails()
     {
         $this->step = 4; // Set step ke 4
+
+        // Animasi mengetik sebelum pertanyaan
+        $this->bot->typesAndWaits(2);
+
         $question = Question::create('Masalah spesifik apa yang Anda alami?')
             ->fallback('Tidak bisa memahami pilihan Anda')
             ->callbackId('ask_plane_issue_details')
@@ -103,6 +117,9 @@ class TreeConversation extends Conversation
 
         $this->ask($question, function ($answer) {
             $response = $answer->getValue();
+
+            // Animasi mengetik sebelum memberikan jawaban
+            $this->bot->typesAndWaits(1);
 
             if ($response === '1') {
                 $this->say('Anda bisa menghubungi layanan pelanggan untuk masalah kode yang tidak bisa dipakai.');
@@ -119,10 +136,14 @@ class TreeConversation extends Conversation
         });
     }
 
-    // Pertanyaan terkait masalah pesawat dengan quick replies
+    // Pertanyaan terkait masalah pesawat dengan animasi mengetik
     public function askMyPlane()
     {
         $this->step = 3; // Set step ke 3
+
+        // Animasi mengetik sebelum pertanyaan
+        $this->bot->typesAndWaits(2);
+
         $question = Question::create('Pilihan masalah pesawat:')
             ->fallback('Tidak bisa memahami pilihan Anda')
             ->callbackId('ask_my_plane')
@@ -134,6 +155,9 @@ class TreeConversation extends Conversation
 
         $this->ask($question, function ($answer) {
             $response = $answer->getValue();
+
+            // Animasi mengetik sebelum memberikan jawaban
+            $this->bot->typesAndWaits(1);
 
             if ($response === '1') {
                 $this->say('Anda memilih subpilihan B1.');
