@@ -4,4 +4,6 @@
 
 @section('contents')
 
+@include('chatbot.chatbot')
+
 @endsection 
