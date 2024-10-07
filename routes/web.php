@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LandingController;
 use App\Http\Controllers\TicketController;
 use Illuminate\Support\Facades\Route;
 use BotMan\BotMan\BotMan;
@@ -20,15 +21,13 @@ use App\Http\conversations\TreeConversation;
 |
 */
 
-Route::get('/', function () {
-    return view('landing_page   ');
-});
+Route::get('/', [LandingController::class, 'index'])->name('landing.page');
 
 
 
 Route::controller(AuthController::class)->group(function () {
     //register
-    Route::get('register', 'register')->name('register');
+    Route::get('register',  'register')->name('register');
     Route::post('register', 'registerSave')->name('register.save');
 
     //login
