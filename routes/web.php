@@ -8,6 +8,8 @@ use App\Http\Controllers\TicketController;
 use Illuminate\Support\Facades\Route;
 use BotMan\BotMan\BotMan;
 use App\Http\conversations\TreeConversation;
+use App\Http\Controllers\SettingController;
+use App\Http\Controllers\PasswordResetController;
 
 
 
@@ -87,3 +89,21 @@ Route::middleware(['auth', 'user-access:admin, officer'])->group(function() {
     Route::get('/tickets/list', [TicketController::class, 'myTicketsForOfficer'])->name('ticket');
     Route::post('/acceptTicket/{id}', [TicketController::class, 'acceptTicket'])->name('accept');
 });
+
+Route::get('/setting', [SettingController::class, 'index'])->name('setting');
+Route::post('/setting/update', [SettingController::class, 'update'])->name('setting.update');
+
+
+
+// Menampilkan form untuk meminta link reset password
+Route::get('/forgot-password', [PasswordResetController::class, 'showLinkRequestForm'])
+    ->name('password.request');
+
+// Mengirim link reset password
+Route::post('/forgot-password', [PasswordResetController::class, 'sendResetLinkEmail'])
+    ->name('password.email');
+
+Route::get('/password/reset/{token}', [PasswordResetController::class, 'showResetForm'])->name('password.reset');
+
+
+

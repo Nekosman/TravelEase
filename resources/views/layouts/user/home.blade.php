@@ -1,2 +1,8 @@
-@include('layouts.user.sidebar') 
+@extends('layouts.user.sidebar')
+
+
+
+@section('contents')
+
+@include('chatbot.chatbot')
 

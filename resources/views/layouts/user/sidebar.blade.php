@@ -35,15 +35,10 @@
                         <span>Ticketing</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="faq">
-                        <i class="fa-solid fa-question icon"></i>
-                        <span>FAQ</span>
-                    </a>
-                </li>
+                
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{{route('setting')}}">
                         <i class="fa-solid fa-gear icon"></i>
                         <span>Settings</span>
                     </a>
