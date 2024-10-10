@@ -28,4 +28,31 @@ class CategoryController extends Controller
         return redirect()->route('categories')
             ->with('success', 'Category created successfully.');
     }
+
+    public function edit(Categories $category)
+    {
+        return view('categories.edit', compact('category'));
+    }
+
+    public function update(Request $request, Categories $category)
+    {
+        $request->validate([
+            'name_category' => 'required',
+            'description' => 'nullable',
+        ]);
+
+        $category->update($request->all());
+
+        return redirect()->route('categories')
+            ->with('success', 'Category updated successfully.');
+    }
+
+    public function destroy($id)
+    {
+        $category = Categories::findOrFail($id);
+        $category->delete();
+
+        return redirect()->route('categories')
+            ->with('success', 'Category deleted successfully.');
+    }
 }

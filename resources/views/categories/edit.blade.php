@@ -1,47 +1,46 @@
-@extends('layouts.admin.sidebar')
+@extends('layouts.user.sidebar')
 
 @section('contents')
-<div class="row">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <h2>Edit Kategori</h2>
-        </div>
-    </div>
-</div>
+    <link rel="stylesheet" href="{{ asset('assets/css/FormInput.css') }}">
 
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <strong>Whoops!</strong> Ada beberapa masalah dengan input Anda.<br><br>
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+    <div class="form-wrapper"> <!-- Wrapper untuk mengontrol layout secara fleksibel -->
+        <div class="form-container">
+            <div class="card shadow-lg"> <!-- Tambahkan shadow -->
+                <div class="card-header text-white" style="background-color: #366389;">Create Ticket</div>
 
-<form action="{{ route('categories.update', $category->id) }}" method="POST" enctype="multipart/form-data">
+                <div class="card-body">
+                    <form method="POST" action="{{ route('categories.update', $category->id) }}">
+                        @method('PUT')
+                        @csrf
+                        <div class="mb-3">
+                            <label for="name_category" class="form-label">Name</label>
+                            <input type="text" class="form-control @error('name_category') is-invalid @enderror" id="name_category"
+                                name="name_category" value="{{ old('name_category', $category->name_category) }}">
+                            @error('name_category')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
 
-    @csrf
-    @method('PUT')
-   
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Nama:</strong>
-                <input type="text" name="name" value="{{ old('name') }}" class="form-control" placeholder="Nama">
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description"
+                                rows="4">{{ old('description', $category->description) }}</textarea>
+                            @error('description')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                       
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn text-white" style="background-color: #366389;">Submit</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Deskripsi:</strong>
-                <textarea class="form-control" style="height:150px" name="description" placeholder="Deskripsi">{{ old('description') }}</textarea>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-            <button type="submit" class="btn btn-primary">UPDATE</button>
-            <button type="reset" class="btn btn-warning">RESET</button>
-        </div>
     </div>
-</form>
 @endsection
