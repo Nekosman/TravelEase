@@ -13,7 +13,7 @@
     };
 </script>
 <script src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/widget.js'></script>
-<<<<<<< HEAD
+
 @endsection
-=======
->>>>>>> 7775111153b93c9a04e9eceb423c05d07c80ed91
+
+
