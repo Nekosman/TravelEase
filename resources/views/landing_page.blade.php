@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Index - Bootslander Bootstrap Template</title>
+    <title>TravelEase</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
 
@@ -43,7 +43,7 @@
     <header id="header" class="header d-flex align-items-center fixed-top">
         <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-            <a href="index.html" class="logo d-flex align-items-center">
+            <a href="/" class="logo d-flex align-items-center">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
                 <img src="{{ asset('assets/img/logo_icon2.png') }}" alt="">
                 <h1 class="sitename">TravelEase</h1>
