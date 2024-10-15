@@ -85,7 +85,7 @@
 </style>
 
 
-<div class="container mt-5">
+<div class="container mt-5" class="alert alert-danger">
     <h2>Pengaturan Akun</h2>
 
     <!-- Notifikasi Sukses -->
@@ -95,28 +95,64 @@
         </div>
     @endif
 
-    <form action="{{ route('setting.update') }}" method="POST">
-        @csrf
-        <!-- Update Email -->
-        <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" name="email" value="{{ old('email', auth()->user()->email) }}">
-        </div>
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
-        <!-- Update Password -->
-        <div class="mb-3">
-            <label for="password" class="form-label">Password Baru</label>
-            <input type="password" class="form-control" id="password" name="password">
-        </div>
+<!-- Bagian form -->
+<form action="{{ route('setting.update') }}" method="POST" id="settingsForm" novalidate>
+    @csrf
+    <!-- Update Email -->
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" name="email" value="{{ old('email', auth()->user()->email) }}" required>
+        <div class="invalid-feedback">Email harus diisi dan valid.</div>
+    </div>
 
-        <!-- Konfirmasi Password -->
-        <div class="mb-3">
-            <label for="password_confirmation" class="form-label">Konfirmasi Password</label>
-            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
-        </div>
+    <!-- Update Password -->
+    <div class="mb-3">
+        <label for="password" class="form-label">Password Baru</label>
+        <input type="password" class="form-control" id="password" name="password" minlength="8">
+        <div class="invalid-feedback">Password harus minimal 8 karakter.</div>
+    </div>
 
-        <!-- Tombol Simpan -->
-        <button type="submit" class="btn btn-primary">Simpan Pengaturan</button>
-    </form>
+    <!-- Konfirmasi Password -->
+    <div class="mb-3">
+        <label for="password_confirmation" class="form-label">Konfirmasi Password</label>
+        <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
+        <div class="invalid-feedback">Konfirmasi password harus cocok.</div>
+    </div>
+
+    <!-- Tombol Simpan -->
+    <button type="submit" class="btn btn-primary">Simpan Pengaturan</button>
+</form>
+<script>
+    <script>
+    (function() {
+        'use strict';
+
+        // Ambil form berdasarkan id
+        var form = document.getElementById('settingsForm');
+
+        // Event listener untuk validasi sebelum form disubmit
+        form.addEventListener('submit', function(event) {
+            // Cek jika form tidak valid
+            if (!form.checkValidity()) {
+                event.preventDefault(); // Mencegah pengiriman form
+                event.stopPropagation(); // Menghentikan propagasi event
+            }
+
+            form.classList.add('was-validated'); // Menambah class untuk menunjukkan pesan validasi
+        }, false);
+    })();
+</script>
+
+</script>
 </div>
 @endsection

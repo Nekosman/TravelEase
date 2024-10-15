@@ -13,26 +13,30 @@ class SettingController extends Controller
     }
 
     public function update(Request $request)
-{
-    // Validasi input
-    $request->validate([
-        'email' => 'required|email',
-        'password' => 'nullable|min:8|confirmed',
-    ]);
+    {
+        // Validasi input
+        $request->validate([
+            'email' => 'required|email', // Email harus diisi dan formatnya valid
+            'password' => 'nullable|min:8|confirmed', // Password opsional tetapi jika diisi harus minimal 8 karakter dan cocok dengan konfirmasi password
+        ], [
+            'email.required' => 'Email harus diisi.',
+            'email.email' => 'Format email tidak valid.',
+            'password.min' => 'Password harus minimal 8 karakter.',
+            'password.confirmed' => 'Konfirmasi password tidak cocok.',
+        ]);
 
-    // Update user
-    $user = auth()->user();
-    $user->email = $request->email;
+        // Update user
+        $user = auth()->user();
+        $user->email = $request->email;
 
-    if ($request->password) {
-        $user->password = bcrypt($request->password);
+        // Hanya update password jika diisi
+        if ($request->password) {
+            $user->password = bcrypt($request->password);
+        }
+
+        $user->save();
+
+        // Redirect back dengan pesan sukses
+        return redirect()->route('setting')->with('success', 'Pengaturan berhasil diperbarui.');
     }
-
-    $user->save();
-
-    // Redirect back dengan pesan sukses
-    return redirect()->route('setting')->with('success', 'Pengaturan berhasil diperbarui.');
 }
-
-}
-
