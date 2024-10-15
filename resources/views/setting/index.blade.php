@@ -7,7 +7,7 @@
         background: linear-gradient(to bottom, #366389 18%, white 18%);
         padding: 40px 20px; /* Tambahkan padding lebih besar untuk estetika */
         border-radius: 12px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow untuk kedalaman */
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4); /* Shadow untuk kedalaman */
         max-width: 600px; /* Membatasi lebar maksimal untuk fokus yang lebih baik */
         margin: 0 auto; /* Memusatkan elemen container */
     }
