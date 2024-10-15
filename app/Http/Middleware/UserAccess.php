@@ -13,12 +13,12 @@ class UserAccess
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, $userType)
+    public function handle(Request $request, Closure $next, ...$userTypes)
     {
-        if (auth()->user()->type == $userType) {
+        if (in_array(auth()->user()->type, $userTypes)) {
             return $next($request);
         }
 
-        return response()->json(['Anda Tidak ada izin untuk page ini.']);
+        return response()->json(['Anda Tidak ada izin untuk page in']);
     }
 }

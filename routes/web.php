@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\TicketMessageController;
 use Illuminate\Support\Facades\Route;
 use BotMan\BotMan\BotMan;
 use App\Http\conversations\TreeConversation;
@@ -45,7 +46,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function(){
 });
 
 Route::middleware(['auth', 'user-access:officer'])->group(function(){
-    Route::get('/agent',[HomeController::class, 'adminOfficer'])->name('officer.home');
+    Route::get('/officer',[HomeController::class, 'officerHome'])->name('officer.home');
 });
 
 Route::middleware(['auth', 'user-access:user'])->group(function(){
@@ -77,7 +78,7 @@ Route::middleware(['auth'])->group(function() {
     });
 });
 
-Route::middleware(['auth', 'user-access:admin, officer'])->group(function() {
+Route::middleware(['auth', 'user-access:admin,officer'])->group(function() {
     Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
     Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
     Route::post('/categories/store', [CategoryController::class, 'store'])->name('categories.store');
@@ -87,4 +88,13 @@ Route::middleware(['auth', 'user-access:admin, officer'])->group(function() {
 
     Route::get('/tickets/list', [TicketController::class, 'myTicketsForOfficer'])->name('ticket');
     Route::post('/acceptTicket/{id}', [TicketController::class, 'acceptTicket'])->name('accept');
+
+    Route::get('/tickets/{id}/accept', [TicketController::class, 'showAcceptForm'])->name('officer.showAcceptForm');
+    Route::post('/tickets/{id}/accept', [TicketController::class, 'acceptTicket'])->name('officer.accept');
+});
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/tickets/{ticket}/chat', [TicketMessageController::class, 'index'])->name('tickets.chat');
+    Route::post('/tickets/{ticket}/chat', [TicketMessageController::class, 'store'])->name('tickets.chat.store');
 });

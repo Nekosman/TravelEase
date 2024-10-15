@@ -1,5 +1,7 @@
 @extends('layouts.user.sidebar')
 
+@section('title', 'Create Ticket')
+
 @section('contents')
     <link rel="stylesheet" href="{{ asset('assets/css/FormInput.css') }}">
 

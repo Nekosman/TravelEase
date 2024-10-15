@@ -1,5 +1,8 @@
 @extends('layouts.user.sidebar')
 
+@section('title', 'Ticketing')
+
+
 @section('contents')
     <div class="container">
         <div class="row justify-content-center">
@@ -58,8 +61,8 @@
                                             @endif
                                         </td>
                                         <td>
-                                            @if ($ticket->status === 'scheduled')
-                                                <a href="{{ route('chat.show', $ticket->id) }}" class="btn btn-primary btn-sm">Go to Chat</a>
+                                            @if ($ticket->status === 'accepted')
+                                                <a href="{{ route('tickets.chat', $ticket->id) }}" class="btn btn-primary btn-sm">Go to Chat</a>
                                             @else
                                                 <span class="badge bg-secondary">Not Available</span>
                                             @endif

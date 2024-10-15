@@ -1,14 +1,18 @@
-@extends(Auth::user()->role === 'officer' ? 'layouts.officer.sidebar' : 'layouts.admin.sidebar')
+@extends(Auth::user()->type === 'officer' ? 'layouts.officer.sidebar' : 'layouts.admin.sidebar')
+
+@section('title', 'List Tickets')
 
 @section('contents')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <div class="card">
-
-                <div class="card-header">
-                    <a href="{{ route('ticket', ['filter' => 'all']) }}" class="btn btn-success">All tickets</a>
-                    <a href="{{ route('ticket', ['filter' => 'officer_empty']) }}" class="btn btn-danger">Empty Officer</a>
+            <div class="card shadow-lg">
+                <div class="card-header text-white" style="background-color: #366389;">
+                    <h4 class="mb-0">Tickets List</h4>
+                    <div class="float-end">
+                        <a href="{{ route('ticket', ['filter' => 'all']) }}" class="btn btn-success btn-sm">All Tickets</a>
+                        <a href="{{ route('ticket', ['filter' => 'officer_empty']) }}" class="btn btn-danger btn-sm">Empty Officer</a>
+                    </div>
                 </div>
 
                 <div class="card-body">
@@ -18,8 +22,8 @@
                         </div>
                     @endif
 
-                    <table class="table table-bordered">
-                        <thead>
+                    <table class="table table-hover table-bordered">
+                        <thead class="text-white" style="background-color: #366389;">
                             <tr>
                                 <th>id</th>
                                 <th>Ticket_no</th>
@@ -48,12 +52,10 @@
                                         @endif
                                     </td>
                                     <td>
-                                        @if ($ticket->status == 'pending')
-                                            @csrf
-                                            <form action="{{ route('accept', $ticket->id) }}" method="POST" style="display: inline">
-                                                @csrf
-                                                <button type="submit" class="btn btn-info btn-sm">Accept</button>
-                                            </form>
+                                        @if ($ticket->status == 'pending' && $ticket->officer_id === null)
+                                            <a href="{{ route('officer.showAcceptForm', $ticket->id) }}" class="btn btn-info btn-sm">Accept</a>
+                                        @elseif ($ticket->status == 'accepted' && $ticket->officer_id === Auth::id())
+                                            <a href="{{ route('tickets.chat', $ticket->id) }}" class="btn btn-primary btn-sm">Chat</a>
                                         @else
                                             No Action
                                         @endif
@@ -61,23 +63,21 @@
                                 </tr>
 
                                 <!-- Modal for Ticket Details -->
-                                {{-- <div class="modal fade" id="ticketDetailModal{{ $ticket->id }}" tabindex="-1" role="dialog" aria-labelledby="ticketDetailModalLabel{{ $ticket->id }}" aria-hidden="true">
+                                <div class="modal fade" id="ticketDetailModal{{ $ticket->id }}" tabindex="-1" role="dialog" aria-labelledby="ticketDetailModalLabel{{ $ticket->id }}" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="ticketDetailModalLabel{{ $ticket->id }}">Ticket Details</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
+                                            <div class="modal-header" style="background-color: #366389;">
+                                                <h5 class="modal-title text-white" id="ticketDetailModalLabel{{ $ticket->id }}">Ticket Details</h5>
+                                                <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
                                                 <p><strong>Title:</strong> {{ $ticket->title }}</p>
                                                 <p><strong>Description:</strong> {{ $ticket->description }}</p>
                                                 <p><strong>Priority:</strong> {{ $ticket->priority }}</p>
                                                 <p><strong>Status:</strong> {{ $ticket->status }}</p>
-                                                <p><strong>Guru yang Mengambil:</strong> 
-                                                    @if($ticket->guru)
-                                                        {{ $ticket->guru->name }}
+                                                <p><strong>Officer:</strong> 
+                                                    @if($ticket->officer)
+                                                        {{ $ticket->officer->name }}
                                                     @else
                                                         Tidak ada
                                                     @endif
@@ -85,17 +85,15 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div> --}}
+                                </div>
 
                                 <!-- Delete Confirmation Modal -->
-                                {{-- <div class="modal fade" id="deleteModal{{ $ticket->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel{{ $ticket->id }}" aria-hidden="true">
+                                <div class="modal fade" id="deleteModal{{ $ticket->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel{{ $ticket->id }}" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="deleteModalLabel{{ $ticket->id }}">Confirm Delete</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
+                                            <div class="modal-header" style="background-color: #366389;">
+                                                <h5 class="modal-title text-white" id="deleteModalLabel{{ $ticket->id }}">Confirm Delete</h5>
+                                                <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
                                                 Are you sure you want to delete this ticket?
@@ -109,19 +107,18 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div> --}}
+                                </div>
+
                             @endforeach
                         </tbody>
                     </table>
-
-                    
-
-                    {{-- <div class="d-flex justify-content-center">
-                        {{ $tickets->links() }}
-                    </div> --}}
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Load Bootstrap and jQuery for Modal functionality -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 @endsection

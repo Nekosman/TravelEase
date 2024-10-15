@@ -1,4 +1,7 @@
-@extends('layouts.user.sidebar')
+@extends(Auth::user()->role === 'officer' ? 'layouts.officer.sidebar' : 'layouts.admin.sidebar')
+
+@section('title', 'Categories List  ')
+
 
 @section('contents')
     <div class="container">

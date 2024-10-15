@@ -1,4 +1,6 @@
-@extends('layouts.user.sidebar')
+@extends(Auth::user()->role === 'officer' ? 'layouts.officer.sidebar' : 'layouts.admin.sidebar')
+
+@section('title', 'Edit Category')
 
 @section('contents')
     <link rel="stylesheet" href="{{ asset('assets/css/FormInput.css') }}">
