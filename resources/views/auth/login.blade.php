@@ -12,15 +12,13 @@
 </head>
 <body>
 
-    <!----------------------- Main Container -------------------------->
-
+    <!-- Main Container -->
     <div class="container d-flex justify-content-center align-items-center min-vh-100">
 
-        <!----------------------- Login Container -------------------------->
-
+        <!-- Login Container -->
         <div class="row border rounded-5 p-3 bg-white shadow box-area">
 
-            <!--------------------------- Left Box ----------------------------->
+            <!-- Left Box -->
             <div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box" style="background: #103cbe;">
                 <div class="featured-image mb-3">
                     <img src="images/1.png" class="img-fluid" style="width: 250px;">
@@ -29,7 +27,7 @@
                 <small class="text-white text-wrap text-center" style="width: 17rem;font-family: 'Courier New', Courier, monospace;">Join TravelEase sekarang.</small>
             </div> 
 
-            <!-------------------- ------ Right Box ---------------------------->
+            <!-- Right Box -->
             <div class="col-md-6 right-box">
                 <div class="row align-items-center">
 
@@ -40,10 +38,21 @@
                         </a>
                     </div>
 
-                    <!-- Tampilkan Notifikasi Sukses -->
+                    <!-- Tampilkan Notifikasi Sukses Login -->
                     @if (session('success'))
                         <div class="alert alert-success">
                             {{ session('success') }}
+                        </div>
+                    @endif
+
+                    <!-- Tampilkan Error (Jika Akun Belum Disetujui) -->
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
                         </div>
                     @endif
 
