@@ -1,4 +1,4 @@
-@extends('layouts.admin.sidebar')
+@extends( $layout)
 
 @section('contents')
 <link rel="stylesheet" href="{{ asset('css/settings.css') }}">

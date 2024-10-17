@@ -154,4 +154,10 @@ class TicketController extends Controller
 
         return view('tickets.officerAction.accept', compact('ticket'));
     }
+
+    public function getListTicket($id){
+        $tickets = Ticket::where('id', $id)->where('officer_id', null)->first();      
+        
+        return view('layouts.admin.home', compact('tickets'));
+    }
 }

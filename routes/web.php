@@ -71,8 +71,22 @@ Route::middleware(['auth'])->group(function () {
             $botman->startConversation(new TreeConversation());
         });
 
-        $botman->listen();
+        $botman->   listen();
     });
+
+    Route::get('/tickets/{ticket}/chat', [TicketMessageController::class, 'index'])->name('tickets.chat');
+    Route::post('/tickets/{ticket}/chat', [TicketMessageController::class, 'store'])->name('tickets.chat.store');
+
+    Route::get('/setting', [SettingController::class, 'index'])->name('setting');
+    Route::post('/setting/update', [SettingController::class, 'update'])->name('setting.update');
+
+    // Menampilkan form untuk meminta link reset password
+    Route::get('/forgot-password', [PasswordResetController::class, 'showLinkRequestForm'])->name('password.request');
+
+    // Mengirim link reset password
+    Route::post('/forgot-password', [PasswordResetController::class, 'sendResetLinkEmail'])->name('password.email');
+
+    Route::get('/password/reset/{token}', [PasswordResetController::class, 'showResetForm'])->name('password.reset');
 });
 
 Route::middleware(['auth', 'user-access:admin,officer'])->group(function () {
@@ -90,18 +104,3 @@ Route::middleware(['auth', 'user-access:admin,officer'])->group(function () {
     Route::post('/tickets/{id}/accept', [TicketController::class, 'acceptTicket'])->name('officer.accept');
 });
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/tickets/{ticket}/chat', [TicketMessageController::class, 'index'])->name('tickets.chat');
-    Route::post('/tickets/{ticket}/chat', [TicketMessageController::class, 'store'])->name('tickets.chat.store');
-
-    Route::get('/setting', [SettingController::class, 'index'])->name('setting');
-    Route::post('/setting/update', [SettingController::class, 'update'])->name('setting.update');
-
-    // Menampilkan form untuk meminta link reset password
-    Route::get('/forgot-password', [PasswordResetController::class, 'showLinkRequestForm'])->name('password.request');
-
-    // Mengirim link reset password
-    Route::post('/forgot-password', [PasswordResetController::class, 'sendResetLinkEmail'])->name('password.email');
-
-    Route::get('/password/reset/{token}', [PasswordResetController::class, 'showResetForm'])->name('password.reset');
-});

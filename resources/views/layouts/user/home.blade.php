@@ -1,11 +1,9 @@
 @extends('layouts.user.sidebar')
 
-@section('title', 'Dashboard')
+@section('title', 'Officer Sidebar')
 
 @section('contents')
 
 @include('chatbot.chatbot')
-
-
-
-@endsection 
+    {{-- @include('chatbot.chatbot') --}}
+@endsection
