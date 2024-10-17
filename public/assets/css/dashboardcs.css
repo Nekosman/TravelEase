@@ -1,0 +1,182 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+:root {
+  --white-color: #fff;
+  --blue-color: #366389;
+  --grey-color: #366389;
+  --grey-color-light: #f5f5f5;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  /* background-color: #e7f2fd; */
+  margin: 0;
+  padding: 0;
+}
+
+
+
+.teks {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+
+
+.user_profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user_name {
+  color: white;
+  font-size: 16px;
+}
+
+/* Containers for different sections */
+.container, .container1, .container2 {
+  flex: 1;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 260px;
+  color: white;
+}
+
+.container {
+  background-color: #1d66a1;
+}
+
+.container1 {
+  background-color: #ffd902;
+}
+
+.container2 {
+  background-color: #0ac00a;
+}
+
+.user-icon {
+  font-size: 40px;
+}
+
+.text-container {
+  flex: 1;
+}
+
+.bookk, .laporan_terpending, .laporan_selesai {
+  color: white;
+}
+
+/* Chart and Report sections */
+.chart_report_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+.chart_container, .container5 {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.chart_container {
+    width: 100%;
+    max-width: 1000px; /* Increase the maximum width */
+    margin: 0 auto; /* Center it within the parent */
+}
+
+.container5 {
+  flex: 1;
+}
+
+h1 {
+  font-size: 22px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.report-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+
+.report-details {
+  flex: 1;
+  margin-left: 10px;
+}
+
+.report-title {
+  font-size: 16px;
+  color: #333;
+}
+
+.report-date {
+  font-size: 12px;
+  color: #777;
+}
+
+.btn {
+  background-color: #366389;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #2b5073;
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 768px) {
+  /* .main_container {
+    flex-direction: column;
+    text-align: center;
+  } */
+
+  .chart_report_wrapper {
+    flex-direction: column;
+  }
+
+  .container, .container1, .container2 {
+    min-width: 100%;
+    margin: 10px 0;
+  }
+}
+
+/* Flexbox Row for Total Widgets */
+.total_widget_row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; /* Adjust gap between widgets */
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  
+  /* Responsive behavior */
+  @media (max-width: 768px) {
+    .total_widget_row {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+
+  

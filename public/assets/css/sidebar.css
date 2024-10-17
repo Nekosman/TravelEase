@@ -61,3 +61,25 @@
     align-items: center;
     
 }
+
+/* .main_container {
+  padding: 20px;
+  background-color: #366489;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+} */
+
+/* .navbar_content {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+} */
+
+/* .navbar_content i {
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+} */

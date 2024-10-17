@@ -12,6 +12,7 @@
 </head>
 
 <body>
+    
     <div class="d-flex">
         <div class="sidebar p-3" id="sidebar">
             <a href="{{ route('user.home') }}"><img id="sidebarLogo" src="{{ url('assets/img/logoTravel.png') }}"
@@ -22,6 +23,8 @@
                     <i class="fa-solid fa-bars"></i>
                 </button>
             </div>
+
+            
             <ul class="nav flex-column">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('admin.home') }}">
@@ -55,7 +58,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{{ route('setting') }}">
                         <i class="fa-solid fa-gear icon"></i>
                         <span>Settings</span>
                     </a>

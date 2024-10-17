@@ -3,13 +3,13 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PasswordResetController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\TicketMessageController;
 use Illuminate\Support\Facades\Route;
 use BotMan\BotMan\BotMan;
 use App\Http\conversations\TreeConversation;
-
-
 
 /*
 |--------------------------------------------------------------------------
@@ -26,8 +26,6 @@ Route::get('/', function () {
     return view('landing_page   ');
 });
 
-
-
 Route::controller(AuthController::class)->group(function () {
     //register
     Route::get('register', 'register')->name('register');
@@ -41,18 +39,17 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('logout', 'logout')->middleware('auth')->name('logout');
 });
 
-Route::middleware(['auth', 'user-access:admin'])->group(function(){
-    Route::get('/admin',[HomeController::class, 'adminHome'])->name('admin.home');
+Route::middleware(['auth', 'user-access:admin'])->group(function () {
+    Route::get('/admin', [HomeController::class, 'adminHome'])->name('admin.home');
 });
 
-Route::middleware(['auth', 'user-access:officer'])->group(function(){
-    Route::get('/officer',[HomeController::class, 'officerHome'])->name('officer.home');
+Route::middleware(['auth', 'user-access:officer'])->group(function () {
+    Route::get('/officer', [HomeController::class, 'officerHome'])->name('officer.home');
 });
 
-Route::middleware(['auth', 'user-access:user'])->group(function(){
-    Route::get('/home',[HomeController::class, 'userHome'])->name('user.home');
+Route::middleware(['auth', 'user-access:user'])->group(function () {
+    Route::get('/home', [HomeController::class, 'userHome'])->name('user.home');
 
-    
     Route::get('/tickets', [TicketController::class, 'indexTicket'])->name('user.ticket');
     Route::get('/tickets/create', [TicketController::class, 'createTicket'])->name('ticket.create');
     Route::post('/tickets', [TicketController::class, 'storeTicket'])->name('ticket.store');
@@ -61,7 +58,7 @@ Route::middleware(['auth', 'user-access:user'])->group(function(){
     Route::delete('tickets/delete/{id}', [TicketController::class, 'destroyTicket'])->name('ticket.destroy');
 });
 
-Route::middleware(['auth'])->group(function() {
+Route::middleware(['auth'])->group(function () {
     // Rute untuk menampilkan halaman chatbot
     Route::get('/chatbot', function () {
         return view('chatbot.chatbot');
@@ -69,16 +66,16 @@ Route::middleware(['auth'])->group(function() {
 
     Route::match(['get', 'post'], '/botman', function () {
         $botman = app('botman');
-    
+
         $botman->hears('{message}', function (BotMan $botman, $message) {
-            $botman->startConversation( new TreeConversation);
+            $botman->startConversation(new TreeConversation());
         });
-    
+
         $botman->listen();
     });
 });
 
-Route::middleware(['auth', 'user-access:admin,officer'])->group(function() {
+Route::middleware(['auth', 'user-access:admin,officer'])->group(function () {
     Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
     Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
     Route::post('/categories/store', [CategoryController::class, 'store'])->name('categories.store');
@@ -93,8 +90,18 @@ Route::middleware(['auth', 'user-access:admin,officer'])->group(function() {
     Route::post('/tickets/{id}/accept', [TicketController::class, 'acceptTicket'])->name('officer.accept');
 });
 
-
 Route::middleware(['auth'])->group(function () {
     Route::get('/tickets/{ticket}/chat', [TicketMessageController::class, 'index'])->name('tickets.chat');
     Route::post('/tickets/{ticket}/chat', [TicketMessageController::class, 'store'])->name('tickets.chat.store');
+
+    Route::get('/setting', [SettingController::class, 'index'])->name('setting');
+    Route::post('/setting/update', [SettingController::class, 'update'])->name('setting.update');
+
+    // Menampilkan form untuk meminta link reset password
+    Route::get('/forgot-password', [PasswordResetController::class, 'showLinkRequestForm'])->name('password.request');
+
+    // Mengirim link reset password
+    Route::post('/forgot-password', [PasswordResetController::class, 'sendResetLinkEmail'])->name('password.email');
+
+    Route::get('/password/reset/{token}', [PasswordResetController::class, 'showResetForm'])->name('password.reset');
 });
