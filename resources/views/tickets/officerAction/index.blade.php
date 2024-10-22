@@ -13,6 +13,10 @@
                         <a href="{{ route('ticket', ['filter' => 'all']) }}" class="btn btn-success btn-sm">All Tickets</a>
                         <a href="{{ route('ticket', ['filter' => 'officer_empty']) }}" class="btn btn-danger btn-sm">Empty Officer</a>
                     </div>
+                    <!-- Input search by category -->
+                    <div class="float-start">
+                        <input type="text" id="searchCategory" class="form-control form-control-sm" placeholder="Search by Category">
+                    </div>
                 </div>
 
                 <div class="card-body">
@@ -22,16 +26,17 @@
                         </div>
                     @endif
 
-                    <table class="table table-hover table-bordered">
+                    <table class="table table-hover table-bordered" id="ticketsTable">
                         <thead class="text-white" style="background-color: #366389;">
                             <tr>
                                 <th>id</th>
                                 <th>Ticket_no</th>
                                 <th>Title</th>
                                 <th>Description</th>
+                                <th>Category</th>
                                 <th>Priority</th>
                                 <th>Status</th>
-                                <th>officer name</th>
+                                <th>Officer Name</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -42,6 +47,7 @@
                                     <td>{{ $ticket->ticket_no }}</td>
                                     <td>{{ $ticket->title }}</td>
                                     <td>{{ $ticket->description }}</td>
+                                    <td>{{ $ticket->category->name_category }}</td>
                                     <td>{{ $ticket->priority }}</td>
                                     <td>{{ $ticket->status }}</td>
                                     <td>
@@ -118,7 +124,20 @@
     </div>
 </div>
 
-<!-- Load Bootstrap and jQuery for Modal functionality -->
+<!-- jQuery and Bootstrap for Modal functionality -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        // Function to filter tickets by category (only filter the category column)
+        $("#searchCategory").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#ticketsTable tbody tr").filter(function() {
+                // Only check the category column (5th column)
+                $(this).toggle($(this).find("td:nth-child(5)").text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
 @endsection

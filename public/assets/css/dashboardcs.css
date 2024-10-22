@@ -114,6 +114,7 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 10px;
   padding: 10px; /* Add some padding for better spacing inside the item */
   background-color: #dfd8d8; /* Optional: background to differentiate items */
   border-radius: 5px; /* Optional: round the corners */
@@ -121,7 +122,8 @@ h1 {
 }
 
 .status-card {
-  margin-left: 10px; /* Ensure space between the report details and the button */
+  margin-left: 10px;
+  margin-bottom: 10px; /* Ensure space between the report details and the button */
 }
 
 .report-description{
@@ -134,7 +136,7 @@ h1 {
   color: #777;
 }
 
-.btn {
+/* .btn {
   background-color: #366389;
   color: white;
   padding: 8px 12px;
@@ -144,7 +146,7 @@ h1 {
 
 .btn:hover {
   background-color: #2b5073;
-}
+} */
 
 /* Media Queries for responsiveness */
 @media (max-width: 768px) {

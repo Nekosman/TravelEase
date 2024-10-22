@@ -9,6 +9,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <link href="{{ asset('assets/css/sidebar.css') }}" rel="stylesheet">
 
+
 </head>
 
 <body>
@@ -32,12 +33,12 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link" href="Chat">
                         <i class="fas fa-comments"></i>
                         <span>Chat</span>
                     </a>
-                </li>
+                </li> --}}
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('ticket') }}">
                         <i class="fa-solid fa-ticket icon"></i>
@@ -51,9 +52,9 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="faq">
-                        <i class="fa-solid fa-question icon"></i>
-                        <span>FAQ</span>
+                    <a class="nav-link" href="{{ route('user.list') }}">
+                        <i class="fas fa-users"></i>
+                        <span>UserList</span>
                     </a>
                 </li>
 

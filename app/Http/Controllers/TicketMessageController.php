@@ -11,9 +11,20 @@ class TicketMessageController extends Controller
 {
     public function index(Ticket $ticket)
     {
+
+        $layout = 'layouts.user.sidebar'; // Default layout
+
+        if (auth()->check()) {
+            if (auth()->user()->type == 'admin') {
+                $layout = 'layouts.admin.sidebar';
+            } elseif (auth()->user()->type == 'officer') {
+                $layout = 'layouts.officer.sidebar';
+            }
+        }
+
         $this->authorize('viewChat', $ticket);
         $messages = $ticket->messages()->with('user')->orderBy('created_at', 'asc')->get();
-        return view('tickets.chat', compact('ticket', 'messages'));
+        return view('tickets.chat', compact('ticket', 'messages', 'layout'));
     }
     public function store(Request $request, Ticket $ticket)
     {

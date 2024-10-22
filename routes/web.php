@@ -3,10 +3,12 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LandingController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\TicketMessageController;
+use App\Http\Controllers\UserlistController;
 use Illuminate\Support\Facades\Route;
 use BotMan\BotMan\BotMan;
 use App\Http\conversations\TreeConversation;
@@ -22,9 +24,8 @@ use App\Http\conversations\TreeConversation;
 |
 */
 
-Route::get('/', function () {
-    return view('landing_page   ');
-});
+Route::get('/', [LandingController::class, 'index'])->name('landing.page');
+
 
 Route::controller(AuthController::class)->group(function () {
     //register
@@ -41,6 +42,11 @@ Route::controller(AuthController::class)->group(function () {
 
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/admin', [HomeController::class, 'adminHome'])->name('admin.home');
+
+    Route::get('/userlist', [UserlistController::class, 'index'])->name('user.list');
+
+    Route::delete('user/delete/{id}', [UserlistController::class, 'destroy'])->name('user.destroy');
+
 });
 
 Route::middleware(['auth', 'user-access:officer'])->group(function () {
