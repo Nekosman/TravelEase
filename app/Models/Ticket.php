@@ -13,6 +13,9 @@ class Ticket extends Model
 
     protected $fillable = ['ticket_no', 'title', 'description', 'priority', 'user_id', 'officer_id', 'scheduled_at', 'status', 'category_id'];
 
+    protected $dates = ['deleted_at']; // To track the soft delete timestamp
+
+
     public function category()
     {
         return $this->belongsTo(Categories::class);

@@ -25,8 +25,8 @@
             <ul class="nav flex-column">
                 <li class="nav-item">
                     <a class="nav-link" href="home">
-                        <i class="fas fa-comments"></i>
-                        <span>Chat</span>
+                        <i class="fas fa-home"></i>
+                        <span>Dashboard</span>
                     </a>
                 </li>
                 <li class="nav-item">

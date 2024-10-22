@@ -64,9 +64,9 @@
 
         </div>
         <script>
-            const xValues = ["Refund", "Pemesanan", "Pembayaran", "Destinasi", "Cek Fakta"];
-            const yValues = [55, 49, 44, 24, 15];
-            const barColors = ["green", "red", "orange", "purple", "brown"];
+            const xValues = ["Laporan selesai", "Laporan terpending", "User", "Destinasi", "Cek Fakta"];
+            const yValues = [45, 40, 35, 24, 15];
+            const barColors = ["green", "orange", "navy", "purple", "brown"];
 
             new Chart("myChart", {
                 type: "bar",

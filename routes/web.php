@@ -7,9 +7,13 @@ use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\TicketMessageController;
+use App\Http\Controllers\LandingController;
 use Illuminate\Support\Facades\Route;
 use BotMan\BotMan\BotMan;
 use App\Http\conversations\TreeConversation;
+use App\Http\Controllers\DiscountController;
+use App\Http\Controllers\BookingController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -22,9 +26,12 @@ use App\Http\conversations\TreeConversation;
 |
 */
 
-Route::get('/', function () {
-    return view('landing_page   ');
-});
+route::get('/', [LandingController::class, 'index'])->name('landing.page');
+
+Route::get('/reset-password', [PasswordResetController::class, 'showResetForm'])->name('password.reset');
+
+// Handle the reset password form submission
+Route::post('/reset-password', [PasswordResetController::class, 'reset'])->name('password.update');
 
 Route::controller(AuthController::class)->group(function () {
     //register
@@ -80,14 +87,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/setting', [SettingController::class, 'index'])->name('setting');
     Route::post('/setting/update', [SettingController::class, 'update'])->name('setting.update');
 
-    // Menampilkan form untuk meminta link reset password
-    Route::get('/forgot-password', [PasswordResetController::class, 'showLinkRequestForm'])->name('password.request');
+    // Show the reset password form
 
-    // Mengirim link reset password
-    Route::post('/forgot-password', [PasswordResetController::class, 'sendResetLinkEmail'])->name('password.email');
-
-    Route::get('/password/reset/{token}', [PasswordResetController::class, 'showResetForm'])->name('password.reset');
 });
+
+// routes/web.php
+
+
+
+
 
 Route::middleware(['auth', 'user-access:admin,officer'])->group(function () {
     Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
@@ -102,5 +110,12 @@ Route::middleware(['auth', 'user-access:admin,officer'])->group(function () {
 
     Route::get('/tickets/{id}/accept', [TicketController::class, 'showAcceptForm'])->name('officer.showAcceptForm');
     Route::post('/tickets/{id}/accept', [TicketController::class, 'acceptTicket'])->name('officer.accept');
+
+    Route::delete('/ticket/trash/{id}', [TicketController::class, 'destroyTicket'])->name('ticket.moveToTrash');
+
+    Route::get('/tickets/trash', [TicketController::class, 'trash'])->name('trash.index');
+    Route::put('/tickets/{id}/restore', [TicketController::class, 'restore'])->name('trash.restore');
+    Route::delete('/tickets/{id}/forceDelete', [TicketController::class, 'forceDelete'])->name('trash.forceDelete');
+
 });
 

@@ -1,53 +1,55 @@
 @extends( $layout)
-
+@section('title', 'Setting')
 @section('contents')
 <link rel="stylesheet" href="{{ asset('css/settings.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Link Font Awesome -->
+
 <style>
     .container {
         background: linear-gradient(to bottom, #366389 18%, white 18%);
-        padding: 40px 20px; /* Tambahkan padding lebih besar untuk estetika */
+        padding: 40px 20px;
         border-radius: 12px;
-        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4); /* Shadow untuk kedalaman */
-        max-width: 600px; /* Membatasi lebar maksimal untuk fokus yang lebih baik */
-        margin: 0 auto; /* Memusatkan elemen container */
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+        max-width: 600px;
+        margin: 0 auto;
     }
 
     h2 {
         color: white;
-        text-align: center; /* Buat judul berada di tengah */
-        font-size: 24px; /* Ukuran teks lebih besar untuk penekanan */
-        margin-bottom: 20px; /* Beri jarak di bawah judul */
+        text-align: center;
+        font-size: 24px;
+        margin-bottom: 20px;
     }
 
     .alert-success {
         font-weight: bold;
         color: black;
-        background-color: #d4edda; /* Tambahkan background hijau muda untuk notifikasi sukses */
+        background-color: #d4edda;
         padding: 10px;
         border-radius: 5px;
-        text-align: center; /* Pusatkan teks notifikasi */
-        margin-bottom: 20px; /* Beri jarak dengan elemen lain */
+        text-align: center;
+        margin-bottom: 20px;
     }
 
     .form-label {
         font-weight: bold;
         color: black;
         display: block;
-        margin-bottom: 8px; /* Tambahkan jarak antara label dan input */
+        margin-bottom: 8px;
     }
 
     .form-control {
         border: 1px solid #ced4da;
-        border-radius: 5px; /* Membuat input lebih rounded */
-        padding: 10px; /* Tambahkan padding untuk kenyamanan pengguna */
-        font-size: 16px; /* Ukuran font yang lebih besar untuk kenyamanan membaca */
-        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1); /* Tambahkan sedikit shadow di dalam input */
+        border-radius: 5px;
+        padding: 10px;
+        font-size: 16px;
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
     .form-control:focus {
         outline: none;
         border-color: #007bff;
-        box-shadow: 0 0 8px rgba(0, 123, 255, 0.25); /* Efek fokus biru yang lebih lembut */
+        box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
     }
 
     .btn-primary {
@@ -60,12 +62,12 @@
         font-size: 16px;
         cursor: pointer;
         transition: background-color 0.3s ease;
-        width: 100%; /* Tombol memanjang ke seluruh lebar form */
-        margin-top: 20px; /* Tambahkan jarak di atas tombol */
+        width: 100%;
+        margin-top: 20px;
     }
 
     .btn-primary:hover {
-        background-color: #0056b3; /* Efek hover untuk tombol */
+        background-color: #0056b3;
     }
 
     /* Responsiveness untuk tampilan mobile */
@@ -82,10 +84,14 @@
             font-size: 14px;
         }
     }
+
+    .icon {
+        margin-right: 8px;
+        color: #007bff;
+    }
 </style>
 
-
-<div class="container mt-5" class="alert alert-danger">
+<div class="container mt-5">
     <h2>Pengaturan Akun</h2>
 
     <!-- Notifikasi Sukses -->
@@ -103,56 +109,78 @@
             @endforeach
         </ul>
     </div>
-@endif
+    @endif
 
-<!-- Bagian form -->
-<form action="{{ route('setting.update') }}" method="POST" id="settingsForm" novalidate>
-    @csrf
-    <!-- Update Email -->
-    <div class="mb-3">
-        <label for="email" class="form-label">Email</label>
-        <input type="email" class="form-control" id="email" name="email" value="{{ old('email', auth()->user()->email) }}" required>
-        <div class="invalid-feedback">Email harus diisi dan valid.</div>
-    </div>
+    <!-- Bagian form -->
+    <form action="{{ route('setting.update') }}" method="POST" id="settingsForm" novalidate>
+        @csrf
+        <!-- Update Email -->
+        <div class="mb-3">
+            <label for="email" class="form-label">
+                <i class="fas fa-envelope icon"></i> Email
+            </label>
+            <input type="email" class="form-control" id="email" name="email" value="{{ old('email', auth()->user()->email) }}" required>
+            <div class="invalid-feedback">Email harus diisi dan valid.</div>
+        </div>
 
-    <!-- Update Password -->
-    <div class="mb-3">
-        <label for="password" class="form-label">Password Baru</label>
-        <input type="password" class="form-control" id="password" name="password" minlength="8">
-        <div class="invalid-feedback">Password harus minimal 8 karakter.</div>
-    </div>
+        <!-- Update Password -->
+        <div class="mb-3">
+            <label for="password" class="form-label">
+                <i class="fas fa-lock icon"></i> Password Baru
+            </label>
+            <input type="password" class="form-control" id="password" name="password" minlength="8">
+            <div class="invalid-feedback">Password harus minimal 8 karakter.</div>
+        </div>
 
-    <!-- Konfirmasi Password -->
-    <div class="mb-3">
-        <label for="password_confirmation" class="form-label">Konfirmasi Password</label>
-        <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
-        <div class="invalid-feedback">Konfirmasi password harus cocok.</div>
-    </div>
+        <!-- Konfirmasi Password -->
+        <div class="mb-3">
+            <label for="password_confirmation" class="form-label">
+                <i class="fas fa-lock icon"></i> Konfirmasi Password
+            </label>
+            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
+            <div class="invalid-feedback">Konfirmasi password harus cocok.</div>
+        </div>
 
-    <!-- Tombol Simpan -->
-    <button type="submit" class="btn btn-primary">Simpan Pengaturan</button>
-</form>
-<script>
+        <!-- Tombol Simpan -->
+        <button type="submit" class="btn btn-primary">Simpan Pengaturan</button>
+    </form>
+
     <script>
-    (function() {
-        'use strict';
+        (function() {
+            'use strict';
 
-        // Ambil form berdasarkan id
-        var form = document.getElementById('settingsForm');
+            var form = document.getElementById('settingsForm');
+            var password = document.getElementById('password');
+            var passwordConfirmation = document.getElementById('password_confirmation');
 
-        // Event listener untuk validasi sebelum form disubmit
-        form.addEventListener('submit', function(event) {
-            // Cek jika form tidak valid
-            if (!form.checkValidity()) {
-                event.preventDefault(); // Mencegah pengiriman form
-                event.stopPropagation(); // Menghentikan propagasi event
-            }
+            form.addEventListener('submit', function(event) {
+                var isValid = true;
 
-            form.classList.add('was-validated'); // Menambah class untuk menunjukkan pesan validasi
-        }, false);
-    })();
-</script>
+                // Validasi jika password diisi tapi konfirmasi kosong
+                if (password.value !== "" && passwordConfirmation.value === "") {
+                    passwordConfirmation.setCustomValidity("Konfirmasi password harus diisi.");
+                    isValid = false;
+                } else {
+                    passwordConfirmation.setCustomValidity(""); // Reset pesan error
+                }
 
-</script>
+                // Validasi jika password dan konfirmasi password tidak cocok
+                if (password.value !== passwordConfirmation.value) {
+                    passwordConfirmation.setCustomValidity("Konfirmasi password harus sama dengan password.");
+                    isValid = false;
+                } else {
+                    passwordConfirmation.setCustomValidity(""); // Reset pesan error
+                }
+
+                // Cek validitas form secara keseluruhan
+                if (!form.checkValidity() || !isValid) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+
+                form.classList.add('was-validated');
+            }, false);
+        })();
+    </script>
 </div>
 @endsection

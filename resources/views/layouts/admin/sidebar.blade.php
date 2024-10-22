@@ -33,12 +33,6 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="Chat">
-                        <i class="fas fa-comments"></i>
-                        <span>Chat</span>
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="{{ route('ticket') }}">
                         <i class="fa-solid fa-ticket icon"></i>
                         <span>Ticketing</span>
@@ -51,9 +45,9 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="faq">
-                        <i class="fa-solid fa-question icon"></i>
-                        <span>FAQ</span>
+                    <a class="nav-link" href="{{ route('trash.index') }}">
+                        <i class="fa-solid fa-trash icon"></i>
+                        <span>Trash</span>
                     </a>
                 </li>
 

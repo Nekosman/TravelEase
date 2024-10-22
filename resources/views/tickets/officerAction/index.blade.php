@@ -59,56 +59,15 @@
                                         @else
                                             No Action
                                         @endif
+
+                                        <!-- Move to Trash button -->
+                                        <form action="{{ route('ticket.moveToTrash', $ticket->id) }}" method="POST" style="display: inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm">Move to Trash</button>
+                                        </form>
                                     </td>
                                 </tr>
-
-                                <!-- Modal for Ticket Details -->
-                                <div class="modal fade" id="ticketDetailModal{{ $ticket->id }}" tabindex="-1" role="dialog" aria-labelledby="ticketDetailModalLabel{{ $ticket->id }}" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header" style="background-color: #366389;">
-                                                <h5 class="modal-title text-white" id="ticketDetailModalLabel{{ $ticket->id }}">Ticket Details</h5>
-                                                <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <p><strong>Title:</strong> {{ $ticket->title }}</p>
-                                                <p><strong>Description:</strong> {{ $ticket->description }}</p>
-                                                <p><strong>Priority:</strong> {{ $ticket->priority }}</p>
-                                                <p><strong>Status:</strong> {{ $ticket->status }}</p>
-                                                <p><strong>Officer:</strong> 
-                                                    @if($ticket->officer)
-                                                        {{ $ticket->officer->name }}
-                                                    @else
-                                                        Tidak ada
-                                                    @endif
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Delete Confirmation Modal -->
-                                <div class="modal fade" id="deleteModal{{ $ticket->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel{{ $ticket->id }}" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header" style="background-color: #366389;">
-                                                <h5 class="modal-title text-white" id="deleteModalLabel{{ $ticket->id }}">Confirm Delete</h5>
-                                                <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                Are you sure you want to delete this ticket?
-                                            </div>
-                                            <div class="modal-footer">
-                                                <form action="{{ route('ticket.destroy', $ticket->id) }}" method="POST" style="display: inline;">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
                             @endforeach
                         </tbody>
                     </table>

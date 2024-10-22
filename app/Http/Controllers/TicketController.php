@@ -100,11 +100,14 @@ class TicketController extends Controller
     }
 
     public function destroyTicket($id)
-    {
-        $ticket = Ticket::findOrFail($id);
-        $ticket->delete();
-
-        return redirect()->route('user.ticket')->with('success', 'Product deleted successfully.');
+    {  
+        $ticket = Ticket::find($id);
+        if ($ticket) {
+            $ticket->delete(); // Soft delete the ticket
+            return redirect()->back()->with('success', 'Ticket moved to trash.');
+        }
+    
+        return redirect()->back()->with('error', 'Ticket not found.');
     }
 
     //Fungsi action guru
@@ -159,5 +162,31 @@ class TicketController extends Controller
         $tickets = Ticket::where('id', $id)->where('officer_id', null)->first();      
         
         return view('layouts.admin.home', compact('tickets'));
+    }
+
+   
+    // Display trashed tickets
+    public function trash()
+    {
+        $deletedTickets = Ticket::onlyTrashed()->get();
+        return view('trash.trash', compact('deletedTickets'));
+    }
+
+    // Restore a trashed ticket
+    public function restore($id)
+    {
+        $ticket = Ticket::withTrashed()->findOrFail($id);
+        $ticket->restore();
+
+        return redirect()->route('trash.index')->with('success', 'Ticket restored successfully.');
+    }
+
+    // Permanently delete a trashed ticket
+    public function forceDelete($id)
+    {
+        $ticket = Ticket::withTrashed()->findOrFail($id);
+        $ticket->forceDelete();
+
+        return redirect()->route('trash.index')->with('success', 'Ticket permanently deleted.');
     }
 }
