@@ -1,4 +1,4 @@
-@extends('layouts.user.sidebar')
+@extends($layout)
 @section('title', 'Setting')
 @section('contents')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -41,14 +41,14 @@
                 @csrf
                 <div class="mb-4">
                     <label for="name" class="font-semibold">Name</label>
-                    <input type="text" id="name" name="name" value="{{ old('name', $user['name']) }}" class="form-control @error('name') is-invalid @enderror">
+                    <input type="text" id="name" name="name" value="{{ old('name', $user->name) }}" class="form-control @error('name') is-invalid @enderror">
                     @error('name')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="mb-4">
                     <label for="email" class="font-semibold">Email</label>
-                    <input type="email" id="email" name="email" value="{{ old('email', $user['email']) }}" class="form-control @error('email') is-invalid @enderror">
+                    <input type="email" id="email" name="email" value="{{ old('email', $user->email) }}" class="form-control @error('email') is-invalid @enderror">
                     @error('email')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -59,21 +59,20 @@
         </div>
 
         <!-- Notification Preferences Tab -->
-        <!-- Notification Preferences Tab -->
         <div class="tab-pane fade" id="notifications" role="tabpanel" aria-labelledby="notifications-tab">
             <form action="{{ route('setting.update.notifications') }}" method="POST">
                 @csrf
                 <div class="mb-4">
                     <label for="email_notifications" class="font-semibold">Email Notifications</label>
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="email_notifications" name="email_notifications" {{ old('email_notifications', $user['emailNotifications']) ? 'checked' : '' }}>
+                        <input class="form-check-input" type="checkbox" id="email_notifications" name="email_notifications" {{ old('email_notifications', $user->email_notifications) ? 'checked' : '' }}>
                         <label class="form-check-label" for="email_notifications"></label>
                     </div>
                 </div>
                 <div class="mb-4">
                     <label for="push_notifications" class="font-semibold">Push Notifications</label>
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="push_notifications" name="push_notifications" {{ old('push_notifications', $user['pushNotifications']) ? 'checked' : '' }}>
+                        <input class="form-check-input" type="checkbox" id="push_notifications" name="push_notifications" {{ old('push_notifications', $user->push_notifications) ? 'checked' : '' }}>
                         <label class="form-check-label" for="push_notifications"></label>
                     </div>
                 </div>

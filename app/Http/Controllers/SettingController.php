@@ -9,10 +9,20 @@ class SettingController extends Controller
 {
     public function index()
     {
-        // Fetch the currently authenticated user
+        $layout = 'layouts.user.sidebar'; // Default layout
+
+        if (auth()->check()) {
+            if (auth()->user()->type == 'admin') {
+                $layout = 'layouts.admin.sidebar';
+            } elseif (auth()->user()->type == 'officer') {
+                $layout = 'layouts.officer.sidebar';
+            }
+        }
+    
+        // Get the authenticated user
         $user = Auth::user();
 
-        return view('setting.index', compact('user'));
+        return view('setting.index', compact('layout', 'user'));
     }
 
     public function updateProfile(Request $request)
@@ -59,15 +69,14 @@ class SettingController extends Controller
             'new_password' => 'required|string|min:6|confirmed',
         ]);
 
-        $user = Auth::user();
-
-        // Check if the current password matches
-        if (!\Hash::check($validated['current_password'], $user->password)) {
+        // Check if the current password is correct
+        if (!\Hash::check($validated['current_password'], Auth::user()->password)) {
             return back()->withErrors(['current_password' => 'Current password is incorrect.']);
         }
 
         // Update user password
-        $user->password = \Hash::make($validated['new_password']);
+        $user = Auth::user();
+        $user->password = bcrypt($validated['new_password']);
         $user->save();
 
         // Redirect back with a success message
