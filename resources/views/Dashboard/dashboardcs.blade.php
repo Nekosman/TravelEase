@@ -25,6 +25,17 @@
                 <div class="header-icons">
                     <i class="bx bx-bell notification"></i>
                     <i class="bx bx-user profile"></i>
+                    <!-- Modal untuk Profil -->
+                    <div id="profileModal" class="modal">
+                        <div class="modal-content">
+                        <span class="close-button">&times;</span>
+                        <h2>Profil Pengguna</h2>
+                        <p><strong>Nama:</strong> <span id="userName">Meliana Putri</span></p>
+                        <p><strong>Email:</strong> <span id="userEmail">Meliana@example.com</span></p>
+                        <p><strong>No Telepon:</strong> <span id="userPhone">123-456-7890</span></p>
+                        <button id="editProfileBtn">Edit Profil</button>
+                    </div>
+                </div>
                 </div>
             </header>
 

@@ -15,6 +15,10 @@ body {
     position: relative;
 }
 
+#compass-toggle {
+    color: #274a63; /* Mengubah warna teks menjadi pink */
+}
+
 .sidebar {
     background-color: #ffffff;
     color: #366389;
@@ -226,6 +230,139 @@ header {
     background-color: #c8e6c9;
 }
 
+.header-icons {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.notification {
+    cursor: pointer;
+}
+
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: 40px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 12px;
+}
+
+.notification-container {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 40px;
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 300px;
+    max-height: 350px;
+    margin-top: 10px;
+    margin-right: 10px;
+    overflow-y: auto;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.notification-item {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+
+.notification-item:last-child {
+    border-bottom: none;
+}
+
+.notification-item:hover {
+    background-color: #e9f7fe;
+    color: #366389;
+    border-left: 4px solid #274a63;
+}
+
+.notification-item strong {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.notification-item span {
+    font-size: 12px;
+    color: #888;
+}
+/* Modal Style */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 20%;
+    margin-left: 1200px;
+    height: 100%;
+}
+
+.modal-content {
+    background: #fff;
+    border-radius: 8px;
+    margin: 50px 20px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.close-button {
+    float: right;
+    font-size: 20px;
+    color: #888;
+    cursor: pointer;
+}
+
+.close-button:hover {
+    color: #d9534f;
+}
+
+h2 {
+    margin: 0 0 10px;
+    color: #333;
+}
+
+p {
+    margin: 8px 0;
+    color: #555;
+}
+
+button {
+    background: #274a63;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #2f5f82;
+}
+
 @media (max-width: 768px) {
     .container {
         flex-direction: column;
@@ -278,5 +415,12 @@ header {
         width: 100%;
         margin-top: 10px;
     }
+
+    .notification-container{
+        margin-top: 6%;
+    }
+
+    .notification{
+        margin-right: 8px;
+    }
 }
-    
