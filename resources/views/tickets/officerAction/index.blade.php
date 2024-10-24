@@ -15,7 +15,7 @@
                     </div>
 
                     <div class="float-start">
-                        <input type="text" id="searchCategory" class="form-control form-control-sm" placeholder="Search by Category">
+                        <input type="text" id="searchCategory" class="form-control form-control-sm" placeholder="Search by Title">
                     </div>
                 </div>
 
@@ -36,7 +36,7 @@
                                 <th>Priority</th>
                                 <th>Status</th>
                                 <th>Category</th>
-                                <th>officer name</th>
+                                <th>Officer Name</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -87,12 +87,15 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
-        // Function to filter tickets by category (only filter the category column)
+        // Function to filter tickets by title or category
         $("#searchCategory").on("keyup", function() {
             var value = $(this).val().toLowerCase();
             $("#ticketsTable tbody tr").filter(function() {
-                // Only check the category column (5th column)
-                $(this).toggle($(this).find("td:nth-child(5)").text().toLowerCase().indexOf(value) > -1)
+                // Check the title (3rd column) and category (7th column)
+                $(this).toggle(
+                    $(this).find("td:nth-child(3)").text().toLowerCase().indexOf(value) > -1 || // Title
+                    $(this).find("td:nth-child(7)").text().toLowerCase().indexOf(value) > -1   // Category
+                );
             });
         });
     });
