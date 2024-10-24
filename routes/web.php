@@ -11,9 +11,7 @@ use App\Http\Controllers\LandingController;
 use Illuminate\Support\Facades\Route;
 use BotMan\BotMan\BotMan;
 use App\Http\conversations\TreeConversation;
-use App\Http\Controllers\DiscountController;
-use App\Http\Controllers\BookingController;
-
+use App\Http\Controllers\UserlistController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +46,10 @@ Route::controller(AuthController::class)->group(function () {
 
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/admin', [HomeController::class, 'adminHome'])->name('admin.home');
+
+    Route::get('/userlist', [UserlistController::class, 'index'])->name('user.list');
+    Route::delete('user/delete/{id}', [UserlistController::class, 'destroy'])->name('user.destroy');
+    
 });
 
 Route::middleware(['auth', 'user-access:officer'])->group(function () {
@@ -87,7 +89,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/setting', [SettingController::class, 'index'])->name('setting');
     Route::post('/setting/update', [SettingController::class, 'update'])->name('setting.update');
 
-    // Show the reset password form
+    Route::get('/settings', [SettingController::class, 'index'])->name('setting.index');
+    Route::post('/settings/profile', [SettingController::class, 'updateProfile'])->name('setting.update.profile');
+    Route::post('/settings/notifications', [SettingController::class, 'updateNotifications'])->name('setting.update.notifications');
+    Route::post('/settings/security', [SettingController::class, 'updateSecurity'])->name('setting.update.security');
 
 });
 

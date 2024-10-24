@@ -265,7 +265,7 @@
                     <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="1000">
                         <div class="features-item">
                                 <i class="bi bi-tag" style="color: #b20969;"></i>
-                                <h3><a href="{{ route('diskon.page') }}" class="stretched-link">Promo</a></h3>
+                                <h3><a href="" class="stretched-link">Promo</a></h3>
                         </div>
                     </div><!-- End Feature Item -->
 

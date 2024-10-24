@@ -1,186 +1,120 @@
-@extends( $layout)
+@extends('layouts.user.sidebar')
 @section('title', 'Setting')
 @section('contents')
-<link rel="stylesheet" href="{{ asset('css/settings.css') }}">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Link Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-<style>
-    .container {
-        background: linear-gradient(to bottom, #366389 18%, white 18%);
-        padding: 40px 20px;
-        border-radius: 12px;
-        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
-        max-width: 600px;
-        margin: 0 auto;
-    }
+<div class="container mx-auto py-10">
+    <h1 class="text-3xl font-bold mb-6">Account Settings</h1>
 
-    h2 {
-        color: white;
-        text-align: center;
-        font-size: 24px;
-        margin-bottom: 20px;
-    }
+    <!-- Tabs Navigation -->
+    <ul class="nav nav-tabs" id="settingsTabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true">
+                <i class="fas fa-user mr-2 text-blue-500"></i>Profile Information
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="notifications-tab" data-toggle="tab" href="#notifications" role="tab" aria-controls="notifications" aria-selected="false">
+                <i class="fas fa-bell mr-2 text-yellow-500"></i>Notification Preferences
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="security-tab" data-toggle="tab" href="#security" role="tab" aria-controls="security" aria-selected="false">
+                <i class="fas fa-lock mr-2 text-red-500"></i>Security Settings
+            </a>
+        </li>
+    </ul>
 
-    .alert-success {
-        font-weight: bold;
-        color: black;
-        background-color: #d4edda;
-        padding: 10px;
-        border-radius: 5px;
-        text-align: center;
-        margin-bottom: 20px;
-    }
+    <!-- Tab Content -->
+    <div class="tab-content bg-white shadow-md rounded-lg p-8 mt-4" id="settingsTabContent">
 
-    .form-label {
-        font-weight: bold;
-        color: black;
-        display: block;
-        margin-bottom: 8px;
-    }
+        <!-- Profile Information Tab -->
+        <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            @if(session('success'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('success') }}
+                </div>
+            @endif
 
-    .form-control {
-        border: 1px solid #ced4da;
-        border-radius: 5px;
-        padding: 10px;
-        font-size: 16px;
-        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    .form-control:focus {
-        outline: none;
-        border-color: #007bff;
-        box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
-    }
-
-    .btn-primary {
-        background-color: #007bff;
-        font-weight: bold;
-        padding: 10px 20px;
-        border-radius: 5px;
-        border: none;
-        color: white;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-        width: 100%;
-        margin-top: 20px;
-    }
-
-    .btn-primary:hover {
-        background-color: #0056b3;
-    }
-
-    /* Responsiveness untuk tampilan mobile */
-    @media (max-width: 768px) {
-        .container {
-            padding: 20px;
-        }
-
-        h2 {
-            font-size: 20px;
-        }
-
-        .btn-primary {
-            font-size: 14px;
-        }
-    }
-
-    .icon {
-        margin-right: 8px;
-        color: #007bff;
-    }
-</style>
-
-<div class="container mt-5">
-    <h2>Pengaturan Akun</h2>
-
-    <!-- Notifikasi Sukses -->
-    @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
+            <form action="{{ route('setting.update.profile') }}" method="POST">
+                @csrf
+                <div class="mb-4">
+                    <label for="name" class="font-semibold">Name</label>
+                    <input type="text" id="name" name="name" value="{{ old('name', $user['name']) }}" class="form-control @error('name') is-invalid @enderror">
+                    @error('name')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="mb-4">
+                    <label for="email" class="font-semibold">Email</label>
+                    <input type="email" id="email" name="email" value="{{ old('email', $user['email']) }}" class="form-control @error('email') is-invalid @enderror">
+                    @error('email')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-primary btn-block">Save Profile Information</button>
+            </form>
         </div>
-    @endif
 
-    @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
+        <!-- Notification Preferences Tab -->
+        <!-- Notification Preferences Tab -->
+        <div class="tab-pane fade" id="notifications" role="tabpanel" aria-labelledby="notifications-tab">
+            <form action="{{ route('setting.update.notifications') }}" method="POST">
+                @csrf
+                <div class="mb-4">
+                    <label for="email_notifications" class="font-semibold">Email Notifications</label>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="email_notifications" name="email_notifications" {{ old('email_notifications', $user['emailNotifications']) ? 'checked' : '' }}>
+                        <label class="form-check-label" for="email_notifications"></label>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="push_notifications" class="font-semibold">Push Notifications</label>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="push_notifications" name="push_notifications" {{ old('push_notifications', $user['pushNotifications']) ? 'checked' : '' }}>
+                        <label class="form-check-label" for="push_notifications"></label>
+                    </div>
+                </div>
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-primary btn-block">Save Notification Preferences</button>
+            </form>
+        </div>
+
+        <!-- Security Settings Tab -->
+        <div class="tab-pane fade" id="security" role="tabpanel" aria-labelledby="security-tab">
+            <form action="{{ route('setting.update.security') }}" method="POST">
+                @csrf
+                <div class="mb-4">
+                    <label for="current_password" class="font-semibold">Current Password</label>
+                    <input type="password" id="current_password" name="current_password" class="form-control @error('current_password') is-invalid @enderror">
+                    @error('current_password')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="mb-4">
+                    <label for="new_password" class="font-semibold">New Password</label>
+                    <input type="password" id="new_password" name="new_password" class="form-control @error('new_password') is-invalid @enderror">
+                    @error('new_password')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="mb-4">
+                    <label for="confirm_password" class="font-semibold">Confirm New Password</label>
+                    <input type="password" id="confirm_password" name="confirm_password" class="form-control @error('confirm_password') is-invalid @enderror">
+                    @error('confirm_password')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-primary btn-block">Update Security Settings</button>
+            </form>
+        </div>
     </div>
-    @endif
-
-    <!-- Bagian form -->
-    <form action="{{ route('setting.update') }}" method="POST" id="settingsForm" novalidate>
-        @csrf
-        <!-- Update Email -->
-        <div class="mb-3">
-            <label for="email" class="form-label">
-                <i class="fas fa-envelope icon"></i> Email
-            </label>
-            <input type="email" class="form-control" id="email" name="email" value="{{ old('email', auth()->user()->email) }}" required>
-            <div class="invalid-feedback">Email harus diisi dan valid.</div>
-        </div>
-
-        <!-- Update Password -->
-        <div class="mb-3">
-            <label for="password" class="form-label">
-                <i class="fas fa-lock icon"></i> Password Baru
-            </label>
-            <input type="password" class="form-control" id="password" name="password" minlength="8">
-            <div class="invalid-feedback">Password harus minimal 8 karakter.</div>
-        </div>
-
-        <!-- Konfirmasi Password -->
-        <div class="mb-3">
-            <label for="password_confirmation" class="form-label">
-                <i class="fas fa-lock icon"></i> Konfirmasi Password
-            </label>
-            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
-            <div class="invalid-feedback">Konfirmasi password harus cocok.</div>
-        </div>
-
-        <!-- Tombol Simpan -->
-        <button type="submit" class="btn btn-primary">Simpan Pengaturan</button>
-    </form>
-
-    <script>
-        (function() {
-            'use strict';
-
-            var form = document.getElementById('settingsForm');
-            var password = document.getElementById('password');
-            var passwordConfirmation = document.getElementById('password_confirmation');
-
-            form.addEventListener('submit', function(event) {
-                var isValid = true;
-
-                // Validasi jika password diisi tapi konfirmasi kosong
-                if (password.value !== "" && passwordConfirmation.value === "") {
-                    passwordConfirmation.setCustomValidity("Konfirmasi password harus diisi.");
-                    isValid = false;
-                } else {
-                    passwordConfirmation.setCustomValidity(""); // Reset pesan error
-                }
-
-                // Validasi jika password dan konfirmasi password tidak cocok
-                if (password.value !== passwordConfirmation.value) {
-                    passwordConfirmation.setCustomValidity("Konfirmasi password harus sama dengan password.");
-                    isValid = false;
-                } else {
-                    passwordConfirmation.setCustomValidity(""); // Reset pesan error
-                }
-
-                // Cek validitas form secara keseluruhan
-                if (!form.checkValidity() || !isValid) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
-
-                form.classList.add('was-validated');
-            }, false);
-        })();
-    </script>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
 @endsection

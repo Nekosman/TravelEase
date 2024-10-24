@@ -9,10 +9,6 @@ class LandingController extends Controller
     public function index(){
         return view('landing_page');
     }
-
-    public function diskon(){
-        return view('diskon');
-    }
 }
    
 

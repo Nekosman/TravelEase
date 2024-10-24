@@ -45,6 +45,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="{{ route('user.list') }}">
+                        <i class="fas fa-users"></i>
+                        <span>UserList</span>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="{{ route('trash.index') }}">
                         <i class="fa-solid fa-trash icon"></i>
                         <span>Trash</span>
