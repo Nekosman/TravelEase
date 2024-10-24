@@ -39,8 +39,20 @@
                     </div>
                 </div>
                 <div class="dropdown">
-                    <i class='bx bx-dots-vertical-rounded'></i>
+                    <i class='bx bx-dots-vertical-rounded detail' id="dropdownToggle"></i>
                     <button class="btn-open1">Open</button>
+
+                    <!-- Dropdown menu yang sudah Anda buat -->
+                    <div class="dropdown-menu" id="dropdownMenu" style="display: none;">
+                        <ul>
+                            <li><strong>Nomor Tiket:</strong> 001</li>
+                            <li><strong>Tanggal Dibuat:</strong> 12 Agustus 2024</li>
+                            <li><strong>Nama:</strong> Zulkifli Hartanto</li>
+                            <li><strong>Email:</strong> zulkifli@gmail.com</li>
+                            <li><strong>Nomor Telepon:</strong> 0888888888</li>
+                            <li><strong>Kategori Ticket:</strong> Pesanan</li>
+                        </ul>
+                    </div>
                 </div>
             </header>
 

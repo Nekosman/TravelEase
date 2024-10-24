@@ -31,6 +31,15 @@
                 <div class="header-icons">
                     <i class="bx bx-bell notification"></i>
                     <i class="bx bx-user profile"></i>
+                    <!-- Modal untuk Profil -->
+                    <div id="profileModal" class="modal">
+                        <div class="modal-content">
+                        <span class="close-button">&times;</span>
+                        <h2>Profil Pengguna</h2>
+                        <p><strong>Nama:</strong> <span id="userName">Meliana Putri</span></p>
+                        <p><strong>Email:</strong> <span id="userEmail">Meliana@example.com</span></p>
+                        <button id="editProfileBtn">Edit Profil</button>
+                    </div>
                 </div>
             </header>
 
@@ -52,7 +61,7 @@
                         </div>
                         <div class="status-with-circle">
                             <div class="status1">
-                                <span class="status-label1">On Hold</span>
+                                <span class="status-label1">Open</span>
                                 <span class="icon-down">
                                     <i class="bx bx-down-arrow"></i>
                                 </span>
@@ -68,7 +77,7 @@
                     <div class="status-card">
                         <div class="icon-container">
                             <div class="icon">
-                                <i class='bx bx-message-rounded-dots'></i>
+                                <i class='bx bx-message-rounded-check'></i>
                             </div>
                         </div>
                         <div class="details">
@@ -77,7 +86,7 @@
                         </div>
                         <div class="status-with-circle">
                             <div class="status">
-                                <span class="status-label">On Hold</span>
+                                <span class="status-label">Closed</span>
                                 <span class="icon-down">
                                     <i class="bx bx-down-arrow"></i>
                                 </span>

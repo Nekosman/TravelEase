@@ -16,7 +16,7 @@ body {
 }
 
 #compass-toggle {
-    color: #274a63; /* Mengubah warna teks menjadi pink */
+    color: #274a63;
 }
 
 .sidebar {
@@ -423,4 +423,9 @@ button:hover {
     .notification{
         margin-right: 8px;
     }
+
+    .modal{
+        margin-right: 1000px;
+    }
+
 }

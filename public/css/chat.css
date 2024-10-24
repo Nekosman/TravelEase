@@ -17,7 +17,7 @@ body {
 
 .sidebar {
     background-color: #ffffff;
-    color: #366389;
+    color: #000000;
     padding: 15px;
     width: 250px;
     flex-shrink: 0;
@@ -86,6 +86,7 @@ header {
     font-size: 24px;
     margin-right: 10px;
     margin-left: 20px;
+    color: #000;
 }
 
 .header-text h4 {
@@ -155,30 +156,25 @@ header {
 }
 
 .btn-open {
-    padding: 10px 15px;
-    background-color: #28a745;
-    color: #ffffff;
-    border: none;
+    background-color: #e9ecef;
     border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 20px;
+    padding: 5px 10px;
+    color: #d9534f;
+    border: 1px solid #d9534f;
+    margin-right: 10px;
+    margin-top: 6%;
 }
 
 .btn-open1 {
-    padding: 10px 15px;
-    background-color: #28a745;
-    color: #ffffff;
-    border: none;
+    background-color: #e9ecef;
     border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 20px;
+    padding: 5px 10px;
+    color: #d9534f;
+    border: 1px solid #d9534f;
+    margin-right: 10px;
+    margin-top: 7px;
 }
 
-.btn-open:hover {
-    background-color: #277539;
-}
 
 .teks1 {
     color: #000000;
@@ -289,6 +285,71 @@ header {
     text-align: right;
 }
 
+.detail{
+    color: #000;
+}
+
+
+.dropdown-menu ul {
+    list-style: none;
+    padding: 10px;
+    margin: 0;
+}
+
+.dropdown-menu h6 {
+    padding: 8px 10px;
+    cursor: default;
+}
+
+.dropdown-menu h6:hover {
+    background-color: #f0f0f0;
+}
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    width: 200px;
+    max-height: 400px;
+    overflow-y: auto;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    margin-right: 60px;
+}
+
+.dropdown-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.dropdown-header .ikon {
+    font-size: 24px;
+    margin-right: 8px;
+}
+
+.dropdown-header h6 {
+    margin: 0;
+    font-weight: bold;
+}
+
+.dropdown-menu ul {
+    list-style: none;
+    padding: 0; /* Menghilangkan padding default */
+    margin: 0; /* Menghilangkan margin */
+}
+
+.dropdown-menu li {
+    padding: 8px 0;
+}
+
+.dropdown-menu li strong {
+    color: #333;
+}
+
 @media (max-width: 768px) {
     .container {
         flex-direction: column;
@@ -344,4 +405,5 @@ header {
     .message-input {
         margin-left: 10px;
     }
+
 }

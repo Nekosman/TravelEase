@@ -28,3 +28,11 @@ sendButton.addEventListener('click', function() {
 document.getElementById('back-to-ticket').addEventListener('click', function() {
     window.location.href = "{{ route('tickets.index') }}";
 });
+document.getElementById('dropdownToggle').addEventListener('click', function() {
+    var dropdownMenu = document.getElementById('dropdownMenu');
+    if (dropdownMenu.style.display === 'none' || dropdownMenu.style.display === '') {
+        dropdownMenu.style.display = 'block';
+    } else {
+        dropdownMenu.style.display = 'none';
+    }
+});

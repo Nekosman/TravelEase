@@ -32,7 +32,6 @@
                         <h2>Profil Pengguna</h2>
                         <p><strong>Nama:</strong> <span id="userName">Meliana Putri</span></p>
                         <p><strong>Email:</strong> <span id="userEmail">Meliana@example.com</span></p>
-                        <p><strong>No Telepon:</strong> <span id="userPhone">123-456-7890</span></p>
                         <button id="editProfileBtn">Edit Profil</button>
                     </div>
                 </div>
@@ -75,7 +74,7 @@
                             <p class="report-title">Dugaan Penipuan dari ...</p>
                             <span class="report-date">15 September 2024 08:29</span>
                         </div>
-                        <button class="btn">Ambil Laporan</button>
+                        <button class="btn" onclick="window.location='{{ route('chat.index') }}'">Ambil Laporan</button>
                     </div>
                 </div>
             </div>
