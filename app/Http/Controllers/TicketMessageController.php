@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\MessageSent;
 use App\Models\Ticket;
 use App\Models\TicketMessage;
 use Illuminate\Http\Request;
@@ -11,7 +12,6 @@ class TicketMessageController extends Controller
 {
     public function index(Ticket $ticket)
     {
-
         $layout = 'layouts.user.sidebar'; // Default layout
 
         if (auth()->check()) {
@@ -26,17 +26,22 @@ class TicketMessageController extends Controller
         $messages = $ticket->messages()->with('user')->orderBy('created_at', 'asc')->get();
         return view('tickets.chat', compact('ticket', 'messages', 'layout'));
     }
+
     public function store(Request $request, Ticket $ticket)
     {
         $this->authorize('viewChat', $ticket);
         $request->validate([
             'message' => 'required|string',
         ]);
-        TicketMessage::create([
+
+        $message = TicketMessage::create([
             'ticket_id' => $ticket->id,
             'user_id' => Auth::id(),
             'message' => $request->message,
         ]);
+
+        broadcast(new MessageSent($ticket, $message))->toOthers(); // Broadcast the event
+
         return redirect()->route('tickets.chat', $ticket)->with('success', 'Message sent successfully.');
     }
 }

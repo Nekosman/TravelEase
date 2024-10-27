@@ -33,6 +33,14 @@ class HomeController extends Controller
     }
 
     public function userHome(){
-        return view('layouts.user.home');
+          // Get the currently logged-in user
+    $user = auth()->user();
+
+    // Fetch tickets where 'officer_id' is null and the ticket is created by the logged-in user
+    $tickets = Ticket::whereNull('officer_id')
+                     ->where('user_id', $user->id)
+                     ->get();
+
+        return view('layouts.user.home',  compact('tickets'));
     }
 }

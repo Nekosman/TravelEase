@@ -62,53 +62,53 @@
                                             <a href="{{ route('officer.showAcceptForm', $ticket->id) }}" class="btn btn-info btn-sm">Accept</a>
                                         @elseif ($ticket->status == 'accepted' && $ticket->officer_id === Auth::id())
                                             <a href="{{ route('tickets.chat', $ticket->id) }}" class="btn btn-primary btn-sm">Chat</a>
+                                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#closeModal{{ $ticket->id }}">close</button>
                                         @else
-                                            No Action
+                                     
+                                            <button type="button" class="btn btn-danger btn-sm"  data-bs-toggle="modal" data-bs-target="#deleteModal{{ $ticket->id }}" >Move to Trash</button>
+                                        
                                         @endif
                                     </td>
                                 </tr>
 
-                                <!-- Modal for Ticket Details -->
-                                <div class="modal fade" id="ticketDetailModal{{ $ticket->id }}" tabindex="-1" role="dialog" aria-labelledby="ticketDetailModalLabel{{ $ticket->id }}" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header" style="background-color: #366389;">
-                                                <h5 class="modal-title text-white" id="ticketDetailModalLabel{{ $ticket->id }}">Ticket Details</h5>
-                                                <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <p><strong>Title:</strong> {{ $ticket->title }}</p>
-                                                <p><strong>Description:</strong> {{ $ticket->description }}</p>
-                                                <p><strong>Priority:</strong> {{ $ticket->priority }}</p>
-                                                <p><strong>Status:</strong> {{ $ticket->status }}</p>
-                                                <p><strong>Officer:</strong> 
-                                                    @if($ticket->officer)
-                                                        {{ $ticket->officer->name }}
-                                                    @else
-                                                        Tidak ada
-                                                    @endif
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
+                                
                                 <!-- Delete Confirmation Modal -->
-                                <div class="modal fade" id="deleteModal{{ $ticket->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel{{ $ticket->id }}" aria-hidden="true">
+                                <div class="modal fade" id="closeModal{{ $ticket->id }}" tabindex="-1" role="dialog" aria-labelledby="closeModallLabel{{ $ticket->id }}" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header" style="background-color: #366389;">
-                                                <h5 class="modal-title text-white" id="deleteModalLabel{{ $ticket->id }}">Confirm Delete</h5>
+                                                <h5 class="modal-title text-white" id="closeModalLabel{{ $ticket->id }}">Close this ticket</h5>
                                                 <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
                                                 Are you sure you want to delete this ticket?
                                             </div>
                                             <div class="modal-footer">
-                                                <form action="{{ route('ticket.destroy', $ticket->id) }}" method="POST" style="display: inline;">
+                                                <form action="{{ route('officer.closed', $ticket->id) }}" method="POST" style="display: inline;">
+                                                    @csrf
+                                                    @method('POST')
+                                                    <button type="submit" class="btn btn-danger">Close</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="modal fade" id="deleteModal{{ $ticket->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel{{ $ticket->id }}" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header" style="background-color: #366389;">
+                                                <h5 class="modal-title text-white" id="deleteModalLabel{{ $ticket->id }}">Close this ticket</h5>
+                                                <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Are you sure you want to delete this ticket?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <form action="{{ route('ticket.moveToTrash', $ticket->id) }}" method="POST" style="display: inline;">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                    <button type="submit" class="btn btn-danger">DELETE</button>
                                                 </form>
                                             </div>
                                         </div>

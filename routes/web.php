@@ -82,17 +82,15 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/tickets/{ticket}/chat', [TicketMessageController::class, 'index'])->name('tickets.chat');
     Route::post('/tickets/{ticket}/chat', [TicketMessageController::class, 'store'])->name('tickets.chat.store');
-
+    
     Route::get('/setting', [SettingController::class, 'index'])->name('setting');
     Route::post('/setting/update', [SettingController::class, 'update'])->name('setting.update');
 
-    // Menampilkan form untuk meminta link reset password
-    Route::get('/forgot-password', [PasswordResetController::class, 'showLinkRequestForm'])->name('password.request');
+    Route::get('/settings', [SettingController::class, 'index'])->name('setting.index');
+    Route::post('/settings/profile', [SettingController::class, 'updateProfile'])->name('setting.update.profile');
+    Route::post('/settings/notifications', [SettingController::class, 'updateNotifications'])->name('setting.update.notifications');
+    Route::post('/settings/security', [SettingController::class, 'updateSecurity'])->name('setting.update.security');
 
-    // Mengirim link reset password
-    Route::post('/forgot-password', [PasswordResetController::class, 'sendResetLinkEmail'])->name('password.email');
-
-    Route::get('/password/reset/{token}', [PasswordResetController::class, 'showResetForm'])->name('password.reset');
 });
 
 Route::middleware(['auth', 'user-access:admin,officer'])->group(function () {
@@ -105,8 +103,13 @@ Route::middleware(['auth', 'user-access:admin,officer'])->group(function () {
 
     Route::get('/tickets/list', [TicketController::class, 'myTicketsForOfficer'])->name('ticket');
     Route::post('/acceptTicket/{id}', [TicketController::class, 'acceptTicket'])->name('accept');
-
     Route::get('/tickets/{id}/accept', [TicketController::class, 'showAcceptForm'])->name('officer.showAcceptForm');
     Route::post('/tickets/{id}/accept', [TicketController::class, 'acceptTicket'])->name('officer.accept');
+    Route::post('/tickets/{id}/closed', [TicketController::class, 'closedTicket'])->name('officer.closed');
+
+    Route::delete('/ticket/trash/{id}', [TicketController::class, 'destroyTicket'])->name('ticket.moveToTrash');
+    Route::get('/tickets/trash', [TicketController::class, 'trash'])->name('trash.index');
+    Route::put('/tickets/{id}/restore', [TicketController::class, 'restore'])->name('trash.restore');
+    Route::delete('/tickets/{id}/forceDelete', [TicketController::class, 'forceDelete'])->name('trash.forceDelete');
 });
 

@@ -76,9 +76,9 @@
                                 <input type="checkbox" class="form-check-input" id="formCheck" name="remember">
                                 <label for="formCheck" class="form-check-label text-secondary"><small>Remember Me</small></label>
                             </div>
-                            <div class="forgot">
+                            {{-- <div class="forgot">
                                 <small><a href="{{ route('password.email') }}">Forgot Password?</a></small>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="input-group mb-3">
                             <button class="btn btn-lg btn-primary w-100 fs-6">Login</button>

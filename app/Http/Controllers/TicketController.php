@@ -101,10 +101,13 @@ class TicketController extends Controller
 
     public function destroyTicket($id)
     {
-        $ticket = Ticket::findOrFail($id);
-        $ticket->delete();
-
-        return redirect()->route('user.ticket')->with('success', 'Product deleted successfully.');
+        $ticket = Ticket::find($id);
+        if ($ticket) {
+            $ticket->delete(); // Soft delete the ticket
+            return redirect()->route('trash.index')->with('success', 'Ticket moved to trash.');
+        }
+    
+        return redirect()->route('trash.index')->with('error', 'Ticket not found.');
     }
 
     //Fungsi action guru
@@ -123,7 +126,7 @@ class TicketController extends Controller
         return view('tickets.officerAction.index', compact('tickets'));
     }
 
-    public function acceptTicket(Request $request, $id)
+    public function acceptTicket($id)
     {
         $ticket = Ticket::where('id', $id)->where('officer_id', null)->first();
 
@@ -159,5 +162,51 @@ class TicketController extends Controller
         $tickets = Ticket::where('id', $id)->where('officer_id', null)->first();      
         
         return view('layouts.admin.home', compact('tickets'));
+    }
+
+    public function closedTicket($id){
+        $ticket = Ticket::where('id', $id)->where('status', 'accepted')->first();
+
+        if (!$ticket) {
+            return redirect()->route('officer.ticket')->with('error', 'Ticket not already  done.');
+        }
+
+        // Update ticket untuk menetapkan guru_id dan mengubah status tanpa kolom scheduled_at
+        $ticket->update([
+            'officer_id' => Auth::id(),
+            'status' => 'closed', // Status diubah menjadi 'accepted' atau sesuai dengan logika Anda
+        ]);
+
+        // // Kirim notifikasi ke user
+        // $user = $ticket->user; // Asumsi bahwa tiket memiliki relasi user
+        // $user->notify(new TicketAccepted($ticket));
+
+        return redirect()->route('ticket')->with('success', 'Ticket accepted successfully.');
+    }
+
+     
+    // Display trashed tickets
+    public function trash()
+    {
+        $deletedTickets = Ticket::onlyTrashed()->get();
+        return view('trash.index', compact('deletedTickets'));
+    }
+
+    // Restore a trashed ticket
+    public function restore($id)
+    {
+        $ticket = Ticket::withTrashed()->findOrFail($id);
+        $ticket->restore();
+
+        return redirect()->route('trash.index')->with('success', 'Ticket restored successfully.');
+    }
+
+    // Permanently delete a trashed ticket
+    public function forceDelete($id)
+    {
+        $ticket = Ticket::withTrashed()->findOrFail($id);
+        $ticket->forceDelete();
+
+        return redirect()->route('trash.index')->with('success', 'Ticket permanently deleted.');
     }
 }
