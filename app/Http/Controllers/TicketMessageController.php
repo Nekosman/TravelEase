@@ -23,13 +23,22 @@ class TicketMessageController extends Controller
         }
 
         $this->authorize('viewChat', $ticket);
+
         $messages = $ticket->messages()->with('user')->orderBy('created_at', 'asc')->get();
+
         return view('tickets.chat', compact('ticket', 'messages', 'layout'));
     }
 
     public function store(Request $request, Ticket $ticket)
     {
         $this->authorize('viewChat', $ticket);
+
+        if ($ticket->status == 'closed') {
+            return redirect()
+                ->back()
+                ->with('error', 'You cannot send a message because the ticket is closed.');
+        }
+
         $request->validate([
             'message' => 'required|string',
         ]);

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <title>TravelEase | Login</title>
@@ -19,12 +20,12 @@
         <div class="row border rounded-5 p-3 bg-white shadow box-area">
 
             <!-- Left Box -->
-            <div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box" style="background: #ZZSZ;">
+            <div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box" style="background: #366389;">
                 <div class="featured-image mb-3">
                     <img src="{{ asset('assets/img/homepage&history.png') }}" class="img-fluid" style="width: 250px;">
                 </div>
-                <p class="text-white fs-2" style="font-family: 'Courier New', Courier, monospace; font-weight: 600;">Di Verifikasi</p>
-                <small class="text-white text-wrap text-center" style="width: 17rem;font-family: 'Courier New', Courier, monospace;">Login RN!!</small>
+                <p class="text-white fs-2" style="font-family: 'Courier New', Courier, monospace; font-weight: 600;">TravelEease</p>
+                <small class="text-white text-wrap text-center" style="width: 17rem;font-family: 'Courier New', Courier, monospace;">Jadikan Bepergian Lebih Mudah.</small>
             </div> 
 
             <!-- Right Box -->
@@ -69,7 +70,10 @@
                             <input type="email" class="form-control form-control-lg bg-light fs-6" placeholder="Email address" name="email">
                         </div>
                         <div class="input-group mb-1">
-                            <input type="password" class="form-control form-control-lg bg-light fs-6" placeholder="Password" name="password">
+                            <input type="password" class="form-control form-control-lg bg-light fs-6" placeholder="Password" name="password" id="password">
+                            <span class="input-group-text" onclick="togglePasswordVisibility()">
+                                <i class="fa fa-eye" id="togglePasswordIcon"></i>
+                            </span>
                         </div>
                         <div class="input-group mb-5 d-flex justify-content-between">
                             <div class="form-check">
@@ -98,5 +102,21 @@
         </div>
     </div>
 
+    <script>
+        function togglePasswordVisibility() {
+        const passwordField = document.getElementById("password");
+        const icon = document.getElementById("togglePasswordIcon");
+        
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            icon.classList.remove("fa-eye");
+            icon.classList.add("fa-eye-slash");
+        } else {
+            passwordField.type = "password";
+            icon.classList.remove("fa-eye-slash");
+            icon.classList.add("fa-eye");
+        }
+    }
+    </script>
 </body>
 </html>

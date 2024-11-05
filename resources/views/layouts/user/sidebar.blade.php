@@ -8,14 +8,16 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <link href="{{ asset('assets/css/sidebar.css') }}" rel="stylesheet">
-
+    <link href="{{ asset('assets/img/logo_icon.png') }}" rel="icon">
+    <link href="{{ asset('assets/img/logo_icon.png') }}" rel="apple-touch-icon">
 </head>
 
 <body>
     <div class="d-flex">
         <div class="sidebar p-3" id="sidebar">
-            <a href="{{ route('user.home') }}"><img id="sidebarLogo" src="{{ url('assets/img/logoTravel.png') }}"
-                    alt="Sidebar Image" class="img-fluid mx-auto d-block"></a>
+            <a href="{{ route('user.home') }}">
+                <img id="sidebarLogo" src="{{ url('assets/img/logoTravel.png') }}" alt="Sidebar Image" class="img-fluid mx-auto d-block">
+            </a>
             <br>
             <div class="toggleButton"> 
                 <button class="btn btn-muted" id="toggleButton">
@@ -24,7 +26,7 @@
             </div>
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link" href="home">
+                    <a class="nav-link" href="{{ route('user.home') }}">
                         <i class="fas fa-home"></i>
                         <span>Home</span>
                     </a>
@@ -63,16 +65,34 @@
         const sidebar = document.getElementById('sidebar');
         const sidebarLogo = document.getElementById('sidebarLogo');
 
+        // Fungsi untuk mengatur sidebar berdasarkan status yang disimpan di localStorage
+        function setSidebarState() {
+            const isCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
+            if (isCollapsed) {
+                sidebar.classList.add('collapsed');
+                sidebarLogo.src = "{{ url('assets/img/logo_icon.png') }}";
+            } else {
+                sidebar.classList.remove('collapsed');
+                sidebarLogo.src = "{{ url('assets/img/logoTravel.png') }}";
+            }
+        }
+
+        // Setiap kali tombol toggle diklik, status sidebar disimpan ke localStorage
         toggleButton.addEventListener('click', function() {
             sidebar.classList.toggle('collapsed');
+            const isCollapsed = sidebar.classList.contains('collapsed');
+            localStorage.setItem('sidebarCollapsed', isCollapsed);
 
             // Ganti logo saat sidebar dikecilkan
-            if (sidebar.classList.contains('collapsed')) {
+            if (isCollapsed) {
                 sidebarLogo.src = "{{ url('assets/img/logo_icon.png') }}"; // Gambar kecil
             } else {
                 sidebarLogo.src = "{{ url('assets/img/logoTravel.png') }}"; // Gambar besar
             }
         });
+
+        // Panggil fungsi untuk mengatur sidebar saat halaman dimuat
+        setSidebarState();
 
         function setActiveNavLink() {
             const currentUrl = window.location.href;
@@ -96,9 +116,6 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-
-
 </body>
 
 </html>

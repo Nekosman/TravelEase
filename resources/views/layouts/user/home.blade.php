@@ -1,10 +1,10 @@
 @extends('layouts.user.sidebar')
 
-@section('title', 'Officer Sidebar')
+@section('title', 'User Dashboard')
 
 @section('contents')
 
-<link href="{{ asset('assets/css/dashboardcs.css') }}" rel="stylesheet">
+<link href="{{ asset('assets/css/dashboard.css') }}" rel="stylesheet">
 
 <div class="promo-section">
     <button class="close-button" onclick="this.parentElement.style.display='none';">&times;</button>

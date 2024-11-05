@@ -1,91 +1,82 @@
     @extends('layouts.admin.sidebar')
 
+    @section('title', 'Admin Dashboard')
+
+
     @section('contents')
         <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
-        <link href="{{ asset('assets/css/dashboardcs.css') }}" rel="stylesheet">
+        <link href="{{ asset('assets/css/dashboard.css') }}" rel="stylesheet">
 
 
 
-        <!-- Row for Total Widgets -->
-        <div class="total_widget_row">
-            <div class="container">
-                <div class="text-container">
-                    <h3 class="bookk">Total User</h3>
-                    <h5 class="bookk">{{ $totalUsers }}</h5>
-                </div>
-                <i class='bx bx-group user-icon'></i>
-            </div>
-
-            <div class="container1">
-                <div class="text-container">
-                    <h3 class="laporan_terpending">Laporan Terpending</h3>
-                    <h5 class="laporan_terpending">{{ $totalPending }}</h5>
-                </div>
-                <i class='bx bx-time user-icon'></i>
-            </div>
-
-            <div class="container2">
-                <div class="text-container">
-                    <h3 class="laporan_selesai">Laporan Terselesaikan</h3>
-                    <h5 class="laporan_selesai">{{ $totalClosed }}</h5>
-                </div>
-                <i class='bx bx-check user-icon'></i>
-            </div>
-        </div>
-
-        <div class="chart_report_wrapper">
-            <div class="chart_container">
-                <canvas id="myChart" style="width:100%;max-width:1000px"></canvas>
-                <!-- Update the max-width to match the container -->
-            </div>
-            <div class="container5">
-                <h1>Laporan Dalam Antrean</h1>
-                <br>
-                @forelse ($tickets as $ticket)
-                    <div class="report-item">
-                       
-                        <div class="report-details">
-                            <p class="report-title">Ticket {{ $ticket->title }} From {{ $ticket->user->name }}</p>
-                            <p class="report-description">Description : {{ $ticket->description }}</p>
-                            <span class="report-date">{{ $ticket->created_at->format('d F Y H:i') }}</span> 
-                        </div>
-                        {{-- <a href="{{ route('admin.take_ticket', $ticket->id) }}" class="status-card">
-                            <button class="btn">Ambil Laporan</button>
-                            <!-- Link to the action where the admin takes the ticket -->
-                        </a> --}}
+        <div class="container">
+            <div class="main-content">
+                <!-- Row for Total Widgets -->
+                <div class="stats_container">
+                    <div class="stat_item total-pengguna">
+                        <span class="stat_label">Total Pengguna</span>
+                        <span class="stat_value">{{ $totalUsers }}</span>
                     </div>
-                @empty
-                    <p>Tidak ada laporan dalam antrean.</p>
-                @endforelse
-                <hr>
+                    <div class="stat_item total-ticket">
+                        <span class="stat_label">Total Pending</span>
+                        <span class="stat_value">{{ $totalPending }}</span>
+                    </div>
+                    <div class="stat_item total-laporan-terselesaikan">
+                        <span class="stat_label">Total terselesaikan</span>
+                        <span class="stat_value">{{ $totalClosed }}</span>
+                    </div>
+                </div>
+
+                <div style="width: 80%; margin: auto;">
+                    <canvas id="barChart"></canvas>
+                </div>
+
+
+                <div class="report-container">
+                    @forelse ($tickets as $ticket)
+                        <div class="report-item">
+                            <i class="bx bx-user profiles"></i>
+                            <div class="report-details">
+                                <p class="report-title">Dugaan {{ $ticket->title }} dari {{ $ticket->user->name }}</p>
+                                <span class="report-date">{{ $ticket->created_at->format('d F Y H:i') }}</span>
+                            </div>
+                            <button class="btn-report" onclick="window.location=''">Ambil Laporan</button>
+                        </div>
+                    @empty
+                        <p>tidak ada</p>
+                    @endforelse
+                </div>
+
             </div>
-
         </div>
-        <script>
-            const xValues = ["Refund", "Pemesanan", "Pembayaran", "Destinasi", "Cek Fakta"];
-            const yValues = [55, 49, 44, 24, 15];
-            const barColors = ["green", "red", "orange", "purple", "brown"];
 
-            new Chart("myChart", {
-                type: "bar",
+        <script>
+            var ctx = document.getElementById('barChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
                 data: {
-                    labels: xValues,
+                    labels: @json($totalChart['labels']),
                     datasets: [{
-                        backgroundColor: barColors,
-                        data: yValues
+                        label: 'totalChart',
+                        data: @json($totalChart['data']),
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
                     }]
                 },
                 options: {
-                    legend: {
-                        display: false
-                    },
-                    title: {
-                        display: true,
-                        text: "LAPORAN CHART 1 MONTH"
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
                     }
                 }
             });
         </script>
+        <script src="{{ asset('assets/js/dashboard.js') }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     @endsection
