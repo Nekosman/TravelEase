@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardCsController;
 use App\Http\Controllers\TicketAlertController;
 use App\Http\Controllers\ChatController;
-use App\Http\Controllers\ProfileController;
 
 
 
@@ -29,5 +28,4 @@ Route::get('/dashboard', [DashboardCsController::class, 'index'])->name('dashboa
 Route::get('/Tickets', [TicketAlertController::class, 'index'])->name('tickets.index');
 // Route untuk chat
 Route::get('/Chat', [ChatController::class, 'index'])->name('chat.index');
-// Route untuk profile
-Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+
