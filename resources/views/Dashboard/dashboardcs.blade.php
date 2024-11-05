@@ -4,11 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Customer Service</title>
+    {{-- link boxicons --}}
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css">
+    {{-- link chart --}}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    {{-- link css --}}
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
 </head>
 <body>
+    {{-- sidebar start --}}
     <div class="container">
         <div class="sidebar" id="sidebar">
             <h2 id="compass-toggle"><i class="bx bx-compass"></i> TravelEase</h2>
@@ -17,15 +21,17 @@
                 <li><a href="{{ route('tickets.index') }}"><i class="bx bx-receipt"></i> Ticketing</a></li>
             </ul>
         </div>
-
+    {{-- sidebar finish --}}
+    {{-- content start --}}
         <div class="main-content">
+            {{-- header start --}}
             <header>
-                <i class="bx bx-menu menu-toggle" id="menu-toggle"></i>
+                <i class="bx bx-menu menu-toggle" id="menu-toggle"></i> {{-- icon toggle responsive --}}
                 <h1>Dashboard Customer Service</h1>
                 <div class="header-icons">
                     <i class="bx bx-bell notification"></i>
                     <i class="bx bx-user profile"></i>
-                    <!-- Modal untuk Profil -->
+                    <!-- Modal Profil -->
                     <div id="profileModal" class="modal">
                         <div class="modal-content">
                         <span class="close-button">&times;</span>
@@ -37,7 +43,8 @@
                 </div>
                 </div>
             </header>
-
+            {{-- sidebar finish --}}
+            {{-- card start --}}
             <div class="content">
                 <div class="stats-container">
                     <div class="stats-box box-user">
@@ -62,11 +69,12 @@
                         <i class='bx bx-check user-icon'></i>
                     </div>
                 </div>
-
+            {{-- card finish --}}
+            {{-- bar chart vertical  --}}
                 <div class="chart-wrapper">
                     <canvas id="myChart"></canvas>
                 </div>
-
+            {{-- report start --}}
                 <div class="report-container">
                     <div class="report-item">
                         <i class="bx bx-user profiles"></i>
@@ -77,9 +85,11 @@
                         <button class="btn" onclick="window.location='{{ route('chat.index') }}'">Ambil Laporan</button>
                     </div>
                 </div>
+            {{-- report finish --}}
             </div>
         </div>
     </div>
+    {{-- header finish --}}
     <script src="{{ asset('js/dashboard.js') }}"></script>
 </body>
 </html>

@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Customer Service</title>
+    <title>Chat Customer Service</title>
+    {{-- link boxicons --}}
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    {{-- link css --}}
     <link href="{{ asset('css/chat.css') }}" rel="stylesheet">
 </head>
 <body>
     <div class="container">
+        {{-- sidebar start --}}
         <div class="sidebar" id="sidebar">
             <div class="header-title" id="header-title-toggle">
                 <i class='bx bx-left-arrow-alt' id="back-to-ticket"></i>
@@ -27,8 +29,10 @@
                 </div>
             </div>
         </div>
-
+        {{-- sidebar finish --}}
+        {{-- content start --}}
         <div class="main-content">
+            {{-- header start --}}
             <header>
                 <i class="bx bx-menu menu-toggle" id="menu-toggle"></i>
                 <div class="header-content">
@@ -38,11 +42,10 @@
                         <span>Zulfikiri - dibuat tanggal 12 Agustus 2024</span>
                     </div>
                 </div>
+                {{-- dropdown detail --}}
                 <div class="dropdown">
                     <i class='bx bx-dots-vertical-rounded detail' id="dropdownToggle"></i>
                     <button class="btn-open1">Open</button>
-
-                    <!-- Dropdown menu yang sudah Anda buat -->
                     <div class="dropdown-menu" id="dropdownMenu" style="display: none;">
                         <ul>
                             <li><strong>Nomor Tiket:</strong> 001</li>
@@ -55,7 +58,8 @@
                     </div>
                 </div>
             </header>
-
+            {{-- header finish --}}
+            {{-- chat start --}}
             <div class="content">
                 <div class="date-container">
                     <hr class="date-divider">
@@ -95,7 +99,9 @@
                     <button class="send-button">Kirim</button>
                 </div>
             </div>
+            {{-- chat finish --}}
         </div>
+        {{-- content finish --}}
     </div>
 <script src="{{ asset('js/chat.js') }}"></script>
 <script>

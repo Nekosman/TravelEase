@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ticketing Customer Service</title>
+    {{-- link boxicons --}}
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    {{-- link css --}}
     <link href="{{ asset('css/ticket.css') }}" rel="stylesheet">
 </head>
 <body>
+    {{-- sidebar start --}}
     <div class="container">
         <div class="sidebar" id="sidebar">
             <h2 id="compass-toggle"><i class="bx bx-compass"></i> TravelEase</h2>
@@ -17,8 +19,10 @@
                 <li><a href="{{ route('tickets.index') }}"><i class="bx bx-receipt"></i> Ticketing</a></li>
             </ul>
         </div>
-
+    {{-- sidebar finish --}}
+    {{-- content start --}}
         <div class="main-content">
+            {{-- header start --}}
             <header>
                 <i class="bx bx-menu menu-toggle" id="menu-toggle"></i>
                 <div class="header-title">
@@ -31,7 +35,7 @@
                 <div class="header-icons">
                     <i class="bx bx-bell notification"></i>
                     <i class="bx bx-user profile"></i>
-                    <!-- Modal untuk Profil -->
+                    {{-- modal profil --}}
                     <div id="profileModal" class="modal">
                         <div class="modal-content">
                         <span class="close-button">&times;</span>
@@ -42,12 +46,13 @@
                     </div>
                 </div>
             </header>
-
+            {{-- header finish --}}
+            {{-- search content jika tidak ada --}}
             <div class="content">
                 <div id="no-results" style="display:none; text-align:center; font-size:20px; margin-top:20px;">
                     Nyari apa? Gaada.
                 </div>
-
+                {{-- card ticket start --}}
                 <div class="content1">
                     <div class="status-card" id="status-card">
                         <div class="icon-container">
@@ -97,8 +102,10 @@
                         </div>
                     </div>
                 </div>
+                {{-- card ticket finish --}}
             </div>
         </div>
+        {{-- content finish --}}
     </div>
     <script src="{{ asset('js/ticket.js') }}"></script>
     <script>
