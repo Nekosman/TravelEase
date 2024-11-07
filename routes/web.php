@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ConversationTreeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\PasswordResetController;
@@ -65,8 +66,8 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    // Rute untuk menampilkan halaman chatbot
-    Route::get('/chatbot', function () {
+     // Rute untuk menampilkan halaman chatbot
+     Route::get('/chatbot', function () {
         return view('chatbot.chatbot');
     });
 
@@ -111,5 +112,7 @@ Route::middleware(['auth', 'user-access:admin,officer'])->group(function () {
     Route::get('/tickets/trash', [TicketController::class, 'trash'])->name('trash.index');
     Route::put('/tickets/{id}/restore', [TicketController::class, 'restore'])->name('trash.restore');
     Route::delete('/tickets/{id}/forceDelete', [TicketController::class, 'forceDelete'])->name('trash.forceDelete');
+
+    Route::resource('conversation-tree', ConversationTreeController::class);
 });
 

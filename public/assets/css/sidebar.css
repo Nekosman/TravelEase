@@ -9,10 +9,7 @@ body{
   background-color: #f4f4f4;
 }
 
-.d-flex {
-    display: flex;
-    min-height: 100vh; /* Sidebar & content fill the screen vertically */
-  }
+
   
   .sidebar {
     background-color: white;
