@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ConversationTreeController;
+use App\Http\Controllers\FaqController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\PasswordResetController;
@@ -114,5 +115,7 @@ Route::middleware(['auth', 'user-access:admin,officer'])->group(function () {
     Route::delete('/tickets/{id}/forceDelete', [TicketController::class, 'forceDelete'])->name('trash.forceDelete');
 
     Route::resource('conversation-tree', ConversationTreeController::class);
+
+    Route::resource('faq', FaqController::class);
 });
 

@@ -53,6 +53,12 @@
                         <span>Categories</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('faq.index') }}">
+                        <i class="fas fa-question"></i>
+                        <span>FAQS</span>
+                    </a>
+                </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('user.list') }}">

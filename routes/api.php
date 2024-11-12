@@ -8,6 +8,7 @@ use App\Http\Controllers\API\TicketController;
 use App\Http\Controllers\API\TicketMessageController;
 use App\Http\Controllers\API\ConversationController;
 use App\Http\Controllers\API\ProfileController;
+use App\Http\Controllers\API\FaqController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,4 +59,9 @@ Route::prefix('conversation')->group(function () {
     Route::get('/children/{parentId}', [ConversationController::class, 'getChildNodes']);
     Route::get('/node/{id}', [ConversationController::class, 'getNode']);
     Route::get('/path/{nodeId}', [ConversationController::class, 'getConversationPath']);
+});
+
+
+Route::prefix('faqs')->group(function () {
+    Route::get('/faq', [FaqController::class, 'index']);         // Mendapatkan semua FAQ
 });
