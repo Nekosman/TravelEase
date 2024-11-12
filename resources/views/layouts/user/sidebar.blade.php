@@ -10,27 +10,37 @@
     <link href="{{ asset('assets/css/sidebar.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/img/logo_icon.png') }}" rel="icon">
     <link href="{{ asset('assets/img/logo_icon.png') }}" rel="apple-touch-icon">
+
+
 </head>
 
 <body>
+
     <div class="d-flex">
         <div class="sidebar p-3" id="sidebar">
-            <a href="{{ route('user.home') }}">
-                <img id="sidebarLogo" src="{{ url('assets/img/logoTravel.png') }}" alt="Sidebar Image" class="img-fluid mx-auto d-block">
-            </a>
+            <a href="{{ route('user.home') }}"><img id="sidebarLogo" src="{{ url('assets/img/logoTravel.png') }}"
+                    alt="Sidebar Image" class="img-fluid mx-auto d-block"></a>
             <br>
-            <div class="toggleButton"> 
+            <div class="toggleButton">
                 <button class="btn btn-muted" id="toggleButton">
                     <i class="fa-solid fa-bars"></i>
                 </button>
             </div>
+
+
             <ul class="nav flex-column">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('user.home') }}">
                         <i class="fas fa-home"></i>
-                        <span>Home</span>
+                        <span>Dashboard</span>
                     </a>
                 </li>
+                {{-- <li class="nav-item">
+                    <a class="nav-link" href="Chat">
+                        <i class="fas fa-comments"></i>
+                        <span>Chat</span>
+                    </a>
+                </li> --}}
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('user.ticket') }}">
                         <i class="fa-solid fa-ticket icon"></i>
@@ -45,14 +55,30 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#" onclick="event.preventDefault(); confirmLogout();">
+                    <a class="nav-link logout-button" href="#"
+                        onclick="event.preventDefault(); showLogoutModal();">
                         <i class="fa-solid fa-right-from-bracket icon"></i>
                         <span>Logout</span>
                     </a>
-                    <form id="logout-form" action="{{ url('/logout') }}" style="display: none;">
+                    <form id="logout-form" action="{{ url('logout') }}" style="display: none;">
                         @csrf
                     </form>
                 </li>
+
+                <!-- Modal Konfirmasi Logout -->
+                <div id="logoutModal" class="modal-overlay" style="display: none;">
+                    <div class="modal-content">
+                        <h3>Apakah kamu ingin Logout?</h3>
+                        <div class="modal-buttons">
+                            <button onclick="confirmLogout()" class="btn-confirm">
+                                <i class="fas fa-check"></i> <!-- Ikon centang -->
+                            </button>
+                            <button onclick="closeLogoutModal()" class="btn-cancel">
+                                <i class="fas fa-times"></i> <!-- Ikon X -->
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </ul>
         </div>
         <div class="content p-4">
@@ -64,6 +90,8 @@
         const toggleButton = document.getElementById('toggleButton');
         const sidebar = document.getElementById('sidebar');
         const sidebarLogo = document.getElementById('sidebarLogo');
+
+
 
         // Fungsi untuk mengatur sidebar berdasarkan status yang disimpan di localStorage
         function setSidebarState() {
@@ -109,13 +137,28 @@
         setActiveNavLink();
 
         function confirmLogout() {
-            if (confirm("Apakah Anda ingin logout?")) {
+            if (confirm("Apakah Anda ingin Logout?")) {
                 document.getElementById('logout-form').submit();
             }
+        }
+
+        function showLogoutModal() {
+            document.getElementById('logoutModal').style.display = 'flex';
+        }
+
+        function closeLogoutModal() {
+            document.getElementById('logoutModal').style.display = 'none';
+        }
+
+        function confirmLogout() {
+            document.getElementById('logout-form').submit();
         }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
 </body>
 
 </html>

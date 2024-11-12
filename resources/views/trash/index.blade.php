@@ -1,4 +1,4 @@
-@extends('layouts.admin.sidebar')
+@extends(Auth::user()->type === 'officer' ? 'layouts.officer.sidebar' : 'layouts.admin.sidebar')
 
 @section('title', 'Trash Tickets')
 
