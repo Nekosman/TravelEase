@@ -63,5 +63,5 @@ Route::prefix('conversation')->group(function () {
 
 
 Route::prefix('faqs')->group(function () {
-    Route::get('/faq', [FaqController::class, 'index']);         // Mendapatkan semua FAQ
+    Route::get('/', [FaqController::class, 'index']);         // Mendapatkan semua FAQ
 });
