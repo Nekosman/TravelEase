@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class SettingController extends Controller
 {
@@ -18,7 +20,7 @@ class SettingController extends Controller
                 $layout = 'layouts.officer.sidebar';
             }
         }
-    
+
         // Get the authenticated user
         $user = Auth::user();
 
@@ -27,19 +29,32 @@ class SettingController extends Controller
 
     public function updateProfile(Request $request)
     {
-        // Validate the input fields for profile information
-        $validated = $request->validate([
+        $request->validate([
+            'profile_image' => 'nullable|image|mimes:jpeg,jpg,png|max:10000',
             'name' => 'required|string|max:255',
             'email' => 'required|email',
         ]);
 
-        // Update user profile information
         $user = Auth::user();
-        $user->name = $validated['name'];
-        $user->email = $validated['email'];
-        $user->save();
 
-        // Redirect back with a success message
+        // Mengunggah gambar profil jika ada
+        if ($request->hasFile('profile_image')) {
+            // Hapus gambar profil lama jika ada
+            if ($user->profile_image) {
+                Storage::delete(str_replace('/storage/', 'public/', $user->profile_image));
+            }
+
+            // Simpan gambar baru
+            $imagePath = $request->file('profile_image')->store('public/assets/img');
+            $user->profile_image = Storage::url($imagePath);
+        }
+
+        // Update hanya nama dan email
+        $user->update([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+        ]);
+
         return back()->with('success', 'Profile updated successfully!');
     }
 

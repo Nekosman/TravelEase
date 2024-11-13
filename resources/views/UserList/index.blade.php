@@ -11,10 +11,14 @@
                     <div class="card-header text-white" style="background-color: #366389;">
                         <h4 class="mb-0">User List </h4>
                         <div class="float-end">
-                            <a href="{{ route('user.list', ['filter' => 'all']) }}" class="btn btn-success btn-sm">All Users</a>
-                            <a href="{{ route('user.list', ['filter' => 'admin']) }}" class="btn btn-danger btn-sm">Admin Only</a>
-                            <a href="{{ route('user.list', ['filter' => 'officer']) }}" class="btn btn-warning btn-sm">Officer Only</a>
-                            <a href="{{ route('user.list', ['filter' => 'user']) }}" class="btn btn-primary btn-sm">User Only</a>
+                            <a href="{{ route('user.list', ['filter' => 'all']) }}" class="btn btn-success btn-sm">All
+                                Users</a>
+                            <a href="{{ route('user.list', ['filter' => 'admin']) }}" class="btn btn-danger btn-sm">Admin
+                                Only</a>
+                            <a href="{{ route('user.list', ['filter' => 'officer']) }}"
+                                class="btn btn-warning btn-sm">Officer Only</a>
+                            <a href="{{ route('user.list', ['filter' => 'user']) }}" class="btn btn-primary btn-sm">User
+                                Only</a>
                         </div>
                     </div>
 
@@ -45,11 +49,28 @@
                                 @foreach ($UserList as $userlist)
                                     <tr>
                                         <td>{{ $userlist->id }}</td>
-                                        <td>{{ $userlist->name }}</td>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div>
+                                                    @if ($userlist->profile_image)
+                                                        <img src="{{ asset($userlist->profile_image) }}"
+                                                            class="avatar me-3 border-radius-lg"
+                                                            style="width: 24px; height: 24px; object-fit: cover; border-radius: 50%;"
+                                                            alt="{{ $userlist->profile_image }}">
+                                                    @else
+                                                        <span>No Image</span>
+                                                    @endif
+                                                </div>
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">{{ $userlist->name }}</h6>
+                                                </div>
+                                            </div>
+                                        </td>
                                         <td>{{ $userlist->email }}</td>
                                         <td>{{ $userlist->type }}</td>
                                         <td>
-                                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $userlist->id }}">Delete</button>
+                                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                                data-bs-target="#deleteModal{{ $userlist->id }}">Delete</button>
                                         </td>
                                     </tr>
 
@@ -73,18 +94,23 @@
                                     </div> --}}
 
                                     <!-- Delete Confirmation Modal -->
-                                    <div class="modal fade" id="deleteModal{{ $userlist->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel{{ $userlist->id }}" aria-hidden="true">
+                                    <div class="modal fade" id="deleteModal{{ $userlist->id }}" tabindex="-1"
+                                        role="dialog" aria-labelledby="deleteModalLabel{{ $userlist->id }}"
+                                        aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header" style="background-color: #366389;">
-                                                    <h5 class="modal-title text-white" id="deleteModalLabel{{ $userlist->id }}">Confirm Delete</h5>
-                                                    <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    <h5 class="modal-title text-white"
+                                                        id="deleteModalLabel{{ $userlist->id }}">Confirm Delete</h5>
+                                                    <button type="button" class="btn-close text-white"
+                                                        data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
                                                     Are you sure you want to delete this ticket?
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <form action="{{ route('user.destroy', $userlist->id) }}" method="POST" style="display: inline;">
+                                                    <form action="{{ route('user.destroy', $userlist->id) }}"
+                                                        method="POST" style="display: inline;">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger">Delete</button>

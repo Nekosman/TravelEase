@@ -195,7 +195,7 @@ form label {
                 </div>
             @endif
 
-            <form action="{{ route('setting.update.profile') }}" method="POST">
+            <form action="{{ route('setting.update.profile') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-4">
                     <label for="name" class="font-semibold">Name</label>
@@ -204,6 +204,7 @@ form label {
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
+            
                 <div class="mb-4">
                     <label for="email" class="font-semibold">Email</label>
                     <input type="email" id="email" name="email" value="{{ old('email', $user->email) }}" class="form-control @error('email') is-invalid @enderror">
@@ -211,9 +212,27 @@ form label {
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
+            
+                <div class="mb-4">
+                    <label for="profile_image" class="font-semibold">Profile Image</label>
+                    <input type="file" id="profile_image" name="profile_image" class="form-control @error('profile_image') is-invalid @enderror">
+                    @error('profile_image')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+            
+                    <!-- Tampilkan gambar profil saat ini -->
+                    @if ($user->profile_image)
+                    <div class="mt-3">
+                        <img src="{{ asset($user->profile_image) }}" alt="Profile Image" style="width: 100px; height: 100px; border-radius: 50%;">
+                    </div>
+                @endif
+                
+                </div>
+            
                 <!-- Submit Button -->
                 <button type="submit" class="btn2 btn-primary btn-block">Save Profile Information</button>
             </form>
+            
         </div>
 
         <!-- Notification Preferences Tab -->

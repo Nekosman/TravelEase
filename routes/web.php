@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ConversationTreeController;
+use App\Http\Controllers\FaqCategoryController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LandingController;
@@ -117,5 +118,6 @@ Route::middleware(['auth', 'user-access:admin,officer'])->group(function () {
     Route::resource('conversation-tree', ConversationTreeController::class);
 
     Route::resource('faq', FaqController::class);
+    Route::resource('faqCategory', FaqCategoryController::class);
 });
 

@@ -36,6 +36,23 @@
                             @enderror
                         </div>
 
+                        <div class="mb-3">
+                            <label for="category_id" class="form-label">FAQ Category</label>
+                            <select class="form-control @error('category_id') is-invalid @enderror" id="category_id" name="category_id" required>
+                                <option value="">-- Select Category --</option>
+                                @foreach ($faqCategory as $category)
+                                    <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                                        {{ $category->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('category_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
                        
                         <div class="d-grid gap-2">
                             <button type="submit" class="btn text-white" style="background-color: #366389;">Submit</button>
