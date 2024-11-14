@@ -26,4 +26,25 @@ class CategoryController extends Controller
             ], 500);
         }
     }
+
+    public function view()
+    {
+        try {
+            // Mengambil semua kategori dari tabel Categories
+            $categories = Categories::all();
+
+            // Mengembalikan data kategori dalam bentuk JSON
+            return response()->json([
+                'success' => true,
+                'data' => $categories
+            ], 200);
+        } catch (\Exception $e) {
+            // Jika terjadi kesalahan, kembalikan pesan error
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to retrieve categories',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
 }

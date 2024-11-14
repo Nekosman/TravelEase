@@ -27,5 +27,13 @@ class FaqController extends Controller
         }
     }
 
-    
+// FaqController.php
+public function getFaqsByCategory($categoryId)
+{
+    $faqs = Faq::where('category_id', $categoryId)->get();
+    return response()->json(['data' => $faqs]);
+}
+
+
+
 }

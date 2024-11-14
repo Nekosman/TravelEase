@@ -8,7 +8,7 @@ use App\Http\Controllers\API\TicketController;
 use App\Http\Controllers\API\TicketMessageController;
 use App\Http\Controllers\API\ConversationController;
 use App\Http\Controllers\API\ProfileController;
-use App\Http\Controllers\API\FaqController;
+use App\Http\Controllers\API\FaqControllerApi;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +31,11 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
 
 // Category
-Route::middleware('auth:sanctum')->get('/categories', [App\Http\Controllers\API\CategoryController::class, 'index']);
+// Rute untuk menampilkan kategori melalui metode `index`
+Route::middleware('auth:sanctum')->get('/categories', [CategoryController::class, 'index']);
+
+// Rute untuk menampilkan kategori melalui metode `view`
+Route::get('/categories-view', [App\Http\Controllers\API\CategoryController::class, 'view']);
 
 // Ticket
 Route::middleware('auth:sanctum')->group(function () {
@@ -62,6 +66,8 @@ Route::prefix('conversation')->group(function () {
 });
 
 
-Route::prefix('faqs')->group(function () {
-    Route::get('/faq', [FaqController::class, 'index']);         // Mendapatkan semua FAQ
-});
+
+Route::get('/faqs-by-category/{categoryId}', [FaqControllerApi::class, 'getFaqsByCategory']);
+// Route::prefix('faqs')->group(function () {
+//     Route::get('/faq', [FaqController::class, 'index']);         // Mendapatkan semua FAQ
+// });
