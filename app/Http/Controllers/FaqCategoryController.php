@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class FaqCategoryController extends Controller
 {
+   public function index(){
+    $faqCategory = FaqCategory::all();
+
+    return view('faqs.categories.index', compact('faqCategory'));
+   }
 
    public function create(){
         return view('faqs.categories.create');

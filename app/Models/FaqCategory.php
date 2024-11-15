@@ -13,6 +13,6 @@ class FaqCategory extends Model
 
     public function faqs()
     {
-        return $this->hasMany(Faq::class, 'category_id');
+        return $this->belongsToMany(Faq::class, 'faq_category');
     }
 }

@@ -17,6 +17,6 @@ class Faq extends Model
 
     public function category()
     {
-        return $this->belongsTo(FaqCategory::class, 'category_id');
+        return $this->belongsToMany(FaqCategory::class, 'faq_category');
     }
 }

@@ -28,10 +28,17 @@ class FaqController extends Controller
         $request->validate([
             'question' => 'required',
             'answer' => 'required',
-            'category_id' => 'required|exists:faq_categories,id',
+            'faq_categories' => 'required|array',
         ]);
 
-        Faq::create($request->all());
+        // Buat FAQ baru
+        $faq = Faq::create($request->only(['question', 'answer']));
+
+        // Sinkronisasi kategori
+        $faq->category()->sync($request->faq_categories);
+
+        // Muat ulang data FAQ dengan relasi kategori
+        $faq->load('category');
 
         return redirect()->route('faq.index')->with('success', 'FAQ created successfully.');
     }

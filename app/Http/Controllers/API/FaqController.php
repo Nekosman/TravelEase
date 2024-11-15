@@ -11,7 +11,7 @@ class FaqController extends Controller
     public function index()
     {
         try {
-            $faqs = Faq::all();
+            $faqs = Faq::with('category')->get();
 
             return response()->json([
                 'status' => true,
