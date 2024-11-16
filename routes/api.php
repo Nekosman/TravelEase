@@ -8,7 +8,7 @@ use App\Http\Controllers\API\TicketController;
 use App\Http\Controllers\API\TicketMessageController;
 use App\Http\Controllers\API\ConversationController;
 use App\Http\Controllers\API\ProfileController;
-use App\Http\Controllers\API\FaqControllerApi;
+use App\Http\Controllers\API\FaqController;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,9 +65,10 @@ Route::prefix('conversation')->group(function () {
     Route::get('/path/{nodeId}', [ConversationController::class, 'getConversationPath']);
 });
 
+Route::get('/faq-categories', [FaqController::class, 'index']);
+Route::get('/faqs/category/{categoryId}', [FaqController::class, 'getByCategory']);
+Route::get('/faq/{category}', [FaqController::class, 'get3Category']);
 
-
-Route::get('/faqs-by-category/{categoryId}', [FaqControllerApi::class, 'getFaqsByCategory']);
 // Route::prefix('faqs')->group(function () {
-//     Route::get('/faq', [FaqController::class, 'index']);         // Mendapatkan semua FAQ
+//     Route::get('/', [FaqController::class, 'index']);         // Mendapatkan semua FAQ
 // });
