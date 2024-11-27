@@ -11,8 +11,20 @@ class FaqCategory extends Model
 
     protected $fillable = ['name', 'description'];
 
+    /**
+     * Relasi One-to-Many dengan SubcategoryFaq.
+     */
+    public function subcategories()
+    {
+        return $this->hasMany(SubCategoryFaq::class, 'faq_category_id');
+    }
+
+    /**
+     * Relasi One-to-Many dengan Faq.
+     */
     public function faqs()
     {
-        return $this->belongsToMany(Faq::class, 'faq_category');
+        return $this->hasMany(Faq::class, 'category_id');
     }
 }
+

@@ -67,7 +67,11 @@ Route::prefix('conversation')->group(function () {
 
 Route::get('/faq-categories', [FaqController::class, 'index']);
 Route::get('/faqs/category/{categoryId}', [FaqController::class, 'getByCategory']);
-Route::get('/faq/{category}', [FaqController::class, 'get3Category']);
+Route::get('/faqs/subsCategory/{subsId}', [FaqController::class, 'getsubsCategory']);
+Route::get('/faqs/getfaq/{faqId}', [FaqController::class, 'getFaqsBySubsCategory']);
+
+Route::get('/faqs/categories-with-faqs', [FaqController::class, 'getFaqCategoriesWithSubcategoriesAndFaqs']);
+
 
 // Route::prefix('faqs')->group(function () {
 //     Route::get('/', [FaqController::class, 'index']);         // Mendapatkan semua FAQ
