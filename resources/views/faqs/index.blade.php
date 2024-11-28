@@ -13,29 +13,30 @@
                             <a href="{{ route('faqCategory.index') }}" class="btn btn-success btn-sm me-2">Create Category</a>
                             <a href="{{ route('faq.create') }}" class="btn btn-info btn-sm">Create FAQ</a>
                         </div>
-                        
+
                     </div>
-                
+
                     <div class="card-body">
                         @if (session('success'))
                             <div class="alert alert-success">
                                 {{ session('success') }}
                             </div>
                         @endif
-                
+
                         @if (session('error'))
                             <div class="alert alert-danger">
                                 {{ session('error') }}
                             </div>
                         @endif
-                
+
                         <table class="table table-hover table-bordered">
                             <thead class="text-white" style="background-color: #366389;">
                                 <tr>
                                     <th>ID</th>
                                     <th>FAQ Question</th>
                                     <th>FAQ Answer</th>
-                                    <th>Categories</th> <!-- Tambahkan kolom kategori -->
+                                    <th>Category</th>
+                                    <th>Subcategory</th> <!-- Kolom tambahan untuk Subcategory -->
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -46,9 +47,18 @@
                                         <td>{{ $faq->question }}</td>
                                         <td>{{ $faq->answer }}</td>
                                         <td>
-                                            @foreach ($faq->category as $category)
-                                                <span class="badge bg-secondary">{{ $category->name }}</span>
-                                            @endforeach
+                                            @if ($faq->category)
+                                                <span class="badge bg-secondary">{{ $faq->category->name }}</span>
+                                            @else
+                                                <span class="badge bg-warning">No Category</span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($faq->subcategory)
+                                                <span class="badge bg-info">{{ $faq->subcategory->name }}</span>
+                                            @else
+                                                <span class="badge bg-warning">No Subcategory</span>
+                                            @endif
                                         </td>
                                         <td>
                                             <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#faqDetailModal{{ $faq->id }}">View</button>
@@ -56,10 +66,10 @@
                                             <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#faqDeleteModal{{ $faq->id }}">Delete</button>
                                         </td>
                                     </tr>
-                
+
                                     <!-- Modal for FAQ Details -->
-                                    <div class="modal fade" id="faqDetailModal{{ $faq->id }}" tabindex="-1" role="dialog" aria-labelledby="faqDetailModalLabel{{ $faq->id }}" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal fade" id="faqDetailModal{{ $faq->id }}" tabindex="-1" aria-labelledby="faqDetailModalLabel{{ $faq->id }}" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
                                                 <div class="modal-header" style="background-color: #366389;">
                                                     <h5 class="modal-title text-white" id="faqDetailModalLabel{{ $faq->id }}">FAQ Details</h5>
@@ -69,29 +79,38 @@
                                                     <p><strong>ID:</strong> {{ $faq->id }}</p>
                                                     <p><strong>Question:</strong> {{ $faq->question }}</p>
                                                     <p><strong>Answer:</strong> {{ $faq->answer }}</p>
-                                                    <p><strong>Categories:</strong>
-                                                        @foreach ($faq->category as $category)
-                                                            <span class="badge bg-secondary">{{ $category->name }}</span>
-                                                        @endforeach
+                                                    <p><strong>Category:</strong>
+                                                        @if ($faq->category)
+                                                            {{ $faq->category->name }}
+                                                        @else
+                                                            No Category
+                                                        @endif
+                                                    </p>
+                                                    <p><strong>Subcategory:</strong>
+                                                        @if ($faq->subcategory)
+                                                            {{ $faq->subcategory->name }}
+                                                        @else
+                                                            No Subcategory
+                                                        @endif
                                                     </p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                
+
                                     <!-- Delete Confirmation Modal -->
-                                    <div class="modal fade" id="faqDeleteModal{{ $faq->id }}" tabindex="-1" role="dialog" aria-labelledby="faqDeleteModalLabel{{ $faq->id }}" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal fade" id="faqDeleteModal{{ $faq->id }}" tabindex="-1" aria-labelledby="faqDeleteModalLabel{{ $faq->id }}" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
                                                 <div class="modal-header" style="background-color: #366389;">
-                                                    <h5 class="modal-title text-white" id="faqDeleteModal{{ $faq->id }}">Confirm Delete</h5>
+                                                    <h5 class="modal-title text-white" id="faqDeleteModalLabel{{ $faq->id }}">Confirm Delete</h5>
                                                     <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
                                                     Are you sure you want to delete this FAQ?
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <form action="{{ route('faq.destroy', $faq->id) }}" method="POST" style="display: inline;">
+                                                    <form action="{{ route('faq.destroy', $faq->id) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger">Delete</button>
@@ -103,11 +122,12 @@
                                 @endforeach
                             </tbody>
                         </table>
+
                     </div>
                 </div>
-                
 
-               
+
+
             </div>
         </div>
     </div>
