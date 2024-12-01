@@ -29,6 +29,12 @@ class ConversationTreeSeeder extends Seeder
             'order' => 3,
         ]);
 
+        $discount = ConversationTree::create([
+            'question' => 'Pertanyaan pertama: Apa yang ingin Anda lakukan?',
+            'button_text' => 'Diskon',
+            'order' => 4,
+        ]);
+
         // Ticket Issues (Second Level)
         ConversationTree::create([
             'parent_id' => $ticketIssue->id,

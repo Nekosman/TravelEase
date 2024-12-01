@@ -152,4 +152,21 @@ class ProfileController extends Controller
             );
         }
     }
+
+    public function getProfile()
+{
+    $user = Auth::user();
+    return response()->json([
+        'success' => true,
+        'message' => 'Profile fetched successfully',
+        'data' => [
+            'user' => [
+                'name' => $user->name,
+                'email' => $user->email,
+                'profile_image' => $user->profile_image,
+            ],
+        ],
+    ]);
+}
+
 }

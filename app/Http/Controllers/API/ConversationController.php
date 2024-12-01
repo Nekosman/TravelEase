@@ -13,6 +13,7 @@ class ConversationController extends Controller
      */
     public function getInitialNodes()
     {
+        // Ambil root node yang tidak memiliki parent_id
         $nodes = ConversationTree::whereNull('parent_id')
             ->orderBy('order')
             ->get(['id', 'question', 'button_text', 'answer']);
@@ -26,6 +27,7 @@ class ConversationController extends Controller
             ]
         ]);
     }
+
 
     /**
      * Get child nodes for a specific parent node
@@ -41,20 +43,41 @@ class ConversationController extends Controller
             ], 404);
         }
 
+        // Mengambil child nodes berdasarkan parent_id
         $nodes = ConversationTree::where('parent_id', $parentId)
             ->orderBy('order')
             ->get(['id', 'question', 'button_text', 'answer']);
+
+        // Menentukan pertanyaan dan jawaban
+        if ($nodes->isNotEmpty()) {
+            // Pertanyaan adalah dari child node pertama
+            $firstChild = $nodes->first();
+            $question = $firstChild->question;
+
+            // Jika node memiliki anak, tidak ada jawaban
+            if ($firstChild->parent_id !== null) {
+                $answer = null;  // Tidak ada jawaban jika masih berlanjut
+            } else {
+                // Jika tidak ada anak, maka ini adalah node terakhir, tampilkan jawaban
+                $answer = $firstChild->answer;
+            }
+        } else {
+            // Jika tidak ada anak, gunakan jawaban dari parent
+            $question = $parent->question;
+            $answer = $parent->answer;
+        }
 
         return response()->json([
             'success' => true,
             'message' => 'Child nodes retrieved successfully',
             'data' => [
-                'question' => $parent->question,
-                'parent_answer' => $parent->answer,
-                'nodes' => $nodes
+                'question' => $question,  // Pertanyaan berikutnya
+                'answer' => $answer,      // Jawaban jika ada
+                'nodes' => $nodes         // Opsi untuk melanjutkan
             ]
         ]);
     }
+
 
     /**
      * Get a specific node's details

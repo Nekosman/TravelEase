@@ -50,10 +50,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/tickets/{ticketId}/messages', [TicketMessageController::class, 'store']);
 
     // Profile routes
-    Route::prefix('profile')->group(function () {
+    Route::middleware('auth:sanctum')->prefix('profile')->group(function () {
         Route::put('/update', [ProfileController::class, 'updateProfile']);
         Route::put('/password', [ProfileController::class, 'updatePassword']);
         Route::put('/notifications', [ProfileController::class, 'updateNotifications']);
+        Route::get('/', [ProfileController::class, 'getProfile']); // Tambahkan ini
     });
 });
 
@@ -63,6 +64,7 @@ Route::prefix('conversation')->group(function () {
     Route::get('/children/{parentId}', [ConversationController::class, 'getChildNodes']);
     Route::get('/node/{id}', [ConversationController::class, 'getNode']);
     Route::get('/path/{nodeId}', [ConversationController::class, 'getConversationPath']);
+    
 });
 
 Route::get('/faq-categories', [FaqController::class, 'index']);
