@@ -4,45 +4,33 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Faq;
+use App\Models\FaqCategories;
+use App\Models\SubcategoryFaq;
 use Illuminate\Http\Request;
 
 class FaqController extends Controller
 {
-    public function index()
+    public function getByCategory($categoryId)
     {
-        try {
-            // Memuat FAQ beserta kategori terkaitnya
-            $faqs = Faq::with('category')->get();
+        return Faq::where('category_id', $categoryId)->get(); // Mengambil FAQ berdasarkan kategori
+    }
 
-            // Menyusun data FAQ untuk menampilkan nama kategori
-            $faqData = $faqs->map(function ($faq) {
-                // Menyusun data untuk FAQ dengan nama kategori
-                $categories = $faq->category->pluck('name'); // Ambil nama kategori
-                return [
-                    'id' => $faq->id,
-                    'question' => $faq->question,
-                    'answer' => $faq->answer,
-                    'categories' => $categories,
-                ];
-            });
+    public function getsubsCategory($subsId)
+    {
+        return SubcategoryFaq::where('faq_category_id', $subsId)->get();
+    }
 
-            return response()->json(
-                [
-                    'status' => true,
-                    'message' => 'FAQS retrieved successfully',
-                    'data' => $faqData,
-                ],
-                200,
-            );
-        } catch (\Exception $e) {
-            return response()->json(
-                [
-                    'status' => false,
-                    'message' => 'Failed to retrieve FAQS',
-                    'error' => $e->getMessage(),
-                ],
-                500,
-            );
-        }
+    public function getFaqsBySubsCategory($faqId)
+    {
+        return Faq::where('subcategory_id', $faqId)->get();
+    }
+
+    public function getFaqCategoriesWithSubcategoriesAndFaqs()
+    {
+        // Ambil semua kategori dengan relasi subkategori dan FAQ
+        $categories = FaqCategories::with(['subcategories.faqs', 'faqs'])->get();
+
+        // Mengembalikan data dalam bentuk JSON
+        return response()->json($categories);
     }
 }

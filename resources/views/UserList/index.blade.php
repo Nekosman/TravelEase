@@ -19,6 +19,7 @@
                                 class="btn btn-warning btn-sm">Officer Only</a>
                             <a href="{{ route('user.list', ['filter' => 'user']) }}" class="btn btn-primary btn-sm">User
                                 Only</a>
+                            <a href="{{ route('user.createOfficer') }}" class="btn btn-info btn-sm">Create Officer</a>
                         </div>
                     </div>
 
@@ -42,6 +43,7 @@
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Role</th>
+                                    <th>is Active</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -68,32 +70,14 @@
                                         </td>
                                         <td>{{ $userlist->email }}</td>
                                         <td>{{ $userlist->type }}</td>
+                                        <td>{{ getApprovalStatus($userlist->is_approved) }}</td>
                                         <td>
                                             <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
                                                 data-bs-target="#deleteModal{{ $userlist->id }}">Delete</button>
+                                            <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal"
+                                                data-bs-target="#approval-toggle{{ $userlist->id }}">Change Aprroved</button>
                                         </td>
                                     </tr>
-
-                                    {{-- <!-- Modal for Ticket Details -->
-                                    <div class="modal fade" id="ticketDetailModal{{ $ticket->id }}" tabindex="-1" role="dialog" aria-labelledby="ticketDetailModalLabel{{ $ticket->id }}" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header" style="background-color: #366389;">
-                                                    <h5 class="modal-title text-white" id="ticketDetailModalLabel{{ $ticket->id }}">Ticket Details</h5>
-                                                    <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p><strong>Title:</strong> {{ $ticket->title }}</p>
-                                                    <p><strong>Description:</strong> {{ $ticket->description }}</p>
-                                                    <p><strong>Priority:</strong> {{ $ticket->priority }}</p>
-                                                    <p><strong>Status:</strong> {{ $ticket->status }}</p>
-                                                    <p><strong>Category:</strong> {{ $ticket->category ? $ticket->category->name_category : 'Category Not Available' }}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> --}}
-
-                                    <!-- Delete Confirmation Modal -->
                                     <div class="modal fade" id="deleteModal{{ $userlist->id }}" tabindex="-1"
                                         role="dialog" aria-labelledby="deleteModalLabel{{ $userlist->id }}"
                                         aria-hidden="true">
@@ -114,6 +98,32 @@
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger">Delete</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="modal fade" id="approval-toggle{{ $userlist->id }}" tabindex="-1"
+                                        role="dialog" aria-labelledby="approval-toggleLabel{{ $userlist->id }}"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header" style="background-color: #366389;">
+                                                    <h5 class="modal-title text-white"
+                                                        id="approval-toggleLabel{{ $userlist->id }}">Confirm Change Approved</h5>
+                                                    <button type="button" class="btn-close text-white"
+                                                        data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Are you sure you want to delete this ticket?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <form action="{{ route('toggle.approval', $userlist->id) }}"
+                                                        method="POST" style="display: inline;">
+                                                        @csrf
+                                                        @method('post')
+                                                        <button type="submit" class="btn btn-danger">Yes</button>
                                                     </form>
                                                 </div>
                                             </div>

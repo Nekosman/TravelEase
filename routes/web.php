@@ -3,8 +3,10 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ConversationTreeController;
+use App\Http\Controllers\FaqCategoriesController;
 use App\Http\Controllers\FaqCategoryController;
 use App\Http\Controllers\FaqController;
+use App\Http\Controllers\FaqSubCategoriesController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\PasswordResetController;
@@ -47,9 +49,11 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/admin', [HomeController::class, 'adminHome'])->name('admin.home');
 
     Route::get('/userlist', [UserlistController::class, 'index'])->name('user.list');
-
     Route::delete('user/delete/{id}', [UserlistController::class, 'destroy'])->name('user.destroy');
+    Route::get('userlist/createOfficer', [UserlistController::class, 'createOfficer'])->name('user.createOfficer');
+    Route::post('userlist/createOfficer/storeOfficer', [UserlistController::class, 'storeOfficer'])->name('user.storeOfficer');
 
+    Route::post('/toggle-approval/{id}', [UserlistController::class, 'toggleApproval'])->name('toggle.approval');
 });
 
 Route::middleware(['auth', 'user-access:officer'])->group(function () {
@@ -118,6 +122,7 @@ Route::middleware(['auth', 'user-access:admin,officer'])->group(function () {
     Route::resource('conversation-tree', ConversationTreeController::class);
 
     Route::resource('faq', FaqController::class);
-    Route::resource('faqCategory', FaqCategoryController::class);
+    Route::resource('faqCategory', FaqCategoriesController::class);
+    Route::resource('faqSubCategory', FaqSubCategoriesController::class);
 });
 

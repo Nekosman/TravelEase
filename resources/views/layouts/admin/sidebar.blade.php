@@ -67,6 +67,15 @@
                     </a>
                 </li>
 
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('conversation-tree.index') }}">
+                        <i class="fas fa-robot">
+                            </i> <span>Bot setting</span>
+                    </a>
+                </li>
+
+
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('trash.index') }}">
                         <i class="fas fa-trash"></i>

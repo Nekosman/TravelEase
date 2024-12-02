@@ -35,25 +35,44 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="faq_categories" class="form-label">FAQ Categories</label>
-                            <select class="form-control @error('faq_categories') is-invalid @enderror" id="faq_categories"
-                                name="faq_categories[]" multiple required>
-                                @foreach ($faqCategory as $category)
+                            <label for="category_id" class="form-label">Category</label>
+                            <select class="form-select @error('category_id') is-invalid @enderror" id="category_id"
+                                name="category_id">
+                                <option value="" disabled selected>Select Category</option>
+                                @foreach ($faqcategories as $category)
                                     <option value="{{ $category->id }}"
-                                        {{ is_array(old('faq_categories')) && in_array($category->id, old('faq_categories')) ? 'selected' : '' }}>
+                                        {{ old('category_id') == $category->id ? 'selected' : '' }}>
                                         {{ $category->name }}
                                     </option>
                                 @endforeach
                             </select>
-                            @error('faq_categories')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
+                                @error('category_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="subcategory_id" class="form-label">SubCategory</label>
+                            <select class="form-select @error('subcategory_id') is-invalid @enderror" id="subcategory_id"
+                                name="subcategory_id">
+                                <option value="" disabled selected>Select Category</option>
+                                @foreach ($subcategories as $subcategory)
+                                    <option value="{{ $subcategory->id }}"
+                                        {{ old('subcategory_id') == $category->id ? 'selected' : '' }}>
+                                        {{ $subcategory->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                                @error('subcategory_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                             @enderror
                         </div>
 
-
-                        @error('category_id')
+                        @error('subcategory_id')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>

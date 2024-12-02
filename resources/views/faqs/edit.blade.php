@@ -15,9 +15,9 @@
                         @method('PUT')
                         @csrf
                         <div class="mb-3">
-                            <label for="question" class="form-label">Question</label>
-                            <input type="text" class="form-control @error('question') is-invalid @enderror" id="question"
-                                name="question" value="{{ old('question', $faq->question) }}">
+                            <label for="question" class="form-label">question</label>
+                            <input type="text" class="form-control @error('question') is-invalid @enderror"
+                                id="question" name="question" value="{{ old('question',  $faq->question) }}">
                             @error('question')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -26,9 +26,8 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="answer" class="form-label">Description</label>
-                            <textarea class="form-control @error('answer') is-invalid @enderror" id="answer" name="answer"
-                                rows="4">{{ old('answer', $faq->answer) }}</textarea>
+                            <label for="answer" class="form-label">answer</label>
+                            <textarea class="form-control @error('answer') is-invalid @enderror" id="answer" name="answer" rows="4">{{ old('answer',$faq->answer) }}</textarea>
                             @error('answer')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -37,11 +36,13 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="category_id" class="form-label">FAQ Category</label>
-                            <select class="form-control @error('category_id') is-invalid @enderror" id="category_id" name="category_id" required>
-                                <option value="">-- Select Category --</option>
-                                @foreach ($faqCategory as $category)
-                                    <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                            <label for="category_id" class="form-label">Category</label>
+                            <select class="form-select @error('category_id') is-invalid @enderror" id="category_id"
+                                name="category_id">
+                                <option value="" disabled selected>Select Category</option>
+                                @foreach ($faqcategories as $category)
+                                    <option value="{{ $category->id }}"
+                                        {{ old('category_id', $faq->id) ? 'selected' : '' }}>
                                         {{ $category->name }}
                                     </option>
                                 @endforeach
@@ -53,13 +54,40 @@
                             @enderror
                         </div>
 
-                       
-                        <div class="d-grid gap-2">
-                            <button type="submit" class="btn text-white" style="background-color: #366389;">Submit</button>
+                        <div class="mb-3">
+                            <label for="subcategory_id" class="form-label">SubCategory</label>
+                            <select class="form-select @error('subcategory_id') is-invalid @enderror" id="subcategory_id"
+                                name="subcategory_id">
+                                <option value="" disabled selected>Select Category</option>
+                                @foreach ($subcategories as $subcategory)
+                                    <option value="{{ $subcategory->id }}"
+                                        {{ old('subcategory_id',$faq->id)? 'selected' : '' }}>
+                                        {{ $subcategory->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('subcategory_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
-                    </form>
+
+                        @error('subcategory_id')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                 </div>
+
+
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn text-white" style="background-color: #366389;">Submit</button>
+                </div>
+                </form>
             </div>
         </div>
+    </div>
     </div>
 @endsection

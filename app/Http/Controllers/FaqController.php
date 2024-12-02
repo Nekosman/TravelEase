@@ -3,24 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Models\Faq;
+use App\Models\FaqCategories;
 use App\Models\FaqCategory;
+use App\Models\SubcategoryFaq;
 use Illuminate\Http\Request;
 
 class FaqController extends Controller
 {
     public function index()
     {
-        $faqCategory = FaqCategory::all();
-
         $faqs = Faq::all();
 
-        return view('faqs.index', compact('faqs', 'faqCategory'));
+        return view('faqs.index', compact('faqs'));
     }
 
     public function create()
     {
-        $faqCategory = FaqCategory::all();
-        return view('faqs.create', compact('faqCategory'));
+        $subcategories = SubcategoryFaq::all();
+        $faqcategories = FaqCategories::all();
+        return view('faqs.create', compact('faqcategories', 'subcategories'));
     }
 
     public function store(Request $request)
@@ -28,27 +29,21 @@ class FaqController extends Controller
         $request->validate([
             'question' => 'required',
             'answer' => 'required',
-            'faq_categories' => 'required|array',
+            'category_id' => 'required|exists:faq_categories,id', // Validasi id kategori
+            'subcategory_id' => 'nullable|exists:subcategory_faq,id', // Validasi subkategori jika ada
         ]);
 
-        // Buat FAQ baru
-        $faq = Faq::create($request->only(['question', 'answer']));
-
-        // Sinkronisasi kategori
-        $faq->category()->sync($request->faq_categories);
-
-        // Muat ulang data FAQ dengan relasi kategori
-        $faq->load('category');
+        Faq::create($request->all());
 
         return redirect()->route('faq.index')->with('success', 'FAQ created successfully.');
     }
 
     public function edit(Faq $faq)
     {
-        // Ambil daftar kategori untuk dropdown jika diperlukan
-        $faqCategory = FaqCategory::all();
+        $subcategories = SubcategoryFaq::all();
+        $faqcategories = FaqCategories::all();
 
-        return view('faqs.edit', compact('faq', 'faqCategory'));
+        return view('faqs.edit', compact('faq', 'faqcategories', 'subcategories'));
     }
 
     public function update(Request $request, Faq $faq)
@@ -56,14 +51,15 @@ class FaqController extends Controller
         $request->validate([
             'question' => 'required',
             'answer' => 'nullable',
-            'category_id' => 'required|exists:faq_categories,id', // Validasi category_id harus ada di tabel faq_category
+            'category_id' => 'required|exists:faq_categories,id',
+            'subcategory_id' => 'nullable|exists:subcategory_faq,id',
         ]);
 
-        // Update data faq termasuk category_id
         $faq->update([
             'question' => $request->input('question'),
             'answer' => $request->input('answer'),
             'category_id' => $request->input('category_id'),
+            'subcategory_id' => $request->input('subcategory_id'),
         ]);
 
         return redirect()->route('faq.index')->with('success', 'FAQ updated successfully.');
