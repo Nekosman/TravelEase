@@ -18,5 +18,11 @@ class Categories extends Model
 {
     return $this->hasMany(ticket::class);
 }
+public function faqs()
+{
+    return $this->hasMany(Faq::class);
+}
+
+
 
 }

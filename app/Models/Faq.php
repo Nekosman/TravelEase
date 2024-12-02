@@ -15,7 +15,11 @@ class Faq extends Model
      */
     public function category()
     {
+<<<<<<< HEAD
         return $this->belongsTo(FaqCategories::class, 'category_id');
+=======
+        return $this->belongsTo(FaqCategory::class, 'category_id');
+>>>>>>> b2ab6ffd2b862af21161f18c71f7829551293ca9
     }
 
     /**
