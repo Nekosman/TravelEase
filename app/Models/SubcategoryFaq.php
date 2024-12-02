@@ -17,11 +17,7 @@ class SubcategoryFaq extends Model
      */
     public function category()
     {
-<<<<<<< HEAD
-        return $this->belongsTo(FaqCategories::class, 'faq_category_id');
-=======
         return $this->belongsTo(FaqCategory::class, 'faq_category_id');
->>>>>>> b2ab6ffd2b862af21161f18c71f7829551293ca9
     }
 
     /**
@@ -32,7 +28,3 @@ class SubcategoryFaq extends Model
         return $this->hasMany(Faq::class, 'subcategory_id');
     }
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> b2ab6ffd2b862af21161f18c71f7829551293ca9

@@ -75,8 +75,4 @@ Route::get('/faqs/categories-with-faqs', [FaqController::class, 'getFaqCategorie
 
 // Route::prefix('faqs')->group(function () {
 //     Route::get('/', [FaqController::class, 'index']);         // Mendapatkan semua FAQ
-<<<<<<< HEAD
 // });
-=======
-// });
->>>>>>> b2ab6ffd2b862af21161f18c71f7829551293ca9

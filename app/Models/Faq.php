@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Faq extends Model
-{ use HasFactory;
+{
+    use HasFactory;
 
     protected $fillable = ['question', 'answer', 'category_id', 'subcategory_id'];
 
@@ -15,11 +16,7 @@ class Faq extends Model
      */
     public function category()
     {
-<<<<<<< HEAD
-        return $this->belongsTo(FaqCategories::class, 'category_id');
-=======
         return $this->belongsTo(FaqCategory::class, 'category_id');
->>>>>>> b2ab6ffd2b862af21161f18c71f7829551293ca9
     }
 
     /**

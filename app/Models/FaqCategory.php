@@ -27,4 +27,3 @@ class FaqCategory extends Model
         return $this->hasMany(Faq::class, 'category_id');
     }
 }
-
