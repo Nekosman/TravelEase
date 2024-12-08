@@ -15,8 +15,14 @@ class TicketController extends Controller
         try {
             $userId = auth()->user()->id;
             $filter = $request->query('filter', 'all');
+            $status = $request->query('status'); // Menambahkan parameter status
 
             $query = Ticket::with('user', 'category')->where('user_id', $userId);
+
+            // Menambahkan filter status jika ada
+            if ($status) {
+                $query->where('status', $status);
+            }
 
             if ($filter === 'officer_empty') {
                 $query->whereNull('officer_id');
@@ -37,6 +43,7 @@ class TicketController extends Controller
             ], 500);
         }
     }
+
 
     public function store(Request $request)
     {

@@ -49,7 +49,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/tickets/{ticketId}/messages', [TicketMessageController::class, 'index']);
     Route::post('/tickets/{ticketId}/messages', [TicketMessageController::class, 'store']);
 
-    // Profile routes
+    // Profile routes  192.168.39.147
     Route::middleware('auth:sanctum')->prefix('profile')->group(function () {
         Route::put('/update', [ProfileController::class, 'updateProfile']);
         Route::put('/password', [ProfileController::class, 'updatePassword']);
@@ -64,7 +64,7 @@ Route::prefix('conversation')->group(function () {
     Route::get('/children/{parentId}', [ConversationController::class, 'getChildNodes']);
     Route::get('/node/{id}', [ConversationController::class, 'getNode']);
     Route::get('/path/{nodeId}', [ConversationController::class, 'getConversationPath']);
-    
+
 });
 
 Route::get('/faq-categories', [FaqController::class, 'index']);

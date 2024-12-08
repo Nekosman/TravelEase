@@ -22,7 +22,7 @@ class ConversationController extends Controller
             'success' => true,
             'message' => 'Initial conversation nodes retrieved successfully',
             'data' => [
-                'question' => 'Apa yang ingin Anda lakukan?',
+                'question' => 'Saya di sini untuk membantu Anda dengan segala kebutuhan perjalanan Anda. Jika Anda memiliki pertanyaan atau memerlukan bantuan, silakan beri tahu saya!',
                 'nodes' => $nodes
             ]
         ]);
