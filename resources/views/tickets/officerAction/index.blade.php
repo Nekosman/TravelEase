@@ -72,6 +72,8 @@
                                             @else
                                                 <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
                                                     data-bs-target="#deleteModal{{ $ticket->id }}">Move to Trash</button>
+                                                    <a href="{{ route('tickets.chat', $ticket->id) }}"
+                                                        class="btn btn-primary btn-sm">Chat</a>
                                             @endif
                                         </td>
                                     </tr>
