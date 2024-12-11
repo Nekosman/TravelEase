@@ -61,7 +61,7 @@
                                             @endif
                                         </td>
                                         <td>
-                                            @if ($ticket->status === 'accepted')
+                                            @if ($ticket->status === 'accepted' || 'closed')
                                                 <a href="{{ route('tickets.chat', $ticket->id) }}" class="btn btn-primary btn-sm">Go to Chat</a>
                                             @else
                                                 <span class="badge bg-secondary">Not Available</span>

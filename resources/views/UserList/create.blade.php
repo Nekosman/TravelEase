@@ -1,4 +1,4 @@
-@extends('layouts.officer.sidebar')
+@extends('layouts.admin.sidebar')
 
 @section('title', 'Create Officer')
 
