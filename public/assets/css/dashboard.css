@@ -21,9 +21,6 @@ body {
   padding: 0;
 }
 
-
-
-/* Container utama untuk statistik */
 .stats_container {
     display: flex;
     justify-content: space-between;
@@ -33,7 +30,7 @@ body {
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
-  
+
   /* Gaya untuk setiap item statistik */
   .stat_item {
     display: flex;
@@ -45,14 +42,14 @@ body {
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
-  
+
   /* Gaya untuk label statistik */
   .stat_label {
     font-size: 14px;
     color: #666;
     margin-bottom: 5px;
   }
-  
+
   /* Gaya untuk nilai statistik */
   .stat_value {
     font-size: 24px;
@@ -130,38 +127,6 @@ body {
 .btn-report:hover {
     background-color: #274a63;
 }
-
-  /* Responsive behavior */
-@media (max-width: 768px) {
-    .total_widget_row {
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .stats_container {
-        flex-direction: column;
-        gap: 10px;
-      }
-
-      .report-details {
-        margin-left: 10px;
-    }
-
-    .report-title{
-        font-size: small;
-    }
-
-    .report-date{
-        font-size: small;
-    }
-
-    .btn-report {
-        width: 100%;
-        margin-top: 10px;
-    }
-
-}
-
   .promo-section {
     background-color: #f5f8fa; /* Light background for the promo section */
     border: 2px solid #007bff; /* Blue border */
@@ -209,24 +174,56 @@ body {
 
 .bali-promo img {
     width: 100%; /* Responsive image */
-    max-width: 400px; /* Max width for larger screens */
+    max-width: 400px;
     height: auto;
-    border-radius: 8px; /* Rounded corners for the image */
-    margin: 15px 0; /* Space around the image */
+    border-radius: 8px;
+    margin: 15px 0;
 }
 
 .promo-button {
     display: inline-block;
-    background-color: #007bff; /* Button background color */
-    color: white; /* Button text color */
-    padding: 10px 20px; /* Button padding */
-    border-radius: 5px; /* Rounded corners */
-    text-decoration: none; /* Remove underline */
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
     font-size: 16px;
-    transition: background-color 0.3s; /* Smooth transition for hover effect */
-    margin-top: 10px; /* Space above the button */
+    transition: background-color 0.3s;
+    margin-top: 10px;
 }
 
 .promo-button:hover {
-    background-color: #0056b3; /* Darker shade on hover */
+    background-color: #0056b3;
+}
+
+
+ /* Responsive behavior */
+ @media (max-width: 768px) {
+    .total_widget_row {
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .stats_container {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .report-details {
+        margin-left: 10px;
+    }
+
+    .report-title{
+        font-size: small;
+    }
+
+    .report-date{
+        font-size: small;
+    }
+
+    .btn-report {
+        width: 100%;
+        margin-top: 10px;
+    }
+
 }

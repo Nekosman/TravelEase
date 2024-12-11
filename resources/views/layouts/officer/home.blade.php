@@ -29,12 +29,11 @@
                     <span class="stat_value">{{ $totalClosed }}</span>
                 </div>
             </div>
-
             <div style="width: 80%; margin: auto;">
-                <canvas id="barChart"></canvas>
+                <div style="text-align: center; margin-bottom: 10px; background-color: white; padding: 10px; border: 1px solid #ddd; border-radius: 5px; margin-top: 2%">
+                    <canvas id="barChart"></canvas>
+                </div>
             </div>
-
-
             <div class="report-container">
                 @forelse ($tickets as $ticket)
                     <div class="report-item">
@@ -54,27 +53,34 @@
     </div>
 
     <script>
-        var ctx = document.getElementById('barChart').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: @json($totalChart['labels']),
-                datasets: [{
-                    label: 'totalChart',
-                    data: @json($totalChart['data']),
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
+    var ctx = document.getElementById('barChart').getContext('2d');
+
+// Deteksi ukuran layar untuk mengatur maintainAspectRatio
+var isSmallScreen = window.innerWidth <= 768; // Anggap layar kecil jika <= 768px
+
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: @json($totalChart['labels']),
+        datasets: [{
+            label: 'Total Chart',
+            data: @json($totalChart['data']),
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: !isSmallScreen, // Nonaktifkan rasio tetap hanya di layar kecil
+        scales: {
+            y: {
+                beginAtZero: true
             }
-        });
+        }
+    }
+});
+
     </script>
     <script src="{{ asset('assets/js/dashboard.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

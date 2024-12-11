@@ -5,7 +5,6 @@
 <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
 
 <style>
-/* Container styling */
 .container {
     max-width: 750px;
     background: #ffffff;
@@ -15,7 +14,6 @@
     margin-top: 40px;
 }
 
-/* Header */
 h1 {
     color: #222;
     font-size: 28px;
@@ -24,7 +22,6 @@ h1 {
     text-align: center;
 }
 
-/* Tabs styling */
 .nav-tabs {
     display: flex;
     justify-content: space-around;
@@ -62,7 +59,6 @@ h1 {
     margin-top: 20px;
 }
 
-/* Form styling */
 form label {
     color: #444;
     font-weight: 600;
@@ -122,13 +118,11 @@ form label {
     color: #333;
 }
 
-/* Animated hover effect for tabs */
 .nav-tabs .nav-link:hover {
     color: #0056b3;
     border-bottom: 3px solid #0056b3;
 }
 
-/* Subtle box shadow on form fields */
 .form-control:hover {
     box-shadow: 0px 2px 8px rgba(0, 105, 217, 0.1);
 }
@@ -204,7 +198,7 @@ form label {
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
-            
+
                 <div class="mb-4">
                     <label for="email" class="font-semibold">Email</label>
                     <input type="email" id="email" name="email" value="{{ old('email', $user->email) }}" class="form-control @error('email') is-invalid @enderror">
@@ -212,27 +206,27 @@ form label {
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
-            
+
                 <div class="mb-4">
                     <label for="profile_image" class="font-semibold">Profile Image</label>
                     <input type="file" id="profile_image" name="profile_image" class="form-control @error('profile_image') is-invalid @enderror">
                     @error('profile_image')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
-            
+
                     <!-- Tampilkan gambar profil saat ini -->
                     @if ($user->profile_image)
                     <div class="mt-3">
                         <img src="{{ asset($user->profile_image) }}" alt="Profile Image" style="width: 100px; height: 100px; border-radius: 50%;">
                     </div>
                 @endif
-                
+
                 </div>
-            
+
                 <!-- Submit Button -->
                 <button type="submit" class="btn2 btn-primary btn-block">Save Profile Information</button>
             </form>
-            
+
         </div>
 
         <!-- Notification Preferences Tab -->
@@ -300,7 +294,7 @@ form label {
                         @enderror
                     </div>
                 </div>
-                
+
                 <!-- Submit Button -->
                 <button type="submit" class="btn2 btn-primary btn-block">Update Security Settings</button>
             </form>
@@ -314,7 +308,7 @@ form label {
     function togglePasswordVisibility(inputId, iconId) {
         const input = document.getElementById(inputId);
         const icon = document.getElementById(iconId);
-        
+
         if (input.type === 'password') {
             input.type = 'text';
             icon.classList.remove('fa-eye');

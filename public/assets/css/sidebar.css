@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
 
 * {
-  
+
   font-family: "Poppins", sans-serif;
 }
 
@@ -10,7 +10,7 @@ body{
 }
 
 
-  
+
   .sidebar {
     background-color: white;
     width: 250px; /* Initial width of the sidebar */
@@ -18,16 +18,16 @@ body{
     min-height: 100vh;
     transition: width 0.3s;
   }
-  
+
   .sidebar.collapsed {
     width: 80px; /* Sidebar width when collapsed */
   }
-  
+
   .content {
     flex-grow: 1; /* Ensures content takes up remaining space */
-    
+
      }
-  
+
   .nav-link {
     display: flex;
     align-items: center;
@@ -38,36 +38,36 @@ body{
     color: #6c757d;
     transition: background-color 0.3s, border-color 0.3s, color 0.3s;
   }
-  
+
   .nav-link.active {
     color: #366389;
     border-color: #366389;
   }
-  
+
   .nav-link span {
     margin-left: 10px;
   }
-  
+
   .sidebar.collapsed .nav-link span {
     display: none; /* Hide text when sidebar is collapsed */
   }
-  
+
   .sidebar img {
     width: 130px; /* Logo size when sidebar is expanded */
     height: auto;
     margin-bottom: 20px;
     transition: width 0.3s;
   }
-  
+
   .sidebar.collapsed img {
     width: 50px; /* Logo size when sidebar is collapsed */
   }
-  
+
   .toggleButton {
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
 }
 
 .logout-button {

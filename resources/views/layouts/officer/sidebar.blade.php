@@ -108,72 +108,88 @@
     </div>
 
     <script>
-        const toggleButton = document.getElementById('toggleButton');
-        const sidebar = document.getElementById('sidebar');
-        const sidebarLogo = document.getElementById('sidebarLogo');
+        // Ambil elemen HTML yang diperlukan
+const toggleButton = document.getElementById('toggleButton'); // Tombol untuk toggle sidebar
+const sidebar = document.getElementById('sidebar'); // Elemen sidebar
+const sidebarLogo = document.getElementById('sidebarLogo'); // Elemen logo di sidebar
 
+// Fungsi untuk mengatur status sidebar (collapsed atau tidak) berdasarkan localStorage
+function setSidebarState() {
+    // Periksa apakah sidebar disetel sebagai collapsed di localStorage
+    const isCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
+    if (isCollapsed) {
+        // Tambahkan kelas 'collapsed' untuk mengecilkan sidebar
+        sidebar.classList.add('collapsed');
+        // Ganti logo menjadi logo kecil
+        sidebarLogo.src = "{{ url('assets/img/logo_icon.png') }}";
+    } else {
+        // Hapus kelas 'collapsed' untuk memperluas sidebar
+        sidebar.classList.remove('collapsed');
+        // Ganti logo menjadi logo besar
+        sidebarLogo.src = "{{ url('assets/img/logoTravel.png') }}";
+    }
+}
 
+// Event listener untuk toggle sidebar ketika tombol diklik
+toggleButton.addEventListener('click', function () {
+    // Toggle kelas 'collapsed' pada sidebar
+    sidebar.classList.toggle('collapsed');
+    // Simpan status baru ke localStorage
+    const isCollapsed = sidebar.classList.contains('collapsed');
+    localStorage.setItem('sidebarCollapsed', isCollapsed);
 
-        // Fungsi untuk mengatur sidebar berdasarkan status yang disimpan di localStorage
-        function setSidebarState() {
-            const isCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
-            if (isCollapsed) {
-                sidebar.classList.add('collapsed');
-                sidebarLogo.src = "{{ url('assets/img/logo_icon.png') }}";
-            } else {
-                sidebar.classList.remove('collapsed');
-                sidebarLogo.src = "{{ url('assets/img/logoTravel.png') }}";
-            }
+    // Ubah logo sesuai dengan status sidebar
+    if (isCollapsed) {
+        sidebarLogo.src = "{{ url('assets/img/logo_icon.png') }}"; // Gambar kecil
+    } else {
+        sidebarLogo.src = "{{ url('assets/img/logoTravel.png') }}"; // Gambar besar
+    }
+});
+
+// Panggil fungsi untuk mengatur sidebar saat halaman dimuat
+setSidebarState();
+
+// Fungsi untuk menandai tautan navigasi aktif berdasarkan URL halaman saat ini
+function setActiveNavLink() {
+    const currentUrl = window.location.href; // Dapatkan URL halaman saat ini
+    const navLinks = document.querySelectorAll('.nav-link'); // Ambil semua tautan navigasi dengan kelas 'nav-link'
+    navLinks.forEach(link => {
+        // Jika URL halaman cocok dengan href tautan, tambahkan kelas 'active'
+        if (link.href === currentUrl) {
+            link.classList.add('active');
+        } else {
+            // Hapus kelas 'active' dari tautan lain
+            link.classList.remove('active');
         }
+    });
+}
 
-        // Setiap kali tombol toggle diklik, status sidebar disimpan ke localStorage
-        toggleButton.addEventListener('click', function() {
-            sidebar.classList.toggle('collapsed');
-            const isCollapsed = sidebar.classList.contains('collapsed');
-            localStorage.setItem('sidebarCollapsed', isCollapsed);
+// Panggil fungsi untuk menandai tautan aktif
+setActiveNavLink();
 
-            // Ganti logo saat sidebar dikecilkan
-            if (isCollapsed) {
-                sidebarLogo.src = "{{ url('assets/img/logo_icon.png') }}"; // Gambar kecil
-            } else {
-                sidebarLogo.src = "{{ url('assets/img/logoTravel.png') }}"; // Gambar besar
-            }
-        });
+// Fungsi untuk mengonfirmasi logout menggunakan dialog konfirmasi
+function confirmLogout() {
+    if (confirm("Apakah Anda ingin Logout?")) {
+        // Jika pengguna menekan "OK", submit form logout
+        document.getElementById('logout-form').submit();
+    }
+}
 
-        // Panggil fungsi untuk mengatur sidebar saat halaman dimuat
-        setSidebarState();
+// Fungsi untuk menampilkan modal logout
+function showLogoutModal() {
+    document.getElementById('logoutModal').style.display = 'flex'; // Tampilkan modal dengan mengubah display-nya
+}
 
-        function setActiveNavLink() {
-            const currentUrl = window.location.href;
-            const navLinks = document.querySelectorAll('.nav-link');
-            navLinks.forEach(link => {
-                if (link.href === currentUrl) {
-                    link.classList.add('active');
-                } else {
-                    link.classList.remove('active');
-                }
-            });
-        }
+// Fungsi untuk menyembunyikan modal logout
+function closeLogoutModal() {
+    document.getElementById('logoutModal').style.display = 'none'; // Sembunyikan modal
+}
 
-        setActiveNavLink();
+// Fungsi untuk langsung logout (digunakan tanpa dialog tambahan)
+function confirmLogout() {
+    document.getElementById('logout-form').submit(); // Submit form logout
+}
 
-        function confirmLogout() {
-            if (confirm("Apakah Anda ingin Logout?")) {
-                document.getElementById('logout-form').submit();
-            }
-        }
-
-        function showLogoutModal() {
-            document.getElementById('logoutModal').style.display = 'flex';
-        }
-
-        function closeLogoutModal() {
-            document.getElementById('logoutModal').style.display = 'none';
-        }
-
-        function confirmLogout() {
-            document.getElementById('logout-form').submit();
-        }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

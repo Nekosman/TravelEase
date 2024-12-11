@@ -143,16 +143,20 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        $(document).ready(function() {
-            // Function to filter tickets by category (only filter the category column)
-            $("#searchTitle").on("keyup", function() {
-                var value = $(this).val().toLowerCase();
-                $("#ticketsTable tbody tr").filter(function() {
-                    // Only check the category column (5th column)
-                    $(this).toggle($(this).find("td:nth-child(3)").text().toLowerCase().indexOf(
-                        value) > -1)
-                });
-            });
+       $(document).ready(function() {
+    // Fungsi untuk memfilter tiket berdasarkan kategori (hanya memfilter kolom kategori)
+    $("#searchTitle").on("keyup", function() {
+        // Ambil nilai input yang dimasukkan oleh pengguna dan ubah menjadi huruf kecil
+        var value = $(this).val().toLowerCase();
+
+        // Iterasi setiap baris tabel di dalam tbody dengan id "ticketsTable"
+        $("#ticketsTable tbody tr").filter(function() {
+            // Cek apakah teks di kolom ke-3 (kategori) berisi nilai input
+            $(this).toggle(
+                $(this).find("td:nth-child(3)").text().toLowerCase().indexOf(value) > -1
+            );
         });
+    });
+});
     </script>
 @endsection

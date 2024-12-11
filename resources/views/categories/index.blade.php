@@ -32,7 +32,7 @@
                             <thead class="text-white" style="background-color: #366389;">
                                 <tr>
                                     <th>ID</th>
-                                    <th>Categoey Name</th>
+                                    <th>Category Name</th>
                                     <th>Description</th>
                                     <th>Actions</th>
                                 </tr>
